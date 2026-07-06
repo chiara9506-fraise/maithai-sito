@@ -1,0 +1,201 @@
+/* ===== FOOTER ===== */
+
+#footer {
+  background-color: var(--color-black);
+}
+
+/* Parte principale */
+.footer__main {
+  padding: var(--space-xl) 0 var(--space-lg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1.2fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+/* Colonna logo */
+.footer__logo {
+  display: block;
+  width: 80px;
+  margin-bottom: var(--space-md);
+}
+
+.footer__logo img {
+  width: 100%;
+  height: auto;
+}
+
+.footer__social-label {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  color: var(--color-white);
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: var(--space-sm);
+}
+
+.footer__social {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-white);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.social-icon:hover {
+  border-color: var(--color-white);
+  color: var(--color-white);
+}
+
+/* Titoli colonne */
+.footer__col-title {
+  font-family: var(--font-title);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  color: var(--color-white);
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: var(--space-md);
+}
+
+/* Nav links */
+.footer__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer__nav a {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.2s;
+}
+
+.footer__nav a:hover {
+  color: var(--color-white);
+}
+
+/* Info location */
+.footer__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer__info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.footer__info-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.footer__info-text {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.5;
+}
+
+.footer__info-text a {
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.footer__info-text a:hover {
+  color: var(--color-white);
+}
+
+/* CTA prenota colonna destra */
+.footer__cta-text {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.6;
+  margin-bottom: var(--space-md);
+}
+
+.footer__cta-btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-black);
+  background-color: var(--color-yellow);
+  padding: 0.75rem 1.75rem;
+  border-radius: 15px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.footer__cta-btn:hover {
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+/* Barra copyright */
+.footer__bottom {
+  padding: var(--space-md) 0;
+  text-align: center;
+}
+
+.footer__bottom p {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.35);
+  line-height: 1.8;
+}
+
+.footer__bottom a {
+  color: rgba(255, 255, 255, 0.5);
+  transition: color 0.2s;
+}
+
+.footer__bottom a:hover {
+  color: var(--color-white);
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 900px) {
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-lg);
+  }
+
+  .footer__col--logo {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 560px) {
+  .footer__grid {
+    grid-template-columns: 1fr;
+  }
+}

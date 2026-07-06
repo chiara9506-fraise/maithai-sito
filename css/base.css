@@ -1,0 +1,81 @@
+@font-face {
+  font-family: 'Gorilla Milkshake';
+  src: url('../font/gorilla-milkshake.regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Colori */
+  --color-red:     #E30D18;
+  --color-yellow:  #FFD100;
+  --color-black:   #010202;
+  --color-white:   #FFFFFF;
+
+  /* Font */
+  --font-title:  'Gorilla Milkshake', cursive;
+  --font-body:   'Open Sans', sans-serif;
+
+  /* Spaziature */
+  --space-xs:   0.5rem;
+  --space-sm:   1rem;
+  --space-md:   2rem;
+  --space-lg:   4rem;
+  --space-xl:   8rem;
+
+  /* Larghezza massima contenuto */
+  --max-width: 1200px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-red);
+  color: var(--color-white);
+  line-height: 1.6;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-title);
+  line-height: 1.1;
+  color: var(--color-yellow);
+}
+
+/* ===== SEZIONI — temi colore ===== */
+
+.section--red {
+  background-color: var(--color-red);
+  color: var(--color-white);
+}
+
+.section--white {
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+
+.section--white h2,
+.section--white h3 {
+  color: var(--color-red);
+}
+
+.section--black {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.section--black h2,
+.section--black h3 {
+  color: var(--color-yellow);
+}
+
+/* Padding standard per ogni sezione */
+.section-pad {
+  padding: var(--space-xl) 0;
+}

@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Il Menu — Mai Thai</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/menu-page.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/animations.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header id="header">
+    <div class="header__inner container">
+      <nav class="header__nav" aria-label="Navigazione principale">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="sedi.html">Dove ci trovi</a></li>
+        </ul>
+      </nav>
+      <a href="index.html" class="header__logo">
+        <img src="images/logo-header.svg" alt="Mai Thai">
+      </a>
+      <a href="index.html#sedi-test" class="header__cta">Prenota</a>
+      <button class="header__burger" aria-label="Apri menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="mp-hero">
+    <div class="container">
+      <p class="mp-hero__label">Cucina Thai Autentica</p>
+      <h1 class="mp-hero__title">Il Menu</h1>
+    </div>
+  </section>
+
+  <!-- Sticky category nav -->
+  <nav class="mp-nav" id="mp-nav" aria-label="Categorie menu">
+    <div class="mp-nav__inner">
+      <a href="#antipasti"      class="mp-nav__link active">Antipasti</a>
+      <a href="#noodles"        class="mp-nav__link">Noodles</a>
+      <a href="#riso"           class="mp-nav__link">Riso</a>
+      <a href="#curry"          class="mp-nav__link">Curry</a>
+      <a href="#seafood"        class="mp-nav__link">Seafood</a>
+      <a href="#carni"          class="mp-nav__link">Carni</a>
+      <a href="#zuppe"          class="mp-nav__link">Zuppe</a>
+      <a href="#bowls"          class="mp-nav__link">Bowls & Verdure</a>
+      <a href="#bevande"        class="mp-nav__link">Bevande</a>
+    </div>
+  </nav>
+
+  <main class="mp-main">
+
+    <!-- ===== ANTIPASTI ===== -->
+    <section class="mp-section" id="antipasti">
+      <div class="container">
+        <h2 class="mp-section__title">Antipasti</h2>
+        <div class="dish-grid">
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/FRIEDMIX.png" alt="Fried Mix"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Fried Mix</h3>
+              <span class="dish-card-sm__price">€15,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/CRISPY%20KOONG.png" alt="Crispy Koong"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Crispy Koong <span class="dish-card-sm__qty">3pz</span></h3>
+              <span class="dish-card-sm__price">€6,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/KOONGROLL.png" alt="Koong Roll"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Koong Roll <span class="dish-card-sm__qty">2pz</span></h3>
+              <span class="dish-card-sm__price">€6,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/SPRINGROLL.png" alt="Spring Roll"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Spring Roll <span class="dish-card-sm__qty">2pz</span></h3>
+              <span class="dish-card-sm__price">€6,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/CHANGROLL.png" alt="Chang Roll"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Chang Roll <span class="dish-card-sm__qty">2pz</span></h3>
+              <span class="dish-card-sm__price">€6,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/GREENSUM.png" alt="Green Sum"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-verde.svg" alt="vegetariano"></div>
+              <h3 class="dish-card-sm__name">Green Sum <span class="dish-card-sm__qty">3pz</span></h3>
+              <span class="dish-card-sm__price">€5,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/SQUIDYANG.png" alt="Squid Yang"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Squid Yang</h3>
+              <span class="dish-card-sm__price">€13,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/GOLDENSQUID.png" alt="Golden Squid"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Golden Squid</h3>
+              <span class="dish-card-sm__price">€13,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/GAMBERISATAY.png" alt="Gamberi Satay"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Gamberi Satay</h3>
+              <span class="dish-card-sm__price">€11,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/TAMARINDKOONG.png" alt="Tamarind Koong"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Tamarind Koong</h3>
+              <span class="dish-card-sm__price">€11,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/POLLOSATAY.png" alt="Pollo Satay"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Pollo Satay</h3>
+              <span class="dish-card-sm__price">€9,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/RISOTHAI.png" alt="Riso Thai"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Riso Thai</h3>
+              <span class="dish-card-sm__price">€3,00</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== NOODLES ===== -->
+    <section class="mp-section" id="noodles">
+      <div class="container">
+        <h2 class="mp-section__title">Noodles</h2>
+        <div class="dish-grid">
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/PADTHAI.png" alt="Pad Thai"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Pad Thai</h3>
+              <p class="dish-card-sm__variant">gamberi · pollo · calamari · veg</p>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/CHIANGMAINOODLES.png" alt="Chiang Mai Noodles"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="piccante"><img src="images/elefante-rosso.svg" alt="piccante"></div>
+              <h3 class="dish-card-sm__name">Chiang Mai Noodles</h3>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/YELLOWSUBMARINE.png" alt="Yellow Submarine"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="piccante"><img src="images/elefante-rosso.svg" alt="piccante"></div>
+              <h3 class="dish-card-sm__name">Yellow Submarine</h3>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/PADSEEEW.png" alt="Pad See Ew"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Pad See Ew</h3>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/PADTALAY.png" alt="Pad Talay"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="piccante"><img src="images/elefante-rosso.svg" alt="piccante"></div>
+              <h3 class="dish-card-sm__name">Pad Talay</h3>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img">
+              <span class="dish-card-sm__badge">Novita'</span>
+            </div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="poco piccante"></div>
+              <h3 class="dish-card-sm__name">Saimon Sut Khieo</h3>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/PADGINGER.png" alt="Pad Ginger"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Pad Ginger</h3>
+              <span class="dish-card-sm__price">€13,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/PADTHAIOMELETTE.png" alt="Pad Thai Omelette"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Pad Thai Omelette</h3>
+              <span class="dish-card-sm__price">€15,00</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== RISO ===== -->
+    <section class="mp-section" id="riso">
+      <div class="container">
+        <h2 class="mp-section__title">Riso</h2>
+        <div class="dish-grid">
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/SEAWORLD.png" alt="Sea World"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Sea World</h3>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/BESAR.png" alt="Besar"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="poco piccante"></div>
+              <h3 class="dish-card-sm__name">Besar</h3>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/BASILRICE.png" alt="Basil Rice"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="piccante"><img src="images/elefante-rosso.svg" alt="piccante"></div>
+              <h3 class="dish-card-sm__name">Basil Rice</h3>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img">
+              <span class="dish-card-sm__badge">Novita'</span>
+            </div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="poco piccante"></div>
+              <h3 class="dish-card-sm__name">Erawan Rice</h3>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/BANGKOKRICE.png" alt="Bangkok Rice"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Bangkok Rice</h3>
+              <span class="dish-card-sm__price">€13,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/GREENTHAI.png" alt="Green Thai"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="poco piccante"></div>
+              <h3 class="dish-card-sm__name">Green Thai</h3>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/PINEAPPLERICE.png" alt="Pineapple Rice"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="poco piccante"><img src="images/elefante-verde.svg" alt="vegetariano"></div>
+              <h3 class="dish-card-sm__name">Pineapple Rice</h3>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/TOMTOM.png" alt="Tom Tom"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="poco piccante"></div>
+              <h3 class="dish-card-sm__name">Tom Tom</h3>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CURRY ===== -->
+    <section class="mp-section" id="curry">
+      <div class="container">
+        <h2 class="mp-section__title">Curry</h2>
+        <div class="dish-grid">
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/CHICKENMASSAMAN.png" alt="Chicken Massaman"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="poco piccante"></div>
+              <h3 class="dish-card-sm__name">Chicken Massaman</h3>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/GREENCHICKEN.png" alt="Green Chicken"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags">
+                <img src="images/elefante-rosso.svg" alt="piccante">
+                <img src="images/elefante-rosso.svg" alt="piccante">
+                <img src="images/elefante-rosso.svg" alt="molto piccante">
+              </div>
+              <h3 class="dish-card-sm__name">Green Chicken</h3>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/MAITHAICURRY.png" alt="Mai Thai Curry"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="piccante"><img src="images/elefante-rosso.svg" alt="piccante"></div>
+              <h3 class="dish-card-sm__name">Mai Thai Curry</h3>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/YELLOWCHICKEN.png" alt="Yellow Chicken"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="poco piccante"></div>
+              <h3 class="dish-card-sm__name">Yellow Chicken</h3>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/REDPORK.png" alt="Red Pork"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="piccante"><img src="images/elefante-rosso.svg" alt="piccante"><img src="images/elefante-rosso.svg" alt="molto piccante"></div>
+              <h3 class="dish-card-sm__name">Red Pork</h3>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/BEEFPANANG.png" alt="Beef Panang"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="poco piccante"></div>
+              <h3 class="dish-card-sm__name">Beef Panang</h3>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/VEGETARIANCURRY.png" alt="Vegetarian Curry"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="piccante"><img src="images/elefante-rosso.svg" alt="piccante"><img src="images/elefante-verde.svg" alt="vegetariano"></div>
+              <h3 class="dish-card-sm__name">Vegetarian Curry</h3>
+              <span class="dish-card-sm__price">€12,00</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SEAFOOD ===== -->
+    <section class="mp-section" id="seafood">
+      <div class="container">
+        <h2 class="mp-section__title">Seafood</h2>
+        <div class="dish-grid">
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/CHEFSSEAFOOD.png" alt="Chef's Seafood"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="piccante"><img src="images/elefante-rosso.svg" alt="piccante"></div>
+              <h3 class="dish-card-sm__name">Chef's Seafood</h3>
+              <span class="dish-card-sm__price">€16,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PRAWNPANANG.png" alt="Prawn Panang"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="piccante"><img src="images/elefante-rosso.svg" alt="piccante"></div>
+              <h3 class="dish-card-sm__name">Prawn Panang</h3>
+              <span class="dish-card-sm__price">€16,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PRAWNMIKESTYLE.png" alt="Prawn Mike Style"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="poco piccante"></div>
+              <h3 class="dish-card-sm__name">Prawn Mike Style</h3>
+              <span class="dish-card-sm__price">€16,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PRAWNGAREE.png" alt="Prawn Garee"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="poco piccante"></div>
+              <h3 class="dish-card-sm__name">Prawn Garee</h3>
+              <span class="dish-card-sm__price">€16,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PLADOOK.png" alt="Plaa Dook"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="piccante"><img src="images/elefante-rosso.svg" alt="piccante"></div>
+              <h3 class="dish-card-sm__name">Plaa Dook</h3>
+              <span class="dish-card-sm__price">€16,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img">
+              <span class="dish-card-sm__badge">Novita'</span>
+            </div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="poco piccante"></div>
+              <h3 class="dish-card-sm__name">Khing Plaa</h3>
+              <span class="dish-card-sm__price">€16,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/GWENFISH.png" alt="Gwen Fish"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="poco piccante"></div>
+              <h3 class="dish-card-sm__name">Gwen Fish</h3>
+              <span class="dish-card-sm__price">€16,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="poco piccante"></div>
+              <h3 class="dish-card-sm__name">Kalanoi</h3>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/FISHCURRY.png" alt="Fish Curry"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="poco piccante"></div>
+              <h3 class="dish-card-sm__name">Fish Curry</h3>
+              <span class="dish-card-sm__price">€16,00</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CARNI ===== -->
+    <section class="mp-section" id="carni">
+      <div class="container">
+        <h2 class="mp-section__title">Carni</h2>
+        <div class="dish-grid">
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/BLACKBEEF.png" alt="Black Beef"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Black Beef</h3>
+              <span class="dish-card-sm__price">€15,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/BEEFCHILLY.png" alt="Beef Chilli"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="piccante"><img src="images/elefante-rosso.svg" alt="piccante"><img src="images/elefante-rosso.svg" alt="molto piccante"></div>
+              <h3 class="dish-card-sm__name">Beef Chilli</h3>
+              <span class="dish-card-sm__price">€15,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/BEEFGARLICCHILLIPEPPER.png" alt="Beef Garlic Chilli Pepper"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="piccante"><img src="images/elefante-rosso.svg" alt="piccante"></div>
+              <h3 class="dish-card-sm__name">Beef Garlic Chilli Pepper</h3>
+              <span class="dish-card-sm__price">€15,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/CHICKENTHAISTYLE.png" alt="Chicken Thai Style"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="poco piccante"></div>
+              <h3 class="dish-card-sm__name">Chicken Thai Style</h3>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/GINGERBEEF.png" alt="Ginger Beef"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Ginger Beef</h3>
+              <span class="dish-card-sm__price">€15,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/MUSHBEEF.png" alt="Mushbeef"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Mushbeef</h3>
+              <span class="dish-card-sm__price">€15,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/CHICKENCASHEWS.png" alt="Chicken Cashews"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="poco piccante"></div>
+              <h3 class="dish-card-sm__name">Chicken Cashews</h3>
+              <span class="dish-card-sm__price">€15,00</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ZUPPE ===== -->
+    <section class="mp-section" id="zuppe">
+      <div class="container">
+        <h2 class="mp-section__title">Zuppe</h2>
+        <div class="dish-grid">
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/TOMYAMKOONG.png" alt="Tom Yam Koong"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="piccante"><img src="images/elefante-rosso.svg" alt="piccante"><img src="images/elefante-rosso.svg" alt="molto piccante"></div>
+              <h3 class="dish-card-sm__name">Tom Yam Koong</h3>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/TOMYAMPLAA.png" alt="Tom Yam Plaa"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="piccante"><img src="images/elefante-rosso.svg" alt="piccante"></div>
+              <h3 class="dish-card-sm__name">Tom Yam Plaa</h3>
+              <span class="dish-card-sm__price">€15,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/TOMKHAKAI.png" alt="Tom Kha Kai"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="poco piccante"></div>
+              <h3 class="dish-card-sm__name">Tom Kha Kai</h3>
+              <span class="dish-card-sm__price">€13,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/NOODLESOUP.png" alt="Noodle Soup"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-verde.svg" alt="vegetariano"></div>
+              <h3 class="dish-card-sm__name">Noodle Soup</h3>
+              <p class="dish-card-sm__variant">classica · vegetariana</p>
+              <span class="dish-card-sm__price">€10,00 / €13,00</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== BOWLS & VERDURE ===== -->
+    <section class="mp-section" id="bowls">
+      <div class="container">
+        <h2 class="mp-section__title">Bowls & Verdure</h2>
+        <div class="dish-grid">
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/SIAMBOWL.png" alt="Siam Bowl"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Siam Bowl</h3>
+              <span class="dish-card-sm__price">€15,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/KOHTAO.png" alt="Koh Tao"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Koh Tao</h3>
+              <span class="dish-card-sm__price">€15,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/PAPYASALAD.png" alt="Papaya Salad"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="piccante"><img src="images/elefante-rosso.svg" alt="piccante"><img src="images/elefante-rosso.svg" alt="molto piccante"></div>
+              <h3 class="dish-card-sm__name">Papaya Salad</h3>
+              <span class="dish-card-sm__price">€14,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/PIATTI/YELLOWSPINACH.png" alt="Yellow Spinach"></div>
+            <div class="dish-card-sm__info">
+              <div class="dish-tags"><img src="images/elefante-rosso.svg" alt="poco piccante"></div>
+              <h3 class="dish-card-sm__name">Yellow Spinach</h3>
+              <span class="dish-card-sm__price">€10,00</span>
+            </div>
+          </article>
+
+          <article class="dish-card-sm">
+            <div class="dish-card-sm__img"><img src="images/OYSTERVEGGIE.png" alt="Oyster Veggie"></div>
+            <div class="dish-card-sm__info">
+              <h3 class="dish-card-sm__name">Oyster Veggie</h3>
+              <span class="dish-card-sm__price">€10,00</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== BEVANDE ===== -->
+    <section class="mp-section mp-section--drinks" id="bevande">
+      <div class="container">
+        <h2 class="mp-section__title">Bevande</h2>
+
+        <div class="drinks-grid">
+
+          <div class="drinks-col">
+            <h3 class="drinks-col__title">Analcoliche</h3>
+            <ul class="drinks-list">
+              <li><span class="drinks-list__name">Acqua nat./frizzante 50cl</span><span class="drinks-list__price">€1,50</span></li>
+              <li><span class="drinks-list__name">Acqua nat./frizzante 70cl</span><span class="drinks-list__price">€2,50</span></li>
+              <li><span class="drinks-list__name">Coca Cola / Zero / Fanta / Sprite / The pesca / The limone 33cl</span><span class="drinks-list__price">€4,00</span></li>
+              <li><span class="drinks-list__name">Succo mango / Succo lychees / Green sencha</span><span class="drinks-list__price">€3,50</span></li>
+              <li><span class="drinks-list__name">Calice di vino (bianco, rosso, bollicine)</span><span class="drinks-list__price">€5,00</span></li>
+            </ul>
+          </div>
+
+          <div class="drinks-col">
+            <h3 class="drinks-col__title">Birre</h3>
+            <ul class="drinks-list">
+              <li><span class="drinks-list__name">Singha 33cl</span><span class="drinks-list__price">€5,00</span></li>
+              <li><span class="drinks-list__name">Singha 63cl</span><span class="drinks-list__price">€8,00</span></li>
+              <li><span class="drinks-list__name">Asahi 33cl</span><span class="drinks-list__price">€4,50</span></li>
+              <li><span class="drinks-list__name">Asahi 50cl</span><span class="drinks-list__price">€6,50</span></li>
+              <li><span class="drinks-list__name">Asahi 0.0% 33cl</span><span class="drinks-list__price">€4,00</span></li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="footer">
+    <div class="footer__main">
+      <div class="container">
+        <div class="footer__grid">
+          <div class="footer__col footer__col--logo">
+            <a href="index.html" class="footer__logo">
+              <img src="images/logo-header.svg" alt="Mai Thai">
+            </a>
+            <p class="footer__social-label">Seguici su</p>
+            <div class="footer__social">
+              <a href="#" class="social-icon" aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </a>
+              <a href="#" class="social-icon" aria-label="Facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="footer__col">
+            <h3 class="footer__col-title">Mai Thai</h3>
+            <nav class="footer__nav">
+              <a href="index.html">Home</a>
+              <a href="menu.html">Il menu</a>
+              <a href="index.html#sedi-test">Le sedi</a>
+              <a href="index.html#sedi-test">Prenota un tavolo</a>
+            </nav>
+          </div>
+          <div class="footer__col footer__col--cta">
+            <h3 class="footer__col-title">Prenota un tavolo</h3>
+            <p class="footer__cta-text">Scegli la sede più vicina a te e prenota direttamente.</p>
+            <a href="index.html#sedi-test" class="footer__cta-btn">Scopri le nostre sedi</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        <p>Mai Thai S.R.L. — Corso Giacomo Matteotti 44, 10121 Torino (TO) — P.IVA 10962900014</p>
+        <p>Copyright © 2025 Mai Thai. Tutti i diritti riservati. — <a href="#">Privacy Policy</a> — <a href="#">Cookie Policy</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal piatto -->
+  <div id="dish-modal" class="dish-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="dish-modal__overlay"></div>
+    <div class="dish-modal__box">
+      <button class="dish-modal__close" aria-label="Chiudi">✕</button>
+      <div class="dish-modal__img">
+        <img src="" alt="">
+      </div>
+      <div class="dish-modal__info">
+        <span class="dish-modal__badge" hidden></span>
+        <h2 class="dish-modal__name"></h2>
+        <span class="dish-modal__price"></span>
+        <div class="dish-modal__spice">
+          <span class="dish-modal__spice-label">Piccantezza</span>
+          <div class="dish-modal__spice-icons"></div>
+        </div>
+        <div class="dish-modal__section">
+          <p class="dish-modal__section-title">Ingredienti</p>
+          <p class="dish-modal__ingredients"></p>
+        </div>
+        <div class="dish-modal__section">
+          <p class="dish-modal__section-title">Puoi rimuovere</p>
+          <div class="dish-modal__removable"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="scroll-top" aria-label="Torna in cima">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <script src="js/main.js"></script>
+  <script src="js/menu-page.js"></script>
+  <script src="js/menu-modal.js"></script>
+  <script src="js/animations.js"></script>
+
+</body>
+</html>

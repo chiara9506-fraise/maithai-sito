@@ -1,0 +1,164 @@
+/* ===== SEZIONE SEDI — CAROSELLO ===== */
+
+#sedi {
+  background-color: var(--color-white);
+  overflow: hidden;
+  padding: var(--space-md) 0 var(--space-lg);
+}
+
+/* Header */
+.sedi__header {
+  text-align: center;
+  margin-bottom: var(--space-md);
+}
+
+.sedi__label {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-red);
+  margin-bottom: var(--space-xs);
+}
+
+.sedi__title {
+  font-family: var(--font-title);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  color: var(--color-black);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* Wrapper carosello — rompe il container per andare full width */
+.sedi__carousel {
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: var(--space-lg);
+}
+
+/* Track animato in loop */
+.sedi__track {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  padding: 0.25rem 0 0.75rem;
+  animation: sedi-scroll 28s linear infinite;
+}
+
+.sedi__track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes sedi-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Card */
+.sedi-card {
+  position: relative;
+  flex: 0 0 auto;
+  width: 220px;
+  height: 360px;
+  border-radius: 10px;
+  overflow: hidden;
+  scroll-snap-align: start;
+  background-color: var(--color-red);
+  transition: transform 0.3s;
+}
+
+.sedi-card:hover {
+  transform: translateY(-6px);
+}
+
+/* Foto (quando disponibile) */
+.sedi-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.4s ease;
+}
+
+.sedi-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Gradiente overlay sul fondo */
+.sedi-card__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem 1.25rem 1.25rem;
+  background: linear-gradient(to top, rgba(1, 2, 2, 0.88) 0%, transparent 100%);
+}
+
+.sedi-card__city {
+  font-family: var(--font-title);
+  font-size: 1.9rem;
+  color: var(--color-yellow);
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+
+.sedi-card__address {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.4;
+}
+
+/* Linea gialla decorativa in alto */
+.sedi-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: var(--color-yellow);
+  z-index: 1;
+}
+
+/* CTA sotto carosello */
+.sedi__cta {
+  text-align: center;
+}
+
+.sedi__cta a {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1rem 2.5rem;
+  background-color: var(--color-red);
+  color: var(--color-white);
+  border-radius: 2px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.sedi__cta a:hover {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 768px) {
+  .sedi-card {
+    width: 180px;
+    height: 300px;
+  }
+
+  .sedi__track {
+    padding: 0.5rem 1rem 1.5rem;
+  }
+}

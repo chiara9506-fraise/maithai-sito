@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mai Thai — Ristorante Thai</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/chisiamo.css">
+  <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/impact.css">
+  <link rel="stylesheet" href="css/sedi-test.css">
+  <link rel="stylesheet" href="css/gallery.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/animations.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <header id="header">
+    <div class="header__inner container">
+      <nav class="header__nav" aria-label="Navigazione principale">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="sedi.html">Dove ci trovi</a></li>
+        </ul>
+      </nav>
+      <a href="#hero" class="header__logo">
+        <img src="images/logo-header.svg" alt="Mai Thai">
+      </a>
+      <a href="sedi.html" class="header__cta">Prenota</a>
+      <button class="header__burger" aria-label="Apri menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <section id="hero">
+      <div class="hero__content container">
+        <h1 class="hero__title">Cucina Thai Autentica</h1>
+        <p class="hero__sub">Sapori veri dalla Thailandia, nel cuore di Torino</p>
+        <div class="hero__actions">
+          <a href="#menu" class="btn btn--primary">Scopri il menu</a>
+          <a href="sedi.html" class="btn btn--outline">Prenota un tavolo</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="chisiamo">
+
+      <div class="container chisiamo__inner" data-reveal>
+
+        <div class="chisiamo__text">
+          <span class="chisiamo__eyebrow">Dal 2018</span>
+          <h2 class="chisiamo__title">Chi siamo</h2>
+          <p class="chisiamo__desc">Niente fronzoli, solo sapori veri. Portiamo il vero street food thailandese in Piemonte: ingredienti freschi, ricette originali e tanta passione per una cucina che non si dimentica.</p>
+          <a href="sedi.html" class="chisiamo__cta">Scopri le nostre sedi</a>
+        </div>
+
+        <div class="chisiamo__visual">
+          <div class="chisiamo__photo" data-reveal-right>
+            <img src="images/PROVA CHI SIAMO.png" alt="Piatto Mai Thai">
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+<section id="menu" class="section--black section-pad">
+      <div class="container">
+
+        <div class="menu__header" data-reveal>
+          <p class="menu__label">I nostri piatti</p>
+          <h2 class="menu__title">Cosa cuciniamo</h2>
+        </div>
+
+        <div class="menu__grid" data-reveal-stagger>
+
+          <!-- Siam Bowl -->
+          <div class="dish-card">
+            <div class="dish-card__img">
+              <img src="images/SIAMBOWL.JPG" alt="Siam Bowl">
+            </div>
+            <div class="dish-card__body">
+              <h3 class="dish-card__name">Siam Bowl</h3>
+              <p class="dish-card__desc">Riso con maiale marinato, uovo all'occhio di bue, papaya fermentata, carote, cipolle caramellate, cipollotto, coriandolo e semi di sesamo</p>
+            </div>
+            <div class="dish-card__footer">
+              <span class="dish-card__price"><span class="dish-card__currency">€</span>15.00</span>
+            </div>
+          </div>
+
+          <!-- Khing Plaa -->
+          <div class="dish-card">
+            <div class="dish-card__img">
+              <img src="images/KHINGPLAA.JPG" alt="Khing Plaa">
+              <span class="dish-card__badge">Novita'</span>
+            </div>
+            <div class="dish-card__body">
+              <h3 class="dish-card__name">Khing Plaa</h3>
+              <p class="dish-card__desc">Bocconcini di orata con zenzero, cipolla, cipollotto, peperoni, pepe nero, farina 00, salsa di soia e salsa d'ostriche</p>
+            </div>
+            <div class="dish-card__footer">
+              <span class="dish-card__price"><span class="dish-card__currency">€</span>16.00</span>
+            </div>
+          </div>
+
+          <!-- Squid Yang -->
+          <div class="dish-card">
+            <div class="dish-card__img">
+              <img src="images/SQUID-YANG.JPG" alt="Squid Yang">
+            </div>
+            <div class="dish-card__body">
+              <h3 class="dish-card__name">Squid Yang</h3>
+              <p class="dish-card__desc">Calamari indopacifici* marinati con lime, curcuma, salsa di pesce, salsa di soia e accompagnati da salsa di zenzero, cipolla, chilli, aglio e coriandolo</p>
+            </div>
+            <div class="dish-card__footer">
+              <span class="dish-card__price"><span class="dish-card__currency">€</span>13.00</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="menu__cta">
+          <a href="menu.html" class="btn--red">Scopri il menu completo</a>
+        </div>
+
+        <div class="menu__delivery" data-reveal>
+          <p class="menu__delivery-label">Croccante anche a casa tua.</p>
+          <div class="menu__delivery-apps">
+            <a href="https://glovoapp.com/it/it/torino/stores/mai-thai" target="_blank" rel="noopener" class="delivery-btn delivery-btn--glovo">
+              <span>Ordina su</span>
+              <img src="images/GLOVO LOGO.png" alt="Glovo">
+            </a>
+            <a href="https://deliveroo.it/it/menu/Torino/torino-centro/mai-thai-via-gropello?geohash=u0j2qkr2xd2v" target="_blank" rel="noopener" class="delivery-btn delivery-btn--deliveroo">
+              <span>Ordina su</span>
+              <img src="images/DELIVEROO LOGO.png" alt="Deliveroo">
+            </a>
+            <a href="https://www.justeat.it/restaurants-maithaicuneo/menu" target="_blank" rel="noopener" class="delivery-btn delivery-btn--justeat">
+              <span>Ordina su</span>
+              <img src="images/JUSTEAT LOGO.png" alt="Just Eat">
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="sedi-test">
+
+      <div class="container">
+        <div class="sedi-test__header" data-reveal>
+          <p class="sedi-test__label">Dove siamo</p>
+          <h2 class="sedi-test__title">Le nostre sedi</h2>
+        </div>
+      </div>
+
+      <div class="sedi-ticker-wrap">
+
+        <!-- Riga: scorre a destra, testo bianco -->
+        <div class="sedi-ticker sedi-ticker--bottom">
+          <div class="sedi-ticker__track">
+            <span>Rivoli</span><span class="sep">✦</span>
+            <span>Torino</span><span class="sep">✦</span>
+            <span>Moncalieri</span><span class="sep">✦</span>
+            <span>Torino 2</span><span class="sep">✦</span>
+            <span>Chieri</span><span class="sep">✦</span>
+            <span>Cuneo</span><span class="sep">✦</span>
+            <span>Mondovi'</span><span class="sep">✦</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="container">
+
+
+        <div class="sedi-test__cta">
+          <a href="sedi.html">Scopri tutte le sedi</a>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section id="gallery">
+
+      <div class="gallery__header" data-reveal>
+        <h2 class="gallery__title">Vita da Mai Thai</h2>
+      </div>
+
+      <div class="gallery__wrap">
+      <div class="gallery__strip">
+        <div class="gallery-item"><img src="images/STREET1.jpg" alt="Mai Thai"></div>
+        <div class="gallery-item"><img src="images/STREET2.jpg" alt="Mai Thai"></div>
+        <div class="gallery-item"><img src="images/STREET3.jpg" alt="Mai Thai"></div>
+        <div class="gallery-item"><img src="images/STREET4.jpg" alt="Mai Thai"></div>
+        <div class="gallery-item"><img src="images/STREET5.jpg" alt="Mai Thai"></div>
+        <div class="gallery-item"><img src="images/STREET6.jpg" alt="Mai Thai"></div>
+        <div class="gallery-item"><img src="images/STREET7.jpg" alt="Mai Thai"></div>
+        <div class="gallery-item"><img src="images/STREET8.jpg" alt="Mai Thai"></div>
+        <div class="gallery-item"><img src="images/STREET9.jpg" alt="Mai Thai"></div>
+        <div class="gallery-item"><img src="images/STREET10.jpg" alt="Mai Thai"></div>
+        <div class="gallery-item"><img src="images/STREET11.jpg" alt="Mai Thai"></div>
+      </div>
+      </div>
+
+      <div class="gallery__cta">
+        <a href="#">Seguici su Instagram</a>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer id="footer">
+
+    <div class="footer__main">
+      <div class="container">
+        <div class="footer__grid" data-reveal-stagger>
+
+          <!-- Logo + Social -->
+          <div class="footer__col footer__col--logo">
+            <a href="#hero" class="footer__logo">
+              <img src="images/logo-header.svg" alt="Mai Thai">
+            </a>
+            <p class="footer__social-label">Seguici su</p>
+            <div class="footer__social">
+              <a href="#" class="social-icon" aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </a>
+              <a href="#" class="social-icon" aria-label="Facebook">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Nav -->
+          <div class="footer__col">
+            <h3 class="footer__col-title">Mai Thai</h3>
+            <nav class="footer__nav">
+              <a href="#hero">Home</a>
+              <a href="#menu">Il menu</a>
+              <a href="sedi.html">Le sedi</a>
+              <a href="#contatti">Contatti</a>
+              <a href="#contatti">Prenota un tavolo</a>
+            </nav>
+          </div>
+
+          <!-- Prenota -->
+          <div class="footer__col footer__col--cta">
+            <h3 class="footer__col-title">Prenota un tavolo</h3>
+            <p class="footer__cta-text">Scegli la sede più vicina a te e prenota direttamente.</p>
+            <a href="sedi.html" class="footer__cta-btn">Scopri le nostre sedi</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="container">
+        <p>Mai Thai S.R.L. — Corso Giacomo Matteotti 44, 10121 Torino (TO) — P.IVA 10962900014</p>
+        <p>Copyright © 2025 Mai Thai. Tutti i diritti riservati. — <a href="#">Privacy Policy</a> — <a href="#">Cookie Policy</a></p>
+      </div>
+    </div>
+
+  </footer>
+
+  <button class="scroll-top" aria-label="Torna in cima">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+  </button>
+
+  <!-- JS -->
+  <script src="js/main.js"></script>
+  <script src="js/animations.js"></script>
+
+</body>
+</html>

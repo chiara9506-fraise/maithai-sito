@@ -1,0 +1,103 @@
+/* ===== CHI SIAMO ===== */
+
+#chisiamo {
+  position: relative;
+  background-color: var(--color-red);
+  overflow: hidden;
+  padding: var(--space-sm) 0;
+}
+
+#chisiamo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-conic-gradient(
+    from 0deg at 50% 50%,
+    rgba(255, 209, 0, 0.07) 0deg 12deg,
+    transparent 12deg 24deg
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.chisiamo__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+  min-height: 260px;
+}
+
+.chisiamo__text { padding-right: var(--space-md); }
+
+.chisiamo__eyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-yellow);
+  margin-bottom: 0.5rem;
+  opacity: 0.85;
+}
+
+.chisiamo__title {
+  font-family: var(--font-title);
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  line-height: 1;
+  color: var(--color-yellow);
+  text-transform: uppercase;
+  margin-bottom: var(--space-sm);
+}
+
+.chisiamo__desc {
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--color-white);
+  margin-bottom: var(--space-md);
+  max-width: 460px;
+}
+
+.chisiamo__cta {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-black);
+  background-color: var(--color-yellow);
+  padding: 0.7rem 1.75rem;
+  border-radius: 15px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.chisiamo__cta:hover {
+  background-color: var(--color-black);
+  color: var(--color-yellow);
+}
+
+.chisiamo__visual {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chisiamo__photo img {
+  max-height: 560px;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.35));
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  #chisiamo { padding: 2rem 0; }
+  .chisiamo__inner { grid-template-columns: 1fr; gap: var(--space-md); min-height: auto; }
+  .chisiamo__text { padding-right: 0; }
+  .chisiamo__visual { height: 200px; order: -1; }
+}

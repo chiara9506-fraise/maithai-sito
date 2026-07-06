@@ -1,0 +1,171 @@
+/* ===== SEDI TEST — Opzione B: Ticker doppio contrapposto ===== */
+
+#sedi-test {
+  position: relative;
+  background-color: var(--color-red);
+  padding: var(--space-lg) 0;
+  overflow: hidden;
+}
+
+#sedi-test::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-conic-gradient(
+    from 0deg at 50% 50%,
+    rgba(255, 209, 0, 0.07) 0deg 12deg,
+    transparent 12deg 24deg
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+#sedi-test .container,
+#sedi-test .sedi-ticker-wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.sedi-test__header {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.sedi-test__label {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-yellow);
+  margin-bottom: var(--space-xs);
+}
+
+.sedi-test__title {
+  font-family: var(--font-title);
+  font-size: clamp(2.8rem, 5vw, 5rem);
+  color: var(--color-yellow);
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+/* Ticker rows */
+.sedi-ticker-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: var(--space-lg);
+}
+
+.sedi-ticker {
+  overflow: hidden;
+  padding: 0.5rem 0;
+}
+
+.sedi-ticker--top {
+  border-top: 2px solid var(--color-yellow);
+  border-bottom: 2px solid var(--color-yellow);
+}
+
+.sedi-ticker--bottom {
+}
+
+.sedi-ticker__track {
+  display: flex;
+  width: max-content;
+  gap: 0;
+}
+
+.sedi-ticker--top .sedi-ticker__track {
+  animation: sedi-left 35s linear infinite;
+}
+
+.sedi-ticker--bottom .sedi-ticker__track {
+  animation: sedi-right 35s linear infinite;
+}
+
+@keyframes sedi-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes sedi-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+.sedi-ticker__track span {
+  font-family: var(--font-title);
+  font-size: clamp(4rem, 8vw, 7rem);
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  padding: 0 1rem;
+}
+
+.sedi-ticker--top .sedi-ticker__track span {
+  color: var(--color-yellow);
+}
+
+.sedi-ticker--bottom .sedi-ticker__track span {
+  color: var(--color-white);
+}
+
+/* Separatore ✦ */
+.sedi-ticker__track span.sep {
+  color: var(--color-black);
+  -webkit-text-stroke: 0;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  vertical-align: middle;
+}
+
+/* Indirizzi sotto */
+.sedi-addresses {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 2rem;
+  padding: 0 var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.sedi-addr {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.6);
+  text-align: center;
+}
+
+.sedi-addr strong {
+  display: block;
+  color: var(--color-white);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.75rem;
+}
+
+/* CTA */
+.sedi-test__cta {
+  text-align: center;
+}
+
+.sedi-test__cta a {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1rem 2.5rem;
+  background-color: var(--color-yellow);
+  color: var(--color-black);
+  border-radius: 15px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.sedi-test__cta a:hover {
+  background-color: var(--color-black);
+  color: var(--color-yellow);
+}
