@@ -19,20 +19,25 @@
 })();
 
 
-// ----- Transizioni tra pagine -----
-document.querySelectorAll('a[href]').forEach(link => {
-  const href = link.getAttribute('href');
-  // Solo link interni .html, escludi ancore e link esterni
-  if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto') || href.startsWith('tel')) return;
+// ----- Loader tra pagine -----
+(function () {
+  const loader = document.getElementById('page-loader');
+  if (!loader) return;
 
-  link.addEventListener('click', function (e) {
-    e.preventDefault();
-    document.body.classList.add('page-leaving');
-    setTimeout(() => {
-      window.location.href = href;
-    }, 300);
+  // Mostra loader al click su link interni
+  document.querySelectorAll('a[href]').forEach(link => {
+    const href = link.getAttribute('href');
+    if (!href || href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto') || href.startsWith('tel')) return;
+
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      loader.classList.add('is-active');
+      setTimeout(() => {
+        window.location.href = href;
+      }, 500);
+    });
   });
-});
+})();
 
 
 (function () {
