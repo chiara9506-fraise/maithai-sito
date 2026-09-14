@@ -325,11 +325,19 @@ body {
 
 @media (max-width: 768px) {
   .mp-hero { padding-bottom: var(--space-lg); padding-top: 80px; }
-  .mp-nav { top: 80px; padding: 0.5rem 1rem; overflow-x: visible; }
+  .mp-nav {
+    position: relative;
+    top: 0;
+    padding: 0.5rem 1rem;
+    overflow: hidden;
+  }
   .mp-nav__inner {
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
+    min-width: 0;
+    max-width: 100%;
     border-radius: 16px;
     gap: 0.25rem;
     padding: 0.35rem;
