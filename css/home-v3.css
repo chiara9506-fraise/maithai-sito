@@ -316,13 +316,12 @@ img { max-width: 100%; display: block; }
   position: relative;
 }
 
-.v3-bestseller__label {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 0.7rem;
-  letter-spacing: 0.22em;
+.v3-bestseller__title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 8rem);
+  color: var(--beige);
   text-transform: uppercase;
-  color: rgba(255,255,255,0.65);
+  line-height: 0.85;
   margin-bottom: 2rem;
 }
 
@@ -915,7 +914,7 @@ img { max-width: 100%; display: block; }
 
   /* Bestseller */
   .v3-bestseller { padding: 2rem 0 2rem 1.5rem; }
-  .v3-bestseller__label { padding-right: 1.5rem; }
+  .v3-bestseller__title { font-size: clamp(2.5rem, 12vw, 5rem); padding-right: 1.5rem; }
   .v3-bestseller__cta { padding-right: 1.5rem; }
   .v3-bestseller__grid {
     display: flex;
