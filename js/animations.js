@@ -1,5 +1,28 @@
 // ===== ANIMAZIONI MAI THAI =====
 
+// ----- Hamburger menu mobile -----
+(function () {
+  const burger    = document.querySelector('.v3-header__burger');
+  const mobileNav = document.getElementById('v3-nav-mobile');
+  if (!burger || !mobileNav) return;
+
+  burger.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('is-open');
+    burger.classList.toggle('is-open', isOpen);
+    burger.setAttribute('aria-expanded', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+
+  mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileNav.classList.remove('is-open');
+      burger.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    });
+  });
+})();
+
 // ----- Scroll to top button -----
 (function () {
   const btn = document.querySelector('.scroll-top');

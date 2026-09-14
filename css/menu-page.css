@@ -324,23 +324,22 @@ body {
 }
 
 @media (max-width: 768px) {
-  .mp-nav {
-    top: 80px;
-  }
+  .mp-hero { padding-bottom: var(--space-lg); }
+  .mp-nav { top: 80px; padding: 0.5rem 1rem; }
+  .mp-section { scroll-margin-top: 130px; padding: var(--space-md) 0; }
+  .mp-section__title { font-size: clamp(2rem, 8vw, 3.5rem); }
+  .mp-main .container { padding: 0 1rem; }
+  .dish-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+  .drinks-grid { grid-template-columns: 1fr; gap: var(--space-md); }
+  .drinks-col__title { font-size: clamp(1.4rem, 6vw, 2rem); }
+}
 
-  .mp-section {
-    scroll-margin-top: 136px;
-  }
-
-  .dish-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.6rem;
-  }
-
-  .drinks-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-md);
-  }
+@media (max-width: 480px) {
+  .mp-hero { min-height: 60vh; padding-bottom: var(--space-md); }
+  .mp-hero__title { font-size: clamp(2.2rem, 14vw, 4rem); }
+  .mp-nav { top: 72px; padding: 0.4rem 0.75rem; }
+  .mp-section { scroll-margin-top: 116px; }
+  .drinks-grid { gap: var(--space-sm); }
 }
 
 @media (max-width: 400px) {
@@ -349,11 +348,6 @@ body {
     gap: 0.5rem;
   }
 
-  .dish-card-sm__name {
-    font-size: 0.72rem;
-  }
-
-  .dish-card-sm__price {
-    font-size: 0.72rem;
-  }
+  .dish-card-sm__name { font-size: 0.72rem; }
+  .dish-card-sm__price { font-size: 0.72rem; }
 }
