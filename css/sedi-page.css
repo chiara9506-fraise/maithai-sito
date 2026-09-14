@@ -1,5 +1,10 @@
 /* ===== PAGINA SEDI ===== */
 
+/* home-v3.css imposta body beige — qui lo riportiamo rosso */
+body {
+  background-color: var(--color-red);
+}
+
 /* ----- Hero ----- */
 .sp-hero {
   position: relative;
@@ -7,7 +12,7 @@
   display: flex;
   align-items: flex-end;
 
-  background-color: #1a0102;
+  background-color: var(--color-red);
   background-image: url('../images/street/STREET12.jpg');
   background-size: cover;
   background-position: center center;
@@ -51,7 +56,7 @@
 
 /* ----- Main ----- */
 .sp-main {
-  background-color: var(--color-black);
+  background-color: var(--color-red);
 }
 
 /* ----- Sede block ----- */
@@ -61,26 +66,15 @@
   border-bottom: none;
 }
 
-.sede-block::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url('../images/grafiche/PATTERN%204.png');
-  background-size: cover;
-  background-position: center;
-  mix-blend-mode: multiply;
-  pointer-events: none;
-  z-index: 0;
-}
 
 .sede-block .sede-block__inner {
   position: relative;
   z-index: 1;
 }
 
-/* Divider giallo sui blocchi rossi */
+/* Divider beige sui blocchi rossi */
 .sede-block:not(.sede-block--alt) .sede__divider {
-  background-color: var(--color-yellow);
+  background-color: #EDE8DA;
 }
 
 /* Leggibilità testo sui blocchi rossi */
@@ -109,7 +103,7 @@
 }
 
 .sede-block:not(.sede-block--alt) .sede__hours {
-  border-left-color: rgba(255, 209, 0, 0.9);
+  border-left-color: rgba(237, 232, 218, 0.4);
 }
 
 /* Blocchi beige */
@@ -119,7 +113,7 @@
 }
 
 .sede-block--alt .sede__name {
-  color: var(--color-black);
+  color: var(--color-red);
 }
 
 .sede-block--alt .sede__divider {
@@ -127,12 +121,12 @@
 }
 
 .sede-block--alt .sede__address {
-  color: var(--color-black);
+  color: var(--color-red);
 }
 
 .sede-block--alt .sede__phone,
 .sede-block--alt .sede__email {
-  color: rgba(0, 0, 0, 0.65);
+  color: rgba(227, 13, 24, 0.65);
 }
 
 .sede-block--alt .sede__phone:hover,
@@ -141,7 +135,7 @@
 }
 
 .sede-block--alt .sede__hours {
-  border-left-color: var(--color-red);
+  border-left-color: rgba(227, 13, 24, 0.35);
 }
 
 .sede-block--alt .sede__hours-label {
@@ -149,25 +143,21 @@
 }
 
 .sede-block--alt .sede__hours-row {
-  color: rgba(0, 0, 0, 0.75);
+  color: rgba(227, 13, 24, 0.75);
 }
 
 .sede-block--alt .sede__hours-row span {
-  color: var(--color-black);
+  color: var(--color-red);
 }
 
 .sede-block--alt .sede__hours-note {
-  color: rgba(0, 0, 0, 0.45);
-}
-
-.sede-block--alt .sede__divider {
-  background-color: var(--color-red);
+  color: rgba(227, 13, 24, 0.45);
 }
 
 .sede-block__inner {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
-  min-height: 220px;
+  min-height: 280px;
 }
 
 /* Alternate: even blocks flip map/text */
@@ -185,13 +175,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: var(--space-xl) var(--space-xl);
+  padding: var(--space-lg) var(--space-lg);
 }
 
 .sede__name {
   font-family: var(--font-title);
   font-size: clamp(3rem, 5vw, 5.5rem);
-  color: var(--color-yellow);
+  color: #EDE8DA;
   text-transform: uppercase;
   line-height: 1;
   margin-bottom: var(--space-sm);
@@ -216,27 +206,27 @@
   font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 600;
-  color: var(--color-white);
+  color: #EDE8DA;
 }
 
 .sede__phone,
 .sede__email {
   font-family: var(--font-body);
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(237, 232, 218, 0.7);
   transition: color 0.2s;
 }
 
 .sede__phone:hover,
 .sede__email:hover {
-  color: var(--color-yellow);
+  color: #EDE8DA;
 }
 
 /* Hours */
 .sede__hours {
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
   padding: var(--space-sm) var(--space-md);
-  border-left: 2px solid var(--color-yellow);
+  border-left: 2px solid rgba(237, 232, 218, 0.4);
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
@@ -248,20 +238,20 @@
   font-size: 0.72rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--color-yellow);
+  color: #EDE8DA;
   margin-bottom: 0.2rem;
 }
 
 .sede__hours-row {
   font-family: var(--font-body);
   font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(237, 232, 218, 0.8);
   line-height: 1.5;
 }
 
 .sede__hours-row span {
   font-weight: 700;
-  color: var(--color-white);
+  color: #EDE8DA;
   display: inline-block;
   min-width: 7rem;
 }
@@ -269,7 +259,7 @@
 .sede__hours-note {
   font-family: var(--font-body);
   font-size: 0.78rem;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(237, 232, 218, 0.5);
   font-style: italic;
 }
 

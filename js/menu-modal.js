@@ -365,7 +365,7 @@ const DISH_DATA = {
     const spiceLevel = data.spice ?? 0;
     for (let i = 1; i <= 3; i++) {
       const img = document.createElement('img');
-      img.src = 'images/elefante-rosso.svg';
+      img.src = 'images/loghi/elefante-rosso.svg';
       img.alt = i <= spiceLevel ? 'piccante' : '';
       if (i > spiceLevel) img.classList.add('inactive');
       spiceIconsEl.appendChild(img);
