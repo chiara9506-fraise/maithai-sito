@@ -970,7 +970,8 @@ img { max-width: 100%; display: block; }
   .v3-footer__headline { font-size: clamp(4rem, 18vw, 8rem); }
   .v3-footer__bottom {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
     gap: 0.5rem;
     padding: 1.25rem 1.5rem;
   }
