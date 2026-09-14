@@ -1,8 +1,25 @@
 /* ===== SEZIONE MENU PREVIEW ===== */
 
 #menu {
-  background-color: var(--color-white);
+  position: relative;
+  background-color: #EDE8DA;
   padding: var(--space-lg) 0;
+}
+
+#menu::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/grafiche/PATTERN%205.png');
+  background-size: cover;
+  background-position: center;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#menu .container {
+  position: relative;
+  z-index: 1;
 }
 
 .menu__header {
@@ -219,7 +236,7 @@
   font-family: var(--font-title);
   font-size: 1.15rem;
   text-transform: uppercase;
-  color: #ffffff;
+  color: #EDE8DA;
   line-height: 1;
   white-space: nowrap;
   transition: transform 0.2s, box-shadow 0.2s;

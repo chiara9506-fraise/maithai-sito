@@ -4,7 +4,7 @@
   position: relative;
   min-height: 100vh;
   padding-top: 140px;
-  background-image: url('../images/STREET6.jpg');
+  background-image: url('../images/street/STREET6.jpg');
   background-size: cover;
   background-position: center 70%;
   display: flex;
@@ -37,7 +37,7 @@
   font-family: var(--font-title);
   font-size: clamp(2.5rem, 6.5vw, 7rem);
   line-height: 1;
-  color: var(--color-yellow);
+  color: var(--color-white);
   text-transform: uppercase;
   white-space: nowrap;
 }

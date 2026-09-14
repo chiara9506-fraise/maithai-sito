@@ -1,0 +1,14 @@
+/* ===== SEZIONE PROMO VISUALE ===== */
+
+#promo-visual {
+  width: 100%;
+  line-height: 0;
+  background-color: #EDE8DA;
+}
+
+#promo-visual img {
+  width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  display: block;
+}

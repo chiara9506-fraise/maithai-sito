@@ -8,7 +8,7 @@
   align-items: flex-end;
 
   background-color: #1a0102;
-  background-image: url('../images/STREET11.jpg');
+  background-image: url('../images/street/STREET11.jpg');
   background-size: cover;
   background-position: center 70%;
 
@@ -39,14 +39,14 @@
   font-size: 0.82rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-yellow);
+  color: var(--color-white);
   margin-bottom: 0.6rem;
 }
 
 .mp-hero__title {
   font-family: var(--font-title);
   font-size: clamp(2.5rem, 6.5vw, 7rem);
-  color: var(--color-yellow);
+  color: var(--color-white);
   text-transform: uppercase;
   line-height: 0.9;
 }
@@ -54,11 +54,10 @@
 /* ----- Sticky category nav ----- */
 .mp-nav {
   position: sticky;
-  top: 106px;
+  top: 100px;
   z-index: 50;
-  background-color: #0a0a0a;
-  border-bottom: 2px solid var(--color-yellow);
-  box-shadow: 0 -4px 0 4px #0a0a0a;
+  background-color: transparent;
+  padding: 0.6rem 1.5rem;
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -70,33 +69,34 @@
   align-items: center;
   justify-content: center;
   gap: 0;
-  padding: 0 1rem;
+  padding: 0 0.5rem;
   width: max-content;
   min-width: 100%;
+  background-color: #EDE8DA;
+  border-radius: 100px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
 }
 
 .mp-nav__link {
   display: block;
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
-  padding: 0.9rem 1.4rem;
+  color: var(--color-black);
+  padding: 0.75rem 1.2rem;
   white-space: nowrap;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -2px;
-  transition: color 0.2s, border-color 0.2s;
+  border-radius: 100px;
+  transition: color 0.2s, background-color 0.2s;
 }
 
 .mp-nav__link:hover {
-  color: var(--color-white);
+  color: var(--color-black);
 }
 
 .mp-nav__link.active {
-  color: var(--color-yellow);
-  border-bottom-color: var(--color-yellow);
+  color: var(--color-red);
 }
 
 /* ----- Main content ----- */
@@ -144,7 +144,7 @@
 .dish-card-sm__img {
   position: relative;
   aspect-ratio: 1 / 1;
-  background-color: var(--color-red);
+  background-color: #EDE8DA;
   overflow: hidden;
 }
 
@@ -152,11 +152,19 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: repeating-conic-gradient(
-    from 0deg at 50% 50%,
-    rgba(255, 209, 0, 0.1) 0deg 12deg,
-    transparent 12deg 24deg
-  );
+  background-image: url('../images/grafiche/PIATTO%20SFONDO.png');
+  background-size: cover;
+  background-position: center;
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+.dish-card-sm__img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.08);
   pointer-events: none;
   z-index: 0;
 }

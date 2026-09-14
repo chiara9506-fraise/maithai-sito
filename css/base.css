@@ -1,4 +1,12 @@
 @font-face {
+  font-family: 'TAN Ashford';
+  src: url('../font/ashford-bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'Gorilla Milkshake';
   src: url('../font/gorilla-milkshake.regular.woff') format('woff');
   font-weight: normal;
@@ -11,10 +19,10 @@
   --color-red:     #E30D18;
   --color-yellow:  #FFD100;
   --color-black:   #010202;
-  --color-white:   #FFFFFF;
+  --color-white:   #EDE8DA;
 
   /* Font */
-  --font-title:  'Gorilla Milkshake', cursive;
+  --font-title:  'TAN Ashford', 'Gorilla Milkshake', cursive;
   --font-body:   'Open Sans', sans-serif;
 
   /* Spaziature */
@@ -45,7 +53,7 @@ body {
 h1, h2, h3, h4 {
   font-family: var(--font-title);
   line-height: 1.1;
-  color: var(--color-yellow);
+  color: var(--color-red);
 }
 
 /* ===== SEZIONI — temi colore ===== */
@@ -55,8 +63,14 @@ h1, h2, h3, h4 {
   color: var(--color-white);
 }
 
+.section--red h1,
+.section--red h2,
+.section--red h3 {
+  color: var(--color-white);
+}
+
 .section--white {
-  background-color: var(--color-white);
+  background-color: #EDE8DA;
   color: var(--color-black);
 }
 

@@ -2,7 +2,7 @@
 
 #sedi-test {
   position: relative;
-  background-color: var(--color-red);
+  background-color: #EDE8DA;
   padding: var(--space-lg) 0;
   overflow: hidden;
 }
@@ -11,11 +11,10 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: repeating-conic-gradient(
-    from 0deg at 50% 50%,
-    rgba(255, 209, 0, 0.07) 0deg 12deg,
-    transparent 12deg 24deg
-  );
+  background-image: url('../images/grafiche/BACKGROUND-chi%20siamo%20.png');
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: multiply;
   pointer-events: none;
   z-index: 0;
 }
@@ -38,14 +37,14 @@
   font-size: 0.8rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--color-yellow);
+  color: var(--color-black);
   margin-bottom: var(--space-xs);
 }
 
 .sedi-test__title {
   font-family: var(--font-title);
   font-size: clamp(2.8rem, 5vw, 5rem);
-  color: var(--color-yellow);
+  color: var(--color-black);
   text-transform: uppercase;
   line-height: 1;
 }
@@ -64,8 +63,8 @@
 }
 
 .sedi-ticker--top {
-  border-top: 2px solid var(--color-yellow);
-  border-bottom: 2px solid var(--color-yellow);
+  border-top: 2px solid var(--color-red);
+  border-bottom: 2px solid var(--color-red);
 }
 
 .sedi-ticker--bottom {
@@ -105,11 +104,11 @@
 }
 
 .sedi-ticker--top .sedi-ticker__track span {
-  color: var(--color-yellow);
+  color: var(--color-black);
 }
 
 .sedi-ticker--bottom .sedi-ticker__track span {
-  color: var(--color-white);
+  color: var(--color-black);
 }
 
 /* Separatore ✦ */
@@ -159,13 +158,13 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 1rem 2.5rem;
-  background-color: var(--color-yellow);
-  color: var(--color-black);
+  background-color: var(--color-red);
+  color: var(--color-white);
   border-radius: 15px;
   transition: background-color 0.2s, color 0.2s;
 }
 
 .sedi-test__cta a:hover {
   background-color: var(--color-black);
-  color: var(--color-yellow);
+  color: var(--color-white);
 }
