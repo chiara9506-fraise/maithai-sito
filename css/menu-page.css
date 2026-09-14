@@ -324,7 +324,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  .mp-hero { padding-bottom: var(--space-lg); padding-top: 80px; }
+  .mp-hero { padding-bottom: 1.5rem; padding-top: 80px; }
   .mp-nav {
     position: relative;
     top: 0;
