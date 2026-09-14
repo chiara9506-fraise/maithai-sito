@@ -57,6 +57,19 @@ document.addEventListener('DOMContentLoaded', function () {
   sediSection.addEventListener('mouseenter', stopAutoplay);
   sediSection.addEventListener('mouseleave', startAutoplay);
 
+  /* ---- Touch swipe mobile ---- */
+  var touchStartX = 0;
+  sediSection.addEventListener('touchstart', function (e) {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+  sediSection.addEventListener('touchend', function (e) {
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) < 40) return;
+    stopAutoplay();
+    showSlide(dx < 0 ? current + 1 : current - 1);
+    startAutoplay();
+  }, { passive: true });
+
   document.addEventListener('keydown', function (e) {
     const rect = sediSection.getBoundingClientRect();
     const inView = rect.top < window.innerHeight && rect.bottom > 0;

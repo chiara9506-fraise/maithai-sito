@@ -415,4 +415,12 @@ const DISH_DATA = {
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeModal();
   });
+
+  // Swipe verso il basso per chiudere (mobile)
+  const modalBox = modal.querySelector('.dish-modal__box');
+  let touchY0 = 0;
+  modalBox.addEventListener('touchstart', e => { touchY0 = e.touches[0].clientY; }, { passive: true });
+  modalBox.addEventListener('touchend', e => {
+    if (e.changedTouches[0].clientY - touchY0 > 60) closeModal();
+  }, { passive: true });
 })();

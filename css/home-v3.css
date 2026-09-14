@@ -888,12 +888,14 @@ img { max-width: 100%; display: block; }
   .v3-header__cta  { display: none; }
   .v3-header__burger { display: flex; }
   .v3-header { max-width: calc(100% - 2rem); }
+  .v3-header__logo img { height: 48px; }
+  .v3-header__inner { padding: 0.5rem 1rem 0.5rem 1.25rem; gap: 1rem; }
 
   /* Hero */
   .v3-hero {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-    padding-top: 120px;
+    padding-top: 96px;
     min-height: 90vh;
   }
   .v3-hero__content { text-align: center; }
@@ -912,8 +914,10 @@ img { max-width: 100%; display: block; }
   .v3-chisiamo__photo img { max-height: 240px; }
 
   /* Bestseller */
-  .v3-bestseller__grid { grid-template-columns: 1fr; gap: 2rem; }
+  .v3-bestseller__grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
   .v3-bestseller { padding: 2rem 1.5rem; }
+  .v3-dish:last-child:nth-child(odd) { grid-column: 1 / -1; max-width: 60%; margin: 0 auto; }
+  .v3-dish__name { font-size: clamp(1.8rem, 8vw, 3rem); white-space: normal; }
 
   /* Sedi */
   .v3-sedi {
