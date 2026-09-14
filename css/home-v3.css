@@ -914,9 +914,25 @@ img { max-width: 100%; display: block; }
   .v3-chisiamo__photo img { max-height: 240px; }
 
   /* Bestseller */
-  .v3-bestseller__grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-  .v3-bestseller { padding: 2rem 1.5rem; }
-  .v3-dish:last-child:nth-child(odd) { grid-column: 1 / -1; max-width: 60%; margin: 0 auto; }
+  .v3-bestseller { padding: 2rem 0 2rem 1.5rem; }
+  .v3-bestseller__label { padding-right: 1.5rem; }
+  .v3-bestseller__cta { padding-right: 1.5rem; }
+  .v3-bestseller__grid {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1.25rem;
+    padding-right: 1.5rem;
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;
+  }
+  .v3-bestseller__grid::-webkit-scrollbar { display: none; }
+  .v3-dish {
+    flex: 0 0 72vw;
+    max-width: 280px;
+    scroll-snap-align: start;
+  }
   .v3-dish__name { font-size: clamp(1.8rem, 8vw, 3rem); white-space: normal; }
 
   /* Sedi */
