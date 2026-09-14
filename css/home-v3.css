@@ -935,14 +935,29 @@ img { max-width: 100%; display: block; }
   }
   .v3-dish__name { font-size: clamp(1.8rem, 8vw, 3rem); white-space: normal; }
 
-  /* Sedi */
+  /* Sedi — carosello orizzontale, senza foto */
   .v3-sedi {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 260px auto;
+    display: block;
   }
-  .v3-sedi__left  { grid-column: 1; grid-row: 1; padding: 2rem 1.5rem; }
-  .v3-sedi__right { grid-column: 1; grid-row: 2; }
-  .v3-sedi__controls { grid-column: 1; grid-row: 3; padding: 0.5rem 1rem; }
+  .v3-sedi__right  { display: none; }
+  .v3-sedi__left {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .v3-sedi__left::-webkit-scrollbar { display: none; }
+  .v3-sedi__slide {
+    display: flex !important;
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+  }
+  .v3-sedi__info { padding: 2rem 1.5rem; }
+  .v3-sedi__controls { justify-content: center; padding: 0.75rem 1rem; }
+  .v3-sedi__arrows  { display: none; }
+  .v3-sedi__counter { display: none; }
   .v3-sedi__heading { font-size: clamp(2rem, 10vw, 4rem); }
   .v3-sedi__city    { font-size: clamp(1.5rem, 8vw, 3rem); }
 
