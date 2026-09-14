@@ -325,8 +325,17 @@ body {
 
 @media (max-width: 768px) {
   .mp-hero { padding-bottom: var(--space-lg); padding-top: 80px; }
-  .mp-nav { top: 80px; padding: 0.5rem 1rem; }
-  .mp-section { scroll-margin-top: 136px; padding: var(--space-md) 0; }
+  .mp-nav { top: 80px; padding: 0.5rem 1rem; overflow-x: visible; }
+  .mp-nav__inner {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    border-radius: 16px;
+    gap: 0.25rem;
+    padding: 0.35rem;
+  }
+  .mp-nav__link { font-size: 0.72rem; padding: 0.5rem 0.85rem; letter-spacing: 0.06em; }
+  .mp-section { scroll-margin-top: 160px; padding: var(--space-md) 0; }
   .mp-section__title { font-size: clamp(2rem, 8vw, 3.5rem); }
   .mp-main .container { padding: 0 1rem; }
   .dish-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
@@ -346,7 +355,8 @@ body {
   .mp-hero { min-height: 55vh; padding-bottom: var(--space-md); }
   .mp-hero__title { font-size: clamp(2.2rem, 14vw, 4rem); }
   .mp-nav { top: 80px; padding: 0.4rem 0.75rem; }
-  .mp-section { scroll-margin-top: 132px; }
+  .mp-nav__link { font-size: 0.68rem; padding: 0.45rem 0.7rem; }
+  .mp-section { scroll-margin-top: 164px; }
   .dish-grid { gap: 0.5rem; }
   .drinks-grid { gap: var(--space-sm); }
 }
