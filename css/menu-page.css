@@ -271,6 +271,20 @@ img.mp-nav__icon {
 
 
 
+/* PROVA — sfondo splatter (solo prima card, da valutare) */
+.dish-card-sm--splash .dish-card-sm__img {
+  background-color: var(--color-red);
+  background-image: url('../images/PROVA%20SFONDO%20PIATTO%20.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: normal;
+}
+
+.dish-card-sm--splash .dish-card-sm__img::after {
+  background: none;
+}
+
 .dish-card-sm__img::after {
   content: '';
   position: absolute;
