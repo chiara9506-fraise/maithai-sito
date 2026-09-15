@@ -249,6 +249,29 @@ img { max-width: 100%; display: block; }
   padding: 0 3rem;
 }
 
+/* WOOW — nello spazio vuoto tra il testo e la foto.
+   Il PNG e nero: il filtro lo porta ad antracite (#383838).
+   Nessuna rotazione CSS: la scritta e gia inclinata nel disegno. */
+.v3-graffiti--woow-chisiamo {
+  width: 220px;
+  top: 12%;
+  left: 40%;
+  z-index: 2;
+  filter: brightness(0) invert(1) brightness(0.22);
+}
+
+/* Seconda stellina, in basso a destra dietro il piatto.
+   z-index -1 la manda sotto la foto ma resta dentro il contesto di
+   impilamento di __inner, quindi sopra il pattern della sezione. */
+.v3-graffiti--stella-chisiamo-2 {
+  width: 155px;
+  right: 4%;
+  bottom: 2%;
+  z-index: -1;
+  transform: rotate(18deg);
+  filter: brightness(0) invert(1) brightness(0.22);
+}
+
 .v3-chisiamo__text {
   display: flex;
   flex-direction: column;
@@ -920,6 +943,33 @@ img { max-width: 100%; display: block; }
   .v3-chisiamo__photo { order: -1; }
   .v3-chisiamo__photo img { max-height: 240px; }
 
+  /* A colonna singola il WOOW andrebbe in mezzo alla foto:
+     piu piccolo e spostato nell'angolo */
+  .v3-graffiti--woow-chisiamo {
+    width: 130px;
+    top: 1%;
+    left: auto;
+    right: 3%;
+  }
+
+  .v3-graffiti--stella-chisiamo-2 {
+    width: 90px;
+    right: auto;
+    left: 3%;
+    bottom: 6%;
+  }
+
+  /* Gallery */
+  .v3-gallery { padding: 2.5rem 0 3rem; }
+  .v3-gallery__title {
+    font-size: clamp(2.5rem, 12vw, 5rem);
+    padding: 0 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .v3-gallery__item { width: 180px; height: 300px; }
+  .v3-gallery__strip { gap: 8px; }
+  .v3-gallery__cta { margin-top: 1.5rem; }
+
   /* Bestseller */
   .v3-bestseller { padding: 2rem 0 2rem 1.5rem; }
   .v3-bestseller__title { font-size: clamp(2.5rem, 12vw, 5rem); padding-right: 1.5rem; }
@@ -1001,6 +1051,100 @@ img { max-width: 100%; display: block; }
   .v3-footer__main { padding: 2rem 1rem; }
   .v3-footer__headline { font-size: clamp(3rem, 18vw, 6rem); }
   .v3-footer__bottom { padding: 1rem; }
+}
+
+/* ===== GALLERY — VITA DA MAI THAI ===== */
+
+.v3-gallery {
+  background-color: var(--beige);
+  padding: 4rem 0 4.5rem;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Stessa scala del titolo bestseller (sezione a tutta larghezza con
+   titolo a filo sinistro), colore rosso come le sezioni beige */
+.v3-gallery__title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 8rem);
+  color: var(--red);
+  text-transform: uppercase;
+  line-height: 0.85;
+  margin-bottom: 2rem;
+  padding: 0 3rem;
+}
+
+.v3-gallery__wrap {
+  overflow: hidden;
+}
+
+/* Le foto sono duplicate nell'HTML: traslando del 50% il loop si
+   richiude esattamente sulla seconda copia, senza stacco visibile. */
+.v3-gallery__strip {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+  animation: gallery-scroll 45s linear infinite;
+}
+
+@keyframes gallery-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.v3-gallery:hover .v3-gallery__strip {
+  animation-play-state: paused;
+}
+
+.v3-gallery__item {
+  flex: 0 0 auto;
+  width: 260px;
+  height: 430px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.v3-gallery__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.v3-gallery__item:hover img {
+  transform: scale(1.06);
+}
+
+.v3-gallery__cta {
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+.v3-gallery__cta a {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1.5px solid rgba(227, 13, 24, 0.5);
+  padding-bottom: 0.3rem;
+  transition: gap 0.2s, border-color 0.2s;
+}
+
+.v3-gallery__cta a:hover {
+  gap: 0.75rem;
+  border-bottom-color: var(--red);
+}
+
+/* Chi preferisce meno movimento non vede lo scorrimento */
+@media (prefers-reduced-motion: reduce) {
+  .v3-gallery__strip { animation: none; }
 }
 
 /* ===== SCHERMI GRANDI ===== */
