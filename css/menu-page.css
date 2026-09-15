@@ -258,40 +258,16 @@ img.mp-nav__icon {
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
 }
 
-/* Photo / placeholder */
+/* Photo / placeholder — sfondo splatter su tutte le card */
 .dish-card-sm__img {
   position: relative;
   aspect-ratio: 1 / 1;
-  background-color: var(--color-red);
-  background-image: url('../images/grafiche/TEXTURE MENU.png');
-  background-repeat: repeat;
-  background-blend-mode: multiply;
-  overflow: hidden;
-}
-
-
-
-/* PROVA — sfondo splatter (solo prima card, da valutare) */
-.dish-card-sm--splash .dish-card-sm__img {
   background-color: var(--color-red);
   background-image: url('../images/grafiche/PROVA%20SFONDO%20PIATTO.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-blend-mode: normal;
-}
-
-.dish-card-sm--splash .dish-card-sm__img::after {
-  background: none;
-}
-
-.dish-card-sm__img::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.08);
-  pointer-events: none;
-  z-index: 0;
+  overflow: hidden;
 }
 
 .dish-card-sm__img img {
