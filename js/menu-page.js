@@ -29,7 +29,7 @@
     });
   });
 
-  // Inietta le icone nei link dalla nav
+  // Inietta le icone nei link dalla nav (visibili sempre)
   navLinks.forEach((link) => {
     const iconSrc = link.getAttribute('data-icon');
     if (!iconSrc) return;
@@ -37,8 +37,7 @@
     img.src = iconSrc;
     img.alt = '';
     img.className = 'mp-nav__icon';
-    img.hidden = true; // nascosta finché non entra in sidebar
-    link.appendChild(img);
+    link.insertBefore(img, link.firstChild);
   });
 
   // Sidebar: slide in da sinistra dopo scroll
@@ -56,30 +55,39 @@
   function enterSidebar() {
     if (isSidebar || isAnimating) return;
     isAnimating = true;
-    nav.classList.add('is-sidebar');
-    navLinks.forEach((link) => {
-      const icon = link.querySelector('.mp-nav__icon');
-      if (icon) icon.hidden = false;
-    });
-    nav.offsetHeight; // force reflow
-    nav.classList.add('is-visible');
-    isSidebar = true;
-    setTimeout(() => { isAnimating = false; }, 460);
+    // Fade out barra orizzontale
+    nav.style.opacity = '0';
+    setTimeout(() => {
+      // Switch a sidebar (già invisibile + fuori schermo)
+      nav.classList.add('is-sidebar');
+      nav.style.opacity = '';
+      nav.offsetHeight; // force reflow
+      // Slide in + fade in sovrapposti
+      requestAnimationFrame(() => {
+        nav.classList.add('is-visible');
+      });
+      isSidebar = true;
+      setTimeout(() => { isAnimating = false; }, 750);
+    }, 300);
   }
 
   function exitSidebar() {
     if (!isSidebar || isAnimating) return;
     isAnimating = true;
+    // Slide out + fade out sidebar
     nav.classList.remove('is-visible');
     setTimeout(() => {
+      // Ripristina barra orizzontale partendo invisibile
       nav.classList.remove('is-sidebar');
-      navLinks.forEach((link) => {
-        const icon = link.querySelector('.mp-nav__icon');
-        if (icon) icon.hidden = true;
+      nav.style.opacity = '0';
+      nav.offsetHeight;
+      // Fade in barra
+      requestAnimationFrame(() => {
+        nav.style.opacity = '';
       });
       isSidebar = false;
-      isAnimating = false;
-    }, 460);
+      setTimeout(() => { isAnimating = false; }, 450);
+    }, 500);
   }
 
   function updateNavPosition() {
