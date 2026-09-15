@@ -84,6 +84,24 @@ body {
   z-index: 1;
 }
 
+/* Grafiche graffiti dei blocchi antracite, una diversa per sede.
+   PNG gia colorati in beige: niente filtri a runtime.
+   Nessun z-index: l'inner ha z-index 1, quindi restano dietro al testo. */
+.sede__graffito {
+  position: absolute;
+  top: 50%;
+  right: 3%;
+  width: 115px;
+  opacity: 0.45;
+  pointer-events: none;
+  user-select: none;
+}
+
+.sede__graffito--1 { transform: translateY(-50%) rotate(-12deg); }
+.sede__graffito--2 { transform: translateY(-50%) rotate(9deg); }
+.sede__graffito--3 { transform: translateY(-50%) rotate(-7deg); }
+.sede__graffito--4 { transform: translateY(-50%) rotate(14deg); }
+
 .sede-block:not(.sede-block--alt):not(.sede-block--red) .sede__name {
   color: var(--color-red);
 }
@@ -383,6 +401,20 @@ body {
   }
 
   .sede__map { min-height: 260px; }
+
+  /* A colonna singola il testo occupa tutta la larghezza: grafica piu
+     piccola e in alto, per non finire in mezzo alle scritte */
+  .sede__graffito {
+    width: 70px;
+    top: auto;
+    bottom: 1rem;
+    right: 1rem;
+    opacity: 0.3;
+  }
+  .sede__graffito--1,
+  .sede__graffito--2,
+  .sede__graffito--3,
+  .sede__graffito--4 { transform: none; }
 }
 
 @media (max-width: 560px) {
