@@ -35,6 +35,16 @@ body {
   z-index: 2;
 }
 
+/* Freccia graffiti. z-index 2 per stare sopra il velo scuro (::after, z-index 1).
+   Usa il PNG gia colorato in beige: niente filtri, colore esatto. */
+.sp-hero__freccia {
+  width: 170px;
+  top: 28%;
+  left: 46%;
+  z-index: 2;
+  transform: rotate(40deg);
+}
+
 .sp-hero__label {
   display: block;
   font-family: var(--font-body);
@@ -349,6 +359,10 @@ body {
 @media (max-width: 900px) {
   .sp-hero { padding-top: 80px; padding-bottom: 2rem; min-height: 55vh; }
   .sp-hero__title { font-size: clamp(2.5rem, 12vw, 5rem); }
+
+  /* Hero piu bassa e titolo a tutta larghezza: freccia piu piccola e
+     spostata a destra per non finirci sopra */
+  .sp-hero__freccia { width: 95px; top: 16%; left: auto; right: 6%; }
 
   .sede-block__inner {
     grid-template-columns: 1fr;

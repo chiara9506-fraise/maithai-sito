@@ -334,7 +334,7 @@ img { max-width: 100%; display: block; }
 /* ===== BEST SELLER ===== */
 
 .v3-bestseller {
-  background-color: var(--red);
+  background-color: var(--beige);
   padding: 4rem 3rem 5rem;
   position: relative;
 }
@@ -342,20 +342,27 @@ img { max-width: 100%; display: block; }
 .v3-bestseller__title {
   font-family: var(--font-display);
   font-size: clamp(3rem, 6vw, 8rem);
-  color: var(--beige);
+  color: var(--red);
   text-transform: uppercase;
   line-height: 0.85;
   margin-bottom: 2rem;
 }
 
-/* cuore — best seller destra */
+/* ----- Grafiche che "sporcano" la sezione (ora beige) -----
+   Tutte nere in origine: il filtro le porta al rosso primario. */
+
+/* cuore — accanto al titolo */
 .v3-graffiti--cuore-bs {
-  width: 200px;
-  top: 3rem;
-  right: 3rem;
+  width: 190px;
+  top: 1.5rem;
+  left: 32%;
+  right: auto;
   z-index: 2;
   transform: rotate(20deg);
+  opacity: 0.9;
+  filter: brightness(0) invert(1) brightness(0.22);
 }
+
 
 .v3-bestseller__grid {
   display: grid;
@@ -377,6 +384,7 @@ img { max-width: 100%; display: block; }
    diverse (piatto piano vs pentola alta) e con height:auto i nomi sotto
    finivano a quote diverse. Con aspect-ratio + contain restano allineati. */
 .v3-dish__img {
+  position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
   display: flex;
@@ -384,7 +392,25 @@ img { max-width: 100%; display: block; }
   justify-content: center;
 }
 
+/* Macchia spray dietro ogni piatto. Sta su uno pseudo-elemento cosi il
+   colore tocca solo lei e non la foto del piatto. */
+.v3-dish__img::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('../images/grafiche/grafiti/cerchio.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80%;
+  filter: invert(13%) sepia(94%) saturate(5000%) hue-rotate(352deg) brightness(95%);
+  opacity: 0.4;
+  z-index: 0;
+  pointer-events: none;
+}
+
 .v3-dish__img img {
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 640px;
   height: 100%;
@@ -402,7 +428,7 @@ img { max-width: 100%; display: block; }
 .v3-dish__name {
   font-family: var(--font-display);
   font-size: clamp(2rem, 4.5vw, 4.5rem);
-  color: var(--white);
+  color: var(--red);
   text-transform: uppercase;
   line-height: 1;
   text-align: center;
@@ -416,7 +442,7 @@ img { max-width: 100%; display: block; }
   flex-direction: column;
   align-items: center;
   gap: 0.4rem;
-  border-top: 2px solid rgba(255,255,255,0.25);
+  border-top: 2px solid rgba(227, 13, 24, 0.3);
   padding-top: 1rem;
   width: 80%;
   margin: auto auto 0;
@@ -428,7 +454,7 @@ img { max-width: 100%; display: block; }
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--beige);
+  color: var(--red);
 }
 
 .v3-dish__spice-icons {
@@ -462,18 +488,18 @@ img { max-width: 100%; display: block; }
   font-size: 0.78rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--white);
+  color: var(--red);
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  border-bottom: 1.5px solid rgba(255,255,255,0.5);
+  border-bottom: 1.5px solid rgba(227, 13, 24, 0.5);
   padding-bottom: 0.3rem;
   transition: gap 0.2s, border-color 0.2s;
 }
 
 .v3-bestseller__cta a:hover {
   gap: 0.75rem;
-  border-bottom-color: var(--white);
+  border-bottom-color: var(--red);
 }
 
 /* ===== TICKER ===== */
@@ -527,6 +553,17 @@ img { max-width: 100%; display: block; }
   top: -60px;
   left: 38%;
   z-index: 10;
+}
+
+/* corona — a cavallo fra la colonna antracite e la foto.
+   Usa corona-rossa.png, gia colorata nel rosso esatto del brand: niente
+   filtro (dava un rosso approssimato) ne mask (non veniva renderizzata). */
+.v3-graffiti--corona-sedi {
+  width: 145px;
+  top: -18px;
+  left: 37%;
+  z-index: 10;
+  transform: rotate(-14deg);
 }
 
 .v3-sedi__left {
@@ -972,6 +1009,9 @@ img { max-width: 100%; display: block; }
 
   /* Bestseller */
   .v3-bestseller { padding: 2rem 0 2rem 1.5rem; }
+  .v3-graffiti--cuore-bs { width: 90px; top: 1rem; left: auto; right: 1rem; }
+  /* A colonna singola la corona finirebbe in mezzo al testo */
+  .v3-graffiti--corona-sedi { width: 110px; top: -18px; left: auto; right: 5%; }
   .v3-bestseller__title { font-size: clamp(2.5rem, 12vw, 5rem); padding-right: 1.5rem; }
   .v3-bestseller__cta { padding-right: 1.5rem; }
   .v3-bestseller__grid {
