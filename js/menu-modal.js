@@ -330,6 +330,7 @@ const DISH_DATA = {
   const nameEl        = modal.querySelector('.dish-modal__name');
   const priceEl       = modal.querySelector('.dish-modal__price');
   const spiceIconsEl  = modal.querySelector('.dish-modal__spice-icons');
+  const vegEl         = modal.querySelector('.dish-modal__veg');
   const ingredientsEl = modal.querySelector('.dish-modal__ingredients');
   const removableEl   = modal.querySelector('.dish-modal__removable');
 
@@ -370,6 +371,10 @@ const DISH_DATA = {
       if (i > spiceLevel) img.classList.add('inactive');
       spiceIconsEl.appendChild(img);
     }
+
+    // Vegetariano
+    const isVeg = !!card.querySelector('.dish-tags img[src*="elefante-verde"]');
+    vegEl.hidden = !isVeg;
 
     // Ingredienti
     ingredientsEl.textContent = data.ingredients || 'Informazioni in aggiornamento.';

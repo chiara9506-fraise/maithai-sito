@@ -10,7 +10,7 @@
 :root {
   --red: #E30D18;
   --beige: #EDE8DA;
-  --black: #010202;
+  --black: #383E42;
   --white: #EDE8DA;
   --font-display: 'TAN Ashford', Georgia, serif;
   --font-body: 'Open Sans', sans-serif;
@@ -186,7 +186,7 @@ img { max-width: 100%; display: block; }
 
 .v3-hero__cta--primary:hover {
   background-color: var(--black);
-  color: var(--red);
+  color: var(--beige);
 }
 
 .v3-hero__cta--secondary {
@@ -197,7 +197,7 @@ img { max-width: 100%; display: block; }
 
 .v3-hero__cta--secondary:hover {
   background-color: var(--black);
-  color: var(--red);
+  color: var(--beige);
   border-color: var(--black);
 }
 
@@ -384,6 +384,10 @@ img { max-width: 100%; display: block; }
   flex-direction: column;
   align-items: center;
   gap: 0.4rem;
+  border-top: 2px solid rgba(255,255,255,0.25);
+  padding-top: 1rem;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .v3-dish__spice-label {
@@ -392,7 +396,7 @@ img { max-width: 100%; display: block; }
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
+  color: var(--beige);
 }
 
 .v3-dish__spice-icons {
@@ -404,8 +408,8 @@ img { max-width: 100%; display: block; }
 .v3-dish__spice-icons img {
   width: 26px;
   height: auto;
-  filter: brightness(0) invert(1);
-  opacity: 0.18;
+  filter: brightness(0) invert(1) brightness(0.22);
+  opacity: 0.3;
   transition: opacity 0.2s;
 }
 
@@ -413,11 +417,7 @@ img { max-width: 100%; display: block; }
   opacity: 1;
 }
 
-.v3-dish__line {
-  width: 80%;
-  height: 2px;
-  background-color: rgba(255,255,255,0.25);
-}
+.v3-dish__line { display: none; }
 
 .v3-bestseller__cta {
   text-align: center;
@@ -483,9 +483,10 @@ img { max-width: 100%; display: block; }
 
 .v3-sedi {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 380px auto;
-  background-color: var(--red);
+  grid-template-columns: 1fr 1.6fr;
+  grid-template-rows: 560px;
+  background-color: var(--black);
+  position: relative;
 }
 
 /* WOOW — angolo in alto a sinistra della foto sedi */
@@ -612,13 +613,7 @@ img { max-width: 100%; display: block; }
 /* Controls */
 
 .v3-sedi__controls {
-  grid-column: 1 / -1;
-  grid-row: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  padding: 0.75rem 3rem;
+  display: none;
 }
 
 .v3-sedi__counter {
@@ -657,9 +652,12 @@ img { max-width: 100%; display: block; }
 }
 
 .v3-sedi__arrows {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
   display: flex;
   gap: 0.5rem;
-  margin-left: auto;
+  z-index: 10;
 }
 
 .v3-sedi__btn {
@@ -728,6 +726,7 @@ img { max-width: 100%; display: block; }
   right: 30rem;
   z-index: 1;
   transform: rotate(15deg);
+  filter: brightness(0) invert(1) brightness(0.22);
 }
 
 .v3-footer__social {
@@ -954,7 +953,7 @@ img { max-width: 100%; display: block; }
     scroll-snap-align: start;
   }
   .v3-sedi__info { padding: 2rem 1.5rem; }
-  .v3-sedi__controls { justify-content: center; padding: 0.75rem 1rem; }
+  .v3-sedi__controls { display: flex; justify-content: center; padding: 0.75rem 1rem; }
   .v3-sedi__arrows  { display: none; }
   .v3-sedi__counter { display: none; }
   .v3-sedi__heading { font-size: clamp(2rem, 10vw, 4rem); }

@@ -38,7 +38,7 @@
 /* ----- Immagine ----- */
 .dish-modal__img {
   position: relative;
-  background-color: #EDE8DA;
+  background-color: var(--color-red);
   background-image: url('../images/grafiche/TEXTURE MENU.png');
   background-repeat: repeat;
   background-blend-mode: multiply;
@@ -63,6 +63,8 @@
   flex-direction: column;
   gap: 1rem;
   overflow-y: auto;
+  background-color: #383E42;
+  color: var(--color-white);
 }
 
 /* Chiudi */
@@ -120,7 +122,7 @@
 .dish-modal__price {
   font-family: var(--font-title);
   font-size: 1.5rem;
-  color: var(--color-white);
+  color: var(--color-yellow);
   line-height: 1;
 }
 
@@ -138,6 +140,22 @@
   display: flex;
   align-items: center;
   gap: 0.6rem;
+}
+
+.dish-modal__veg {
+  display: none;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.dish-modal__veg:not([hidden]) {
+  display: flex;
+}
+
+.dish-modal__veg img {
+  width: 20px;
+  height: auto;
+  display: block;
 }
 
 .dish-modal__spice-label {
@@ -159,12 +177,12 @@
   width: 20px;
   height: auto;
   display: block;
-  filter: brightness(0) invert(1);
+  filter: invert(13%) sepia(94%) saturate(5000%) hue-rotate(352deg) brightness(95%);
 }
 
 .dish-modal__spice-icons img.inactive {
   opacity: 0.3;
-  filter: brightness(0) invert(1);
+  filter: invert(13%) sepia(94%) saturate(5000%) hue-rotate(352deg) brightness(95%);
 }
 
 /* Sezioni */

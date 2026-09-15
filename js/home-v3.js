@@ -29,8 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     dotsWrap.appendChild(dot);
   });
-  const arrowsEl = document.querySelector('.v3-sedi__arrows');
-  controls.insertBefore(dotsWrap, arrowsEl);
+  controls.appendChild(dotsWrap);
 
   /* ---- Aggiorna pallini ---- */
   function updateDots(idx) {

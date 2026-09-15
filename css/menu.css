@@ -58,7 +58,7 @@
 .dish-card {
   display: flex;
   flex-direction: column;
-  background-color: #111111;
+  background-color: #383E42;
   border: 1px solid #222222;
   border-radius: 4px;
   overflow: hidden;
