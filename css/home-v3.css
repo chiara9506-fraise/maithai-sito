@@ -347,10 +347,15 @@ img { max-width: 100%; display: block; }
   flex-direction: column;
   align-items: center;
   gap: 1.2rem;
+  height: 100%;
 }
 
+/* Box immagine di altezza uniforme: le foto dei piatti hanno proporzioni
+   diverse (piatto piano vs pentola alta) e con height:auto i nomi sotto
+   finivano a quote diverse. Con aspect-ratio + contain restano allineati. */
 .v3-dish__img {
   width: 100%;
+  aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -359,7 +364,7 @@ img { max-width: 100%; display: block; }
 .v3-dish__img img {
   width: 100%;
   max-width: 640px;
-  height: auto;
+  height: 100%;
   object-fit: contain;
   filter: drop-shadow(0 16px 40px rgba(0,0,0,0.35));
   transition: transform 0.35s;
@@ -369,9 +374,11 @@ img { max-width: 100%; display: block; }
   transform: translateY(-10px);
 }
 
+/* Il cap era 8rem ma la colonna è fissa a 379px (griglia 1200px / 3):
+   "SIAM BOWL" a 96px misura ~435px e sbordava sulle colonne vicine. */
 .v3-dish__name {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 6vw, 8rem);
+  font-size: clamp(2rem, 4.5vw, 4.5rem);
   color: var(--white);
   text-transform: uppercase;
   line-height: 1;
@@ -379,6 +386,8 @@ img { max-width: 100%; display: block; }
   white-space: nowrap;
 }
 
+/* margin-top auto tiene la piccantezza sempre a filo in fondo alla card,
+   anche se un nome dovesse andare a capo */
 .v3-dish__spice {
   display: flex;
   flex-direction: column;
@@ -387,7 +396,7 @@ img { max-width: 100%; display: block; }
   border-top: 2px solid rgba(255,255,255,0.25);
   padding-top: 1rem;
   width: 80%;
-  margin: 0 auto;
+  margin: auto auto 0;
 }
 
 .v3-dish__spice-label {
@@ -1005,6 +1014,16 @@ img { max-width: 100%; display: block; }
 
   .v3-sedi__info {
     max-width: 640px;
+  }
+
+  /* Più spazio in orizzontale: le colonne passano da 379px a 479px,
+     quindi i nomi dei piatti possono tornare più grandi senza sbordare */
+  .v3-bestseller__grid {
+    max-width: 1500px;
+  }
+
+  .v3-dish__name {
+    font-size: 5.5rem;
   }
 }
 
