@@ -76,7 +76,9 @@ body {
 .mp-nav.is-sidebar {
   position: fixed;
   top: 50%;
-  left: 0;
+  /* Si aggancia appena fuori dalla colonna di contenuto (1600px):
+     sugli schermi stretti resta a filo del bordo schermo */
+  left: max(0px, calc((100vw - 1600px) / 2 - 80px));
   right: auto;
   width: auto;
   padding: 0;
@@ -477,4 +479,16 @@ img.mp-nav__icon {
   .mp-section { scroll-margin-top: 80px; }
   .dish-grid { gap: 0.5rem; }
   .drinks-grid { gap: var(--space-sm); }
+}
+
+/* ===== SCHERMI GRANDI ===== */
+@media (min-width: 1500px) {
+  .mp-hero .container,
+  .mp-main .container {
+    max-width: 1600px;
+  }
+
+  .dish-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }

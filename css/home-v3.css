@@ -993,3 +993,23 @@ img { max-width: 100%; display: block; }
   .v3-footer__headline { font-size: clamp(3rem, 18vw, 6rem); }
   .v3-footer__bottom { padding: 1rem; }
 }
+
+/* ===== SCHERMI GRANDI ===== */
+/* La sezione "Dove siamo" ha la riga a 560px fissi: senza un cap sulla
+   larghezza la foto diventa una striscia bassissima e viene tagliata male
+   da object-fit: cover. Qui l'altezza cresce insieme alla larghezza. */
+@media (min-width: 1500px) {
+  .v3-sedi {
+    grid-template-rows: 660px;
+  }
+
+  .v3-sedi__info {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 2000px) {
+  .v3-sedi {
+    grid-template-rows: 780px;
+  }
+}

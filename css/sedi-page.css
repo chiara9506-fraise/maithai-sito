@@ -210,6 +210,17 @@ body {
   flex-direction: column;
   justify-content: center;
   padding: var(--space-lg) clamp(2rem, 8%, 6rem);
+  /* Su schermi grandi il testo smette di allargarsi e resta verso il centro,
+     mentre la mappa continua a occupare tutto fino al bordo */
+  max-width: 880px;
+  margin-left: auto;
+}
+
+/* Nei blocchi --alt la colonna testo è a destra (direction: rtl):
+   va ancorata a sinistra per restare verso il centro pagina */
+.sede-block--alt .sede__text {
+  margin-left: 0;
+  margin-right: auto;
 }
 
 .sede__name {
@@ -349,7 +360,13 @@ body {
 
   .sede__name { font-size: clamp(2.5rem, 10vw, 4rem); }
 
-  .sede__text { padding: 1.5rem 1.5rem; }
+  .sede__text,
+  .sede-block--alt .sede__text {
+    padding: 1.5rem 1.5rem;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
 
   .sede__map { min-height: 260px; }
 }
