@@ -29,52 +29,71 @@
     });
   });
 
-  // Move nav to bottom when scrolling past threshold, back to top when near top
+  // Inietta le icone nei link dalla nav
+  navLinks.forEach((link) => {
+    const iconSrc = link.getAttribute('data-icon');
+    if (!iconSrc) return;
+    const img = document.createElement('img');
+    img.src = iconSrc;
+    img.alt = '';
+    img.className = 'mp-nav__icon';
+    img.hidden = true; // nascosta finché non entra in sidebar
+    link.appendChild(img);
+  });
+
+  // Sidebar: slide in da sinistra dopo scroll
   let navNaturalTop = 0;
-  let isAtBottom = false;
+  let isSidebar = false;
   let isAnimating = false;
-  const EXTRA_SCROLL = 350; // px scrolled past nav before it moves to bottom
-  const HYSTERESIS = 100;   // px gap to avoid flickering when going back up
+  const HEADER_H = 100;   // altezza header desktop
+  const EXTRA_SCROLL = 0;
+  const HYSTERESIS = 80;
 
   function initNavTop() {
     navNaturalTop = nav.getBoundingClientRect().top + window.scrollY;
   }
 
-  function moveToBottom() {
-    if (isAtBottom || isAnimating) return;
+  function enterSidebar() {
+    if (isSidebar || isAnimating) return;
     isAnimating = true;
-    const currentTop = nav.getBoundingClientRect().top;
-    nav.classList.add('is-fixed');
-    nav.style.top = currentTop + 'px';
-    nav.offsetHeight; // force reflow so transition fires
-    nav.style.top = (window.innerHeight - nav.offsetHeight) + 'px';
-    isAtBottom = true;
+    nav.classList.add('is-sidebar');
+    navLinks.forEach((link) => {
+      const icon = link.querySelector('.mp-nav__icon');
+      if (icon) icon.hidden = false;
+    });
+    nav.offsetHeight; // force reflow
+    nav.classList.add('is-visible');
+    isSidebar = true;
     setTimeout(() => { isAnimating = false; }, 460);
   }
 
-  function moveToTop() {
-    if (!isAtBottom || isAnimating) return;
+  function exitSidebar() {
+    if (!isSidebar || isAnimating) return;
     isAnimating = true;
-    nav.style.top = '100px';
+    nav.classList.remove('is-visible');
     setTimeout(() => {
-      nav.classList.remove('is-fixed');
-      nav.style.top = '';
-      isAtBottom = false;
+      nav.classList.remove('is-sidebar');
+      navLinks.forEach((link) => {
+        const icon = link.querySelector('.mp-nav__icon');
+        if (icon) icon.hidden = true;
+      });
+      isSidebar = false;
       isAnimating = false;
     }, 460);
   }
 
   function updateNavPosition() {
     const scrollY = window.scrollY;
-    if (scrollY > navNaturalTop + EXTRA_SCROLL) {
-      moveToBottom();
-    } else if (scrollY < navNaturalTop + EXTRA_SCROLL - HYSTERESIS) {
-      moveToTop();
+    const trigger = navNaturalTop - HEADER_H + EXTRA_SCROLL;
+    if (scrollY > trigger) {
+      enterSidebar();
+    } else if (scrollY < trigger - HYSTERESIS) {
+      exitSidebar();
     }
   }
 
   window.addEventListener('load', initNavTop);
   window.addEventListener('scroll', updateNavPosition, { passive: true });
-  window.addEventListener('resize', () => { initNavTop(); }, { passive: true });
+  window.addEventListener('resize', initNavTop, { passive: true });
   initNavTop();
 })();
