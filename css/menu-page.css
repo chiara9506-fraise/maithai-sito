@@ -76,9 +76,11 @@ body {
 .mp-nav.is-sidebar {
   position: fixed;
   top: 50%;
-  /* Si aggancia appena fuori dalla colonna di contenuto (1600px):
-     sugli schermi stretti resta a filo del bordo schermo */
-  left: max(0px, calc((100vw - 1600px) / 2 - 80px));
+  /* A filo del bordo schermo a ogni larghezza: l'inner e squadrato a
+     sinistra e arrotondato a destra (border-radius 0 16px 16px 0), quindi
+     e disegnato per stare attaccato al bordo. Staccandolo resta vuoto da
+     entrambi i lati e sembra fluttuare. */
+  left: 0;
   right: auto;
   width: auto;
   padding: 0;
@@ -327,19 +329,23 @@ img.mp-nav__icon {
 }
 
 .dish-card-sm__name {
-  font-family: var(--font-body);
-  font-weight: 700;
-  font-size: 1rem;
+  font-family: var(--font-title);
+  font-size: 1.35rem;
   color: var(--color-white);
-  line-height: 1.3;
+  text-transform: uppercase;
+  line-height: 1.1;
   margin-bottom: 0.15rem;
   order: 1;
 }
 
+/* Resta nel font di testo: il nome ora usa quello dei titoli, e "3pz"
+   in maiuscolo display starebbe male accanto al nome del piatto. */
 .dish-card-sm__qty {
+  font-family: var(--font-body);
   font-weight: 400;
   color: rgba(255, 255, 255, 0.45);
   font-size: 0.72rem;
+  text-transform: none;
 }
 
 .dish-card-sm__variant {
@@ -494,7 +500,7 @@ img.mp-nav__icon {
   .mp-main .container { padding: 0 1rem; }
   .dish-grid { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
   .dish-card-sm__name {
-    font-size: 0.85rem;
+    font-size: 1.05rem;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;

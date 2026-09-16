@@ -237,6 +237,9 @@ img { max-width: 100%; display: block; }
   overflow: hidden;
 }
 
+/* Niente contenitore centrato: il testo deve partire a 3rem dal bordo
+   pagina, come i titoli di bestseller, gallery e Dove siamo. Con
+   max-width 1300px centrato rientrava di ~310px in piu su schermi larghi. */
 .v3-chisiamo__inner {
   position: relative;
   z-index: 1;
@@ -244,31 +247,19 @@ img { max-width: 100%; display: block; }
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   align-items: center;
-  max-width: 1300px;
-  margin: 0 auto;
   padding: 0 3rem;
 }
 
-/* WOOW — nello spazio vuoto tra il testo e la foto.
-   Il PNG e nero: il filtro lo porta ad antracite (#383838).
-   Nessuna rotazione CSS: la scritta e gia inclinata nel disegno. */
-.v3-graffiti--woow-chisiamo {
-  width: 220px;
-  top: 12%;
-  left: 40%;
-  z-index: 2;
-  filter: brightness(0) invert(1) brightness(0.22);
-}
-
-/* Seconda stellina, in basso a destra dietro il piatto.
+/* Stellina in basso a destra dietro il piatto.
    z-index -1 la manda sotto la foto ma resta dentro il contesto di
    impilamento di __inner, quindi sopra il pattern della sezione. */
 .v3-graffiti--stella-chisiamo-2 {
-  width: 155px;
-  right: 4%;
-  bottom: 2%;
+  width: 215px;
+  top: 50%;
+  left: 51%;
+  right: auto;
   z-index: -1;
-  transform: rotate(18deg);
+  transform: translateY(-50%) rotate(12deg);
   filter: brightness(0) invert(1) brightness(0.22);
 }
 
@@ -334,7 +325,7 @@ img { max-width: 100%; display: block; }
 /* ===== BEST SELLER ===== */
 
 .v3-bestseller {
-  background-color: var(--beige);
+  background-color: var(--red);
   padding: 4rem 3rem 5rem;
   position: relative;
 }
@@ -342,7 +333,7 @@ img { max-width: 100%; display: block; }
 .v3-bestseller__title {
   font-family: var(--font-display);
   font-size: clamp(3rem, 6vw, 8rem);
-  color: var(--red);
+  color: var(--beige);
   text-transform: uppercase;
   line-height: 0.85;
   margin-bottom: 2rem;
@@ -360,7 +351,6 @@ img { max-width: 100%; display: block; }
   z-index: 2;
   transform: rotate(20deg);
   opacity: 0.9;
-  filter: brightness(0) invert(1) brightness(0.22);
 }
 
 
@@ -398,12 +388,10 @@ img { max-width: 100%; display: block; }
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('../images/grafiche/grafiti/cerchio.png');
+  background-image: url('../images/grafiche/grafiti/MACCHIA%20GIUSTA.png');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 80%;
-  filter: invert(13%) sepia(94%) saturate(5000%) hue-rotate(352deg) brightness(95%);
-  opacity: 0.4;
+  background-size: 90%;
   z-index: 0;
   pointer-events: none;
 }
@@ -428,7 +416,7 @@ img { max-width: 100%; display: block; }
 .v3-dish__name {
   font-family: var(--font-display);
   font-size: clamp(2rem, 4.5vw, 4.5rem);
-  color: var(--red);
+  color: var(--white);
   text-transform: uppercase;
   line-height: 1;
   text-align: center;
@@ -442,7 +430,7 @@ img { max-width: 100%; display: block; }
   flex-direction: column;
   align-items: center;
   gap: 0.4rem;
-  border-top: 2px solid rgba(227, 13, 24, 0.3);
+  border-top: 2px solid rgba(255, 255, 255, 0.25);
   padding-top: 1rem;
   width: 80%;
   margin: auto auto 0;
@@ -454,7 +442,7 @@ img { max-width: 100%; display: block; }
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--red);
+  color: var(--beige);
 }
 
 .v3-dish__spice-icons {
@@ -488,18 +476,18 @@ img { max-width: 100%; display: block; }
   font-size: 0.78rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--red);
+  color: var(--white);
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  border-bottom: 1.5px solid rgba(227, 13, 24, 0.5);
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.5);
   padding-bottom: 0.3rem;
   transition: gap 0.2s, border-color 0.2s;
 }
 
 .v3-bestseller__cta a:hover {
   gap: 0.75rem;
-  border-bottom-color: var(--red);
+  border-bottom-color: var(--white);
 }
 
 /* ===== TICKER ===== */
@@ -802,32 +790,45 @@ img { max-width: 100%; display: block; }
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0.6rem;
+  gap: 0.8rem;
   position: relative;
   z-index: 2;
 }
 
 .v3-footer__social-label {
   font-family: var(--font-body);
-  font-size: 0.72rem;
+  font-size: 1rem;
   font-weight: 700;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(0,0,0,0.45);
+  color: rgba(0,0,0,0.5);
 }
 
 .v3-footer__social-handle {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
   font-family: var(--font-body);
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.25rem;
+  font-weight: 700;
   color: var(--black);
-  transition: opacity 0.2s;
+  border-bottom: 1.5px solid rgba(56, 62, 66, 0.35);
+  padding-bottom: 0.2rem;
+  transition: opacity 0.2s, gap 0.2s, border-color 0.2s;
 }
 
-.v3-footer__social-handle:hover { opacity: 0.75; }
+/* L'icona segue la dimensione del testo invece dei 18px fissi nell'SVG */
+.v3-footer__social-handle svg {
+  width: 1.05em;
+  height: 1.05em;
+  flex-shrink: 0;
+}
+
+.v3-footer__social-handle:hover {
+  opacity: 0.75;
+  gap: 0.8rem;
+  border-bottom-color: var(--black);
+}
 
 .v3-footer__bottom {
   border-top: 1px solid rgba(0,0,0,0.1);
@@ -980,20 +981,14 @@ img { max-width: 100%; display: block; }
   .v3-chisiamo__photo { order: -1; }
   .v3-chisiamo__photo img { max-height: 240px; }
 
-  /* A colonna singola il WOOW andrebbe in mezzo alla foto:
-     piu piccolo e spostato nell'angolo */
-  .v3-graffiti--woow-chisiamo {
-    width: 130px;
-    top: 1%;
-    left: auto;
-    right: 3%;
-  }
-
+  /* Annulla il centraggio verticale della versione desktop */
   .v3-graffiti--stella-chisiamo-2 {
     width: 90px;
     right: auto;
     left: 3%;
+    top: auto;
     bottom: 6%;
+    transform: rotate(12deg);
   }
 
   /* Gallery */
@@ -1084,6 +1079,8 @@ img { max-width: 100%; display: block; }
 
   .v3-bestseller { padding: 2rem 1rem 3rem; }
   .v3-bestseller__grid { gap: 1.5rem; }
+
+  .v3-gallery__title { padding: 0 1rem; }
 
   .v3-sedi__left  { padding: 1.5rem 1rem; }
   .v3-sedi__controls { padding: 0.5rem 1rem; }

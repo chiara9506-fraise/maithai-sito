@@ -48,8 +48,27 @@
   const EXTRA_SCROLL = 0;
   const HYSTERESIS = 80;
 
+  // La nav e sticky e poi diventa fixed: misurarla direttamente restituisce
+  // la posizione in cui e incollata, non quella naturale. Questo marcatore
+  // resta sempre nel flusso, quindi la misura e valida a ogni scroll.
+  const sentinel = document.createElement('div');
+  sentinel.setAttribute('aria-hidden', 'true');
+  sentinel.style.height = '0';
+  nav.parentNode.insertBefore(sentinel, nav);
+
   function initNavTop() {
-    navNaturalTop = nav.getBoundingClientRect().top + window.scrollY;
+    navNaturalTop = sentinel.getBoundingClientRect().top + window.scrollY;
+  }
+
+  // Al caricamento con la pagina gia scrollata lo stato va applicato subito
+  // e senza animazione, altrimenti a ogni ricarica parte il fade + slide.
+  function applySidebarNow() {
+    if (isSidebar) return;
+    nav.style.transition = 'none';
+    nav.classList.add('is-sidebar', 'is-visible');
+    nav.offsetHeight; // force reflow
+    nav.style.transition = '';
+    isSidebar = true;
   }
 
   function enterSidebar() {
@@ -100,8 +119,23 @@
     }
   }
 
-  window.addEventListener('load', initNavTop);
+  // Allo start va valutato subito lo stato: il browser puo ripristinare lo
+  // scroll a meta pagina, e senza questa chiamata la nav restava in alto
+  // finche l'utente non scrollava di nuovo.
+  function syncToScroll(immediate) {
+    initNavTop();
+    const trigger = navNaturalTop - HEADER_H + EXTRA_SCROLL;
+    if (immediate && window.scrollY > trigger) {
+      applySidebarNow();
+    } else {
+      updateNavPosition();
+    }
+  }
+
   window.addEventListener('scroll', updateNavPosition, { passive: true });
-  window.addEventListener('resize', initNavTop, { passive: true });
-  initNavTop();
+  window.addEventListener('resize', () => syncToScroll(false), { passive: true });
+
+  // Il ripristino dello scroll avviene entro il load, quindi si rimisura li
+  window.addEventListener('load', () => syncToScroll(true));
+  syncToScroll(true);
 })();
