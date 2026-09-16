@@ -776,11 +776,15 @@ img { max-width: 100%; display: block; }
   text-transform: uppercase;
 }
 
-/* SMILE — footer */
+/* SMILE — footer, in alto a destra.
+   Era a right: 30rem, un offset fisso che non teneva conto dell'headline
+   accanto: essendo clamp(5rem, 14vw, 18rem) il titolo cresce col viewport
+   e a certe larghezze ci finiva sotto. Qui invece sta nella colonna del
+   blocco social, che essendo allineato in basso lascia libero il sopra. */
 .v3-graffiti--smile-footer {
   width: 150px;
-  top: 2rem;
-  right: 30rem;
+  top: 1.5rem;
+  right: 3rem;
   z-index: 1;
   transform: rotate(15deg);
   filter: brightness(0) invert(1) brightness(0.22);
@@ -1060,6 +1064,10 @@ img { max-width: 100%; display: block; }
     gap: 1.5rem;
   }
   .v3-footer__headline { font-size: clamp(4rem, 18vw, 8rem); }
+
+  /* A colonna singola non resta spazio libero: headline e blocco social
+     si impilano e la grafica finirebbe sopra al testo */
+  .v3-graffiti--smile-footer { display: none; }
   .v3-footer__bottom {
     flex-direction: column;
     align-items: center;
