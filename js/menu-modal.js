@@ -32,7 +32,7 @@ const DISH_DATA = {
   },
   'Squid Yang': {
     ingredients: 'Calamari indopacifici*, lime, curcuma, salsa di pesce, salsa di soia, salsa di zenzero, cipolla, chilli, aglio, coriandolo',
-    spice: 1
+    spice: 0
   },
   'Gamberi Satay': {
     ingredients: 'Mazzancolle tropicali*, latte di cocco, salsa satay',
