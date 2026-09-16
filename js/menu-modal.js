@@ -59,7 +59,7 @@ const DISH_DATA = {
   'Pad Thai': {
     ingredients: 'Tagliatelle di riso, uova, tofu, carote, germogli di soia, cipollotto, lime, tamarindo, granella di arachidi, salsa d\'ostriche, salsa di soia, salsa di pesce',
     spice: 0,
-    scelta: ['Mazzancolle', 'Pollo', 'Calamari', 'Vegetariano']
+    scelta: ['Mazzancolle*', 'Pollo', 'Calamari*', 'Vegetariano']
   },
   'Chiang Mai Noodles': {
     ingredients: 'Noodles gialli, pollo, carote, cipolla, cipollotto, curry rosso, salsa di pesce',
@@ -88,7 +88,7 @@ const DISH_DATA = {
   'Pad Thai Omelette': {
     ingredients: 'Tagliatelle di riso, omelette, tofu, carote, germogli di soia, cipollotto, lime, tamarindo, granella di arachidi, salsa d\'ostriche, salsa di soia, salsa di pesce',
     spice: 0,
-    scelta: ['Mazzancolle', 'Pollo', 'Calamari', 'Vegetariano']
+    scelta: ['Mazzancolle*', 'Pollo', 'Calamari*', 'Vegetariano']
   },
 
   // RISO
@@ -326,11 +326,9 @@ const DISH_DATA = {
     const isVeg = !!card.querySelector('.dish-tags img[src*="elefante-verde"]');
     vegEl.hidden = !isVeg;
 
-    // Ingredienti. La legenda compare solo se fra gli ingredienti c'e un
-    // asterisco, che segnala prodotto congelato all'origine.
+    // Ingredienti
     const ingr = data.ingredients || 'Informazioni in aggiornamento.';
     ingredientsEl.textContent = ingr;
-    noteEl.hidden = !ingr.includes('*');
 
     // Proteina a scelta — sezione presente solo per i piatti che la prevedono
     const scelta = data.scelta || [];
@@ -354,6 +352,11 @@ const DISH_DATA = {
       chip.textContent = item;
       removableEl.appendChild(chip);
     });
+
+    // Legenda asterisco (congelato all'origine): serve se il simbolo compare
+    // negli ingredienti OPPURE fra le proteine a scelta. Sta in fondo cosi
+    // vale per entrambe le sezioni.
+    noteEl.hidden = !(ingr + scelta.join(' ')).includes('*');
 
     // Apri
     modal.classList.add('is-open');

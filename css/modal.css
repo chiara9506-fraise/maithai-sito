@@ -210,13 +210,15 @@
   line-height: 1.65;
 }
 
-/* Legenda asterisco (congelato all'origine) */
+/* Legenda asterisco (congelato all'origine), a pie del popup */
 .dish-modal__note {
   font-family: var(--font-body);
   font-size: 0.72rem;
   font-style: italic;
   color: rgba(255, 255, 255, 0.55);
-  margin-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 0.7rem;
+  margin-top: 0.2rem;
 }
 
 /* Proteina a scelta — separatori verticali fra le opzioni, come nel menu
