@@ -56,6 +56,37 @@ body {
   line-height: 0.9;
 }
 
+/* Pulsante Glovo. Riprende lo schema dei CTA del sito (.v3-hero__cta):
+   font di testo, 0.82rem, letter-spacing 0.12em, pill. Cambia solo il
+   colore, che e quello del brand Glovo. */
+.mp-hero__glovo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1.5rem;
+  padding: 0.9rem 2.2rem;
+  background-color: #ffc041;
+  color: #fff;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1;
+  border-radius: 999px;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.mp-hero__glovo img {
+  height: 1.8em;
+  width: auto;
+  display: block;
+}
+
+.mp-hero__glovo:hover {
+  background-color: #f0b02e;
+}
+
 /* ----- Sticky category nav ----- */
 .mp-nav {
   position: sticky;
