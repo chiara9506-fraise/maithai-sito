@@ -210,6 +210,15 @@
   line-height: 1.65;
 }
 
+/* Legenda asterisco (congelato all'origine) */
+.dish-modal__note {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 0.5rem;
+}
+
 /* Proteina a scelta — separatori verticali fra le opzioni, come nel menu
    cartaceo. La regola :not(:first-child) evita la barretta iniziale. */
 .dish-modal__choice {

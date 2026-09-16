@@ -1,322 +1,265 @@
-// ===== DATI PIATTI (placeholder — sostituire con dati reali) =====
+// ===== DATI PIATTI =====
+// Ingredienti reali forniti dal cliente. L'asterisco indica prodotto
+// congelato all'origine ed e una dicitura obbligatoria: non va rimossa.
+// Il campo 'removable' e stato tolto: quello precedente era inventato e
+// citava ingredienti inesistenti nei piatti. Va ricompilato sui dati veri.
 const DISH_DATA = {
 
   // ANTIPASTI
   'Fried Mix': {
-    ingredients: 'Gamberi, calamari, verdure miste pastellate, farina di riso, olio di semi, salsa agrodolce',
-    removable: ['Gamberi', 'Calamari', 'Salsa agrodolce'],
-    spice: 0
-  },
-  'Crispy Koong': {
-    ingredients: 'Gamberi, pastella croccante di riso, olio di semi, sesamo, salsa thai',
-    removable: ['Sesamo', 'Salsa thai'],
-    spice: 0
-  },
-  'Koong Roll': {
-    ingredients: 'Gamberi, pasta di riso, vermicelli, verdure, salsa di soia',
-    removable: ['Salsa di soia'],
-    spice: 0
-  },
-  'Spring Roll': {
-    ingredients: 'Verdure miste, vermicelli di riso, pasta di riso, salsa agrodolce',
-    removable: ['Salsa agrodolce'],
-    spice: 0
-  },
-  'Chang Roll': {
-    ingredients: 'Maiale, pasta di riso, vermicelli, cipolla, salsa hoisin',
-    removable: ['Cipolla', 'Salsa hoisin'],
-    spice: 0
-  },
-  'Green Sum': {
-    ingredients: 'Gamberi, bambù, pasta di frumento, salsa di soia, zenzero',
-    removable: ['Zenzero'],
-    spice: 0
-  },
-  'Squid Yang': {
-    ingredients: 'Calamari indopacifici, lime, curcuma, salsa di pesce, coriandolo, aglio',
-    removable: ['Coriandolo', 'Aglio'],
-    spice: 1
-  },
-  'Golden Squid': {
-    ingredients: 'Calamari, farina di riso, curcuma, aglio, pepe bianco, olio di semi',
-    removable: ['Aglio'],
-    spice: 0
-  },
-  'Gamberi Satay': {
-    ingredients: 'Gamberi, salsa satay, arachidi, lemongrass, curcuma, latte di cocco',
-    removable: ['Arachidi', 'Lemongrass'],
-    spice: 0
-  },
-  'Tamarind Koong': {
-    ingredients: 'Gamberi, salsa di tamarindo, aglio, cipolla, zucchero di palma',
-    removable: ['Cipolla', 'Aglio'],
-    spice: 0
-  },
-  'Pollo Satay': {
-    ingredients: 'Pollo, salsa satay, arachidi, lemongrass, curcuma, latte di cocco',
-    removable: ['Arachidi', 'Lemongrass'],
+    ingredients: 'Composto da: 1 Spring Roll, 1 Koong Roll, 1 Chang Roll, 2 Crispy Koong, 1 Green Sum',
     spice: 0
   },
   'Riso Thai': {
-    ingredients: 'Riso thai gelsomino, aglio, olio di sesamo',
-    removable: ['Aglio'],
+    ingredients: 'Riso bollito',
+    spice: 0
+  },
+  'Crispy Koong': {
+    ingredients: 'Mazzancolle tropicali*, briciole di pane',
+    spice: 0
+  },
+  'Koong Roll': {
+    ingredients: 'Mazzancolle tropicali*, spaghetti di soia, carote, cipolla, cavolo verza, pepe nero, salsa d\'ostriche, salsa di soia',
+    spice: 0
+  },
+  'Spring Roll': {
+    ingredients: 'Verdure, carote, cipolla, cipollotto, patate, cavolo verza, salsa vegetariana',
+    spice: 0
+  },
+  'Chang Roll': {
+    ingredients: 'Maiale, spaghetti di soia, carote, funghi, cipollotto, pepe nero, salsa d\'ostriche, salsa di soia',
+    spice: 0
+  },
+  'Squid Yang': {
+    ingredients: 'Calamari indopacifici*, lime, curcuma, salsa di pesce, salsa di soia, salsa di zenzero, cipolla, chilli, aglio, coriandolo',
+    spice: 1
+  },
+  'Gamberi Satay': {
+    ingredients: 'Mazzancolle tropicali*, latte di cocco, salsa satay',
+    spice: 0
+  },
+  'Golden Squid': {
+    ingredients: 'Calamari indopacifici*, uova, farina 00, pepe, vinaigrette thailandese piccante',
+    spice: 0
+  },
+  'Green Sum': {
+    ingredients: 'Samosa vegetariani*, farina di frumento, carote, cavolo bianco, cipollotto, jicama, pepe, salsa di soia',
+    spice: 0
+  },
+  'Tamarind Koong': {
+    ingredients: 'Mazzancolle tropicali*, salsa al tamarindo, semi di sesamo',
+    spice: 0
+  },
+  'Pollo Satay': {
+    ingredients: 'Pollo, latte di cocco, salsa satay',
     spice: 0
   },
 
   // NOODLES
   'Pad Thai': {
-    ingredients: 'Noodles di riso, uovo, germogli di soia, cipollotto, arachidi, salsa di pesce, tamarindo',
-    removable: ['Arachidi', 'Uovo', 'Cipollotto'],
+    ingredients: 'Tagliatelle di riso, uova, tofu, carote, germogli di soia, cipollotto, lime, tamarindo, granella di arachidi, salsa d\'ostriche, salsa di soia, salsa di pesce',
     spice: 0,
-    // Campo opzionale: la sezione nel popup compare solo se presente
     scelta: ['Mazzancolle', 'Pollo', 'Calamari', 'Vegetariano']
   },
   'Chiang Mai Noodles': {
-    ingredients: 'Noodles all\'uovo, pollo, curry rosso, latte di cocco, cipolla rossa, lime',
-    removable: ['Cipolla', 'Lime'],
+    ingredients: 'Noodles gialli, pollo, carote, cipolla, cipollotto, curry rosso, salsa di pesce',
     spice: 2
   },
   'Yellow Submarine': {
-    ingredients: 'Noodles di riso, curry giallo, pollo, latte di cocco, curcuma, cipolla',
-    removable: ['Cipolla'],
+    ingredients: 'Noodles gialli, mazzancolle tropicali*, calamari indopacifici*, cipolla, carote, fagiolini, basilico thai, chilli, salsa basil, pepe',
     spice: 2
   },
   'Pad See Ew': {
-    ingredients: 'Noodles larghi di riso, pollo, uovo, broccoli cinesi, salsa di soia scura',
-    removable: ['Uovo', 'Broccoli'],
+    ingredients: 'Tagliatelle di riso, pollo, uova, broccoli, pepe nero, salsa di soia dolce, salsa di pesce',
     spice: 0
   },
   'Pad Talay': {
-    ingredients: 'Noodles di riso, gamberi, calamari, cozze, salsa di ostriche, aglio',
-    removable: ['Cozze', 'Aglio'],
+    ingredients: 'Tagliatelle di riso, mazzancolle tropicali*, calamari indopacifici*, foglie di kaffir lime, carote, funghi, basilico thai, katchai, pepe, salsa d\'ostriche, salsa di pesce, chilli',
     spice: 2
   },
   'Saimon Sut Khieo': {
-    ingredients: 'Noodles di soia, salmone, verdure, salsa di soia, zenzero, sesamo',
-    removable: ['Zenzero', 'Sesamo'],
+    ingredients: 'Noodles gialli, calamari*, pesto di zucchine, coriandolo, fagiolini, anacardi',
     spice: 1
   },
   'Pad Ginger': {
-    ingredients: 'Noodles, pollo, zenzero fresco, cipolla, peperoni, salsa di soia, peperoncino',
-    removable: ['Peperoncino', 'Cipolla', 'Zenzero'],
+    ingredients: 'Tagliatelle di riso, maiale, zenzero, germogli di soia, cavolo verza, fagiolini lunghi, carote, cipolla, cipollotto, salsa vegetariana, salsa di soia',
     spice: 0
   },
   'Pad Thai Omelette': {
-    ingredients: 'Uova, noodles di riso, gamberi, germogli di soia, cipollotto, arachidi, salsa di pesce',
-    removable: ['Arachidi', 'Cipollotto'],
+    ingredients: 'Tagliatelle di riso, omelette, tofu, carote, germogli di soia, cipollotto, lime, tamarindo, granella di arachidi, salsa d\'ostriche, salsa di soia, salsa di pesce',
     spice: 0,
     scelta: ['Mazzancolle', 'Pollo', 'Calamari', 'Vegetariano']
   },
 
   // RISO
   'Sea World': {
-    ingredients: 'Riso thai, gamberi, calamari, cozze, aglio, salsa di ostriche, cipollotto',
-    removable: ['Cozze', 'Cipollotto', 'Aglio'],
+    ingredients: 'Riso saltato, mazzancolle tropicali*, calamari indopacifici*, uova, pomodori, cipolla, cipollotto, salsa di pesce, salsa d\'ostriche',
     spice: 0
   },
   'Besar': {
-    ingredients: 'Riso thai, pollo, uovo, curry giallo, curcuma, cipolla, aglio',
-    removable: ['Uovo', 'Cipolla'],
+    ingredients: 'Riso saltato, mazzancolle tropicali*, uova, cipolla, cipollotto, foglie di kaffir lime, curry rosso, latte di cocco, salsa di pesce, salsa d\'ostriche, chilli',
     spice: 1
   },
   'Basil Rice': {
-    ingredients: 'Riso thai, pollo, basilico thai, aglio, peperoncino, salsa di soia',
-    removable: ['Peperoncino', 'Aglio'],
+    ingredients: 'Riso, pollo tritato, uovo all\'occhio di bue, cipolla, fagiolini lunghi, basilico thai, peperoni, carote, chilli, salsa basil',
     spice: 2
   },
   'Erawan Rice': {
-    ingredients: 'Riso thai, verdure miste, uovo, salsa speciale della casa, cipollotto',
-    removable: ['Uovo', 'Cipollotto'],
+    ingredients: 'Riso saltato, maiale, uova, germogli di soia, cipolla, foglie di kaffir lime, cavolo verza, basilico thai, salsa tomyum, salsa d\'ostriche, salsa di pesce, chilli',
     spice: 1
   },
   'Bangkok Rice': {
-    ingredients: 'Riso thai, maiale, aglio, salsa di soia, olio di sesamo, sesamo',
-    removable: ['Sesamo', 'Aglio'],
+    ingredients: 'Riso saltato, pollo, carote, fagiolini lunghi, uova, basilico thai, cipolla, salsa di soia, salsa d\'ostriche',
     spice: 0
   },
   'Green Thai': {
-    ingredients: 'Riso thai, curry verde, latte di cocco, verdure, basilico thai',
-    removable: ['Basilico'],
+    ingredients: 'Riso saltato, pollo, uova, fagiolini lunghi, peperoni, basilico thai, foglie di kaffir lime, curry verde, latte di cocco, salsa d\'ostriche, salsa di pesce',
     spice: 1
   },
   'Pineapple Rice': {
-    ingredients: 'Riso thai, ananas, anacardi, uvetta, curry, cipolla, uovo',
-    removable: ['Anacardi', 'Uvetta', 'Cipolla'],
+    ingredients: 'Riso saltato, ananas, peperoni, cipollotto, anacardi, curcuma, latte di cocco, salsa vegetariana, salsa piccante',
     spice: 1
   },
   'Tom Tom': {
-    ingredients: 'Riso thai, manzo, salsa piccante, erbe aromatiche, cipollotto',
-    removable: ['Cipollotto'],
+    ingredients: 'Riso saltato, mazzancolle tropicali*, calamari indopacifici*, uova, germogli di soia, cipolla, foglie di kaffir lime, cavolo verza, basilico thai, salsa tomyum, salsa d\'ostriche, salsa di pesce, chilli',
     spice: 1
   },
 
   // CURRY
   'Chicken Massaman': {
-    ingredients: 'Pollo, patate, arachidi, latte di cocco, curry massaman, cipolla, cardamomo',
-    removable: ['Arachidi', 'Patate', 'Cipolla'],
+    ingredients: 'Pollo, curry massaman, patate, arachidi, cannella, latte di cocco, salsa di pesce',
     spice: 1
   },
   'Green Chicken': {
-    ingredients: 'Pollo, curry verde, latte di cocco, melanzane, basilico thai, peperoncino',
-    removable: ['Melanzane', 'Basilico', 'Peperoncino'],
+    ingredients: 'Pollo, curry verde, melanzane, fagiolini lunghi, basilico thai, foglie di kaffir lime, latte di cocco, salsa di pesce, chilli',
     spice: 3
   },
   'Mai Thai Curry': {
-    ingredients: 'Pollo, curry della casa, latte di cocco, verdure di stagione, basilico',
-    removable: ['Basilico'],
+    ingredients: 'Vitello, curry verde, fagiolini lunghi, carote, melanzane, basilico thai, foglie di kaffir lime, latte di cocco, salsa di pesce, salsa d\'ostriche',
     spice: 2
   },
   'Yellow Chicken': {
-    ingredients: 'Pollo, curry giallo, patate, latte di cocco, cipolla, curcuma',
-    removable: ['Patate', 'Cipolla'],
+    ingredients: 'Pollo, curry giallo, patate, latte di cocco, salsa di pesce',
     spice: 1
   },
   'Red Pork': {
-    ingredients: 'Maiale, curry rosso, latte di cocco, peperoni, basilico thai',
-    removable: ['Peperoni', 'Basilico'],
+    ingredients: 'Maiale, curry rosso, patate, foglie di kaffir lime, latte di cocco, salsa di pesce, chilli',
     spice: 3
   },
   'Beef Panang': {
-    ingredients: 'Manzo, curry panang, latte di cocco, foglie di lime kaffir, arachidi',
-    removable: ['Arachidi', 'Foglie di lime'],
+    ingredients: 'Vitello, curry panang, melanzane, foglie di kaffir lime, latte di cocco, salsa di pesce, chilli',
     spice: 1
   },
   'Vegetarian Curry': {
-    ingredients: 'Tofu, verdure miste, curry verde, latte di cocco, basilico thai, peperoncino',
-    removable: ['Tofu', 'Peperoncino', 'Basilico'],
+    ingredients: 'Carote, baby corn, patate, fagiolini lunghi, peperoni, zucchine, foglie di kaffir lime, basilico thai, curry rosso, latte di cocco, salsa vegetariana',
     spice: 2
   },
 
   // SEAFOOD
   'Chef\'s Seafood': {
-    ingredients: 'Gamberi, calamari, cozze, capesante, salsa dello chef, aglio, basilico',
-    removable: ['Cozze', 'Capesante', 'Aglio'],
+    ingredients: 'Mazzancolle tropicali*, calamari indopacifici*, orata, foglie di kaffir lime, basilico thai, salsa tomyum, chilli, salsa d\'ostriche, salsa di soia dolce',
     spice: 2
   },
   'Prawn Panang': {
-    ingredients: 'Gamberi, curry panang, latte di cocco, foglie di lime kaffir, arachidi',
-    removable: ['Arachidi', 'Foglie di lime'],
+    ingredients: 'Mazzancolle tropicali*, curry panang, fagiolini lunghi, peperoni, cavolo verza, cipolla, cipollotto, basilico thai, pepe, latte di cocco, salsa d\'ostriche, salsa di pesce, chilli',
     spice: 2
   },
   'Prawn Mike Style': {
-    ingredients: 'Gamberi, salsa speciale, aglio, peperoncino, cipollotto, lime',
-    removable: ['Peperoncino', 'Cipollotto', 'Aglio'],
+    ingredients: 'Mazzancolle tropicali*, curry verde, fagiolini, basilico thai, foglie di kaffir lime, latte di cocco, salsa tomyum, salsa di pesce, salsa d\'ostriche',
     spice: 1
   },
   'Prawn Garee': {
-    ingredients: 'Gamberi, curry giallo, latte di cocco, cipolla, curcuma, aglio',
-    removable: ['Cipolla', 'Aglio'],
+    ingredients: 'Mazzancolle tropicali*, curry giallo, fagiolini lunghi, cipolla, cipollotto, basilico thai, latte di cocco, salsa d\'ostriche, salsa di pesce, chilli',
     spice: 1
   },
   'Plaa Dook': {
-    ingredients: 'Pesce gatto, aglio, peperoncino, salsa di pesce, basilico thai',
-    removable: ['Peperoncino', 'Aglio'],
+    ingredients: 'Branzino*, curry rosso, peperoni, cipolle, foglie di kaffir lime, basilico thai, pepe, farina 00, salsa di soia, salsa d\'ostriche, chilli',
     spice: 2
   },
   'Khing Plaa': {
-    ingredients: 'Orata, zenzero, cipolla, cipollotto, peperoni, salsa di soia, salsa d\'ostriche',
-    removable: ['Zenzero', 'Cipollotto', 'Cipolla'],
+    ingredients: 'Orata*, zenzero, cipolla, cipollotto, peperoni, pepe nero, farina 00, salsa di soia, salsa d\'ostriche',
     spice: 1
   },
   'Gwen Fish': {
-    ingredients: 'Pesce, curry rosso, latte di cocco, erbe aromatiche, basilico thai',
-    removable: ['Basilico'],
+    ingredients: 'Orata*, peperoni, cipollotto, foglie di kaffir lime, farina 00, salsa d\'ostriche, salsa di soia, salsa di chilli dolce',
     spice: 1
   },
   'Kalanoi': {
-    ingredients: 'Frutti di mare misti, salsa nera, aglio, pepe nero, cipollotto',
-    removable: ['Cipollotto', 'Aglio'],
+    ingredients: 'Calamari indopacifici*, basilico thai, curry verde, latte di cocco',
     spice: 1
   },
   'Fish Curry': {
-    ingredients: 'Pesce, curry rosso, latte di cocco, melanzane, basilico thai, peperoncino',
-    removable: ['Melanzane', 'Peperoncino', 'Basilico'],
+    ingredients: 'Orata*, curry massaman, latte di cocco, patate, galanga, basilico thai, foglie di kaffir lime, citronella, farina 00, salsa di pesce, salsa d\'ostriche',
     spice: 1
   },
 
   // CARNI
   'Black Beef': {
-    ingredients: 'Manzo, salsa nera, aglio, pepe nero, cipolla, olio di sesamo',
-    removable: ['Cipolla', 'Aglio'],
+    ingredients: 'Vitello, fagiolini lunghi, cipollotto, cipolla, citronella, pepe nero, farina 00, salsa d\'ostriche, salsa di soia',
     spice: 0
   },
   'Beef Chilli': {
-    ingredients: 'Manzo, peperoncino, aglio, salsa di soia, cipollotto, pepe',
-    removable: ['Peperoncino', 'Cipollotto', 'Aglio'],
+    ingredients: 'Vitello macinato, peperoni, fagiolini lunghi, cipolla, basilico thai, pepe nero, chilli, salsa basil',
     spice: 3
   },
   'Beef Garlic Chilli Pepper': {
-    ingredients: 'Manzo, aglio, peperoncino, pepe nero, farina 00, salsa di soia',
-    removable: ['Peperoncino', 'Aglio'],
+    ingredients: 'Vitello, aglio, cipollotto, pepe, farina 00, salsa d\'ostriche, salsa di soia dolce, chilli',
     spice: 2
   },
   'Chicken Thai Style': {
-    ingredients: 'Pollo, aglio, salsa thai della casa, verdure di stagione, cipollotto',
-    removable: ['Cipollotto', 'Aglio'],
+    ingredients: 'Pollo, curry rosso, fagiolini lunghi, basilico thai, citronella, foglie di kaffir lime, pepe, panna, salsa di pesce, chilli',
     spice: 1
   },
   'Ginger Beef': {
-    ingredients: 'Manzo, zenzero fresco, cipolla, peperoni rossi, salsa di soia, salsa di ostriche',
-    removable: ['Zenzero', 'Cipolla', 'Peperoni'],
+    ingredients: 'Vitello, zenzero, cipolla, cipollotto, peperoni, pepe nero, farina 00, salsa di soia, salsa d\'ostriche',
     spice: 0
   },
   'Mushbeef': {
-    ingredients: 'Manzo, funghi misti, salsa di ostriche, aglio, cipollotto, pepe nero',
-    removable: ['Cipollotto', 'Aglio'],
+    ingredients: 'Vitello, funghi shiitake, carote, cipolle, germogli di soia, pepe, farina 00, olio di sesamo, salsa di soia, salsa teriyaki',
     spice: 0
   },
   'Chicken Cashews': {
-    ingredients: 'Pollo, anacardi tostati, peperoni, cipolla, salsa dolce di peperoncino',
-    removable: ['Anacardi', 'Cipolla', 'Peperoni'],
+    ingredients: 'Pollo, fagiolini lunghi, carote, anacardi, farina 00, latte di cocco, salsa di soia, salsa d\'ostriche, chilli',
     spice: 1
   },
 
   // ZUPPE
   'Tom Yam Koong': {
-    ingredients: 'Brodo speziato, gamberi, funghi, lemongrass, foglie di lime, galanga, coriandolo',
-    removable: ['Coriandolo', 'Funghi'],
+    ingredients: 'Mazzancolle tropicali*, funghi, pomodori, cipolla, citronella, lime, latte, salsa d\'ostriche, salsa tomyum, salsa di pesce, chilli',
     spice: 3
   },
+  'Noodle Soup': {
+    ingredients: 'Tagliatelle di riso, brodo, maiale, carote, cipollotto, cavolo verza, germogli di soia, pepe, olio di sesamo, salsa d\'ostriche, salsa di pesce',
+    spice: 0
+  },
   'Tom Yam Plaa': {
-    ingredients: 'Brodo speziato, pesce, funghi, lemongrass, foglie di lime, galanga, coriandolo',
-    removable: ['Coriandolo', 'Funghi'],
+    ingredients: 'Mazzancolle tropicali*, calamari indopacifici, filetti di orata*, funghi, cipolla, foglie di kaffir lime, pomodori, zenzero, citronella, latte, salsa di pesce, salsa d\'ostriche, salsa tomyum, chilli',
     spice: 2
   },
   'Tom Kha Kai': {
-    ingredients: 'Brodo di cocco, pollo, funghi, galanga, lemongrass, foglie di lime, coriandolo',
-    removable: ['Coriandolo', 'Funghi'],
+    ingredients: 'Pollo, funghi, pomodori, cipollotto, galanga, citronella, latte di cocco, salsa d\'ostriche, salsa di pesce',
     spice: 1
-  },
-  'Noodle Soup': {
-    ingredients: 'Brodo di pollo, noodles di riso, verdure, carne a scelta, cipollotto, coriandolo',
-    removable: ['Coriandolo', 'Cipollotto'],
-    spice: 0
   },
 
   // BOWLS & VERDURE
   'Siam Bowl': {
-    ingredients: 'Riso thai, maiale marinato, uovo all\'occhio di bue, papaya fermentata, carote, cipollotto, coriandolo, sesamo',
-    removable: ['Uovo', 'Coriandolo', 'Sesamo'],
+    ingredients: 'Riso, maiale marinato, uovo all\'occhio di bue, papaya fermentata, carote, cipolle caramellate, cipollotto, coriandolo, semi di sesamo',
     spice: 0
   },
   'Koh Tao': {
-    ingredients: 'Riso thai, gamberi, mango, verdure di stagione, salsa agrodolce, lime',
-    removable: ['Mango', 'Lime'],
+    ingredients: 'Riso, branzino*, uovo all\'occhio di bue, carote, peperoni, papaya fermentata, cipolla caramellata, cipollotto, coriandolo, farina 00, salsa sweet chilli',
     spice: 0
   },
   'Papaya Salad': {
-    ingredients: 'Papaya verde, pomodorini, fagiolini, arachidi, aglio, peperoncino, lime, salsa di pesce',
-    removable: ['Arachidi', 'Peperoncino', 'Aglio'],
+    ingredients: 'Mazzancolle tropicali*, papaya verde, tamarindo, carote, pomodorini, arachidi, lime, salsa di pesce, chilli',
     spice: 3
   },
   'Yellow Spinach': {
-    ingredients: 'Spinaci, aglio, salsa di ostriche, olio di sesamo',
-    removable: ['Aglio'],
+    ingredients: 'Spinaci*, curry giallo, cipolla, latte di cocco, salsa d\'ostriche, salsa di pesce',
     spice: 1
   },
   'Oyster Veggie': {
-    ingredients: 'Funghi ostrica, verdure di stagione, aglio, salsa di soia, olio di sesamo',
-    removable: ['Aglio'],
+    ingredients: 'Carote, peperoni, zucchine, fagiolini lunghi, cipolla, germogli di soia, pepe, salsa d\'ostriche, salsa di soia, salsa vegetariana',
     spice: 0
   }
 };
@@ -338,6 +281,8 @@ const DISH_DATA = {
   const removableEl   = modal.querySelector('.dish-modal__removable');
   const choiceEl      = modal.querySelector('.dish-modal__choice');
   const choiceSection = modal.querySelector('.dish-modal__choice-section');
+  const removableSection = modal.querySelector('.dish-modal__removable-section');
+  const noteEl        = modal.querySelector('.dish-modal__note');
 
   function openModal(card) {
     // Nome (ignora lo span qty se presente)
@@ -381,8 +326,11 @@ const DISH_DATA = {
     const isVeg = !!card.querySelector('.dish-tags img[src*="elefante-verde"]');
     vegEl.hidden = !isVeg;
 
-    // Ingredienti
-    ingredientsEl.textContent = data.ingredients || 'Informazioni in aggiornamento.';
+    // Ingredienti. La legenda compare solo se fra gli ingredienti c'e un
+    // asterisco, che segnala prodotto congelato all'origine.
+    const ingr = data.ingredients || 'Informazioni in aggiornamento.';
+    ingredientsEl.textContent = ingr;
+    noteEl.hidden = !ingr.includes('*');
 
     // Proteina a scelta — sezione presente solo per i piatti che la prevedono
     const scelta = data.scelta || [];
@@ -395,22 +343,17 @@ const DISH_DATA = {
       choiceEl.appendChild(span);
     });
 
-    // Eliminabili
-    removableEl.innerHTML = '';
+    // Eliminabili. Senza dato la sezione sparisce: dichiarare "nessun
+    // ingrediente eliminabile" sarebbe un'affermazione non verificata.
     const removable = data.removable || [];
-    if (removable.length > 0) {
-      removable.forEach(item => {
-        const chip = document.createElement('span');
-        chip.className = 'dish-modal__chip';
-        chip.textContent = item;
-        removableEl.appendChild(chip);
-      });
-    } else {
-      const none = document.createElement('span');
-      none.className = 'dish-modal__no-removable';
-      none.textContent = 'Nessun ingrediente eliminabile';
-      removableEl.appendChild(none);
-    }
+    removableEl.innerHTML = '';
+    removableSection.hidden = removable.length === 0;
+    removable.forEach(item => {
+      const chip = document.createElement('span');
+      chip.className = 'dish-modal__chip';
+      chip.textContent = item;
+      removableEl.appendChild(chip);
+    });
 
     // Apri
     modal.classList.add('is-open');
