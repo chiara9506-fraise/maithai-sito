@@ -162,9 +162,13 @@ img { max-width: 100%; display: block; }
   white-space: nowrap;
 }
 
+/* wrap perche con tre pulsanti la riga supera di poco lo spazio utile
+   appena sopra il breakpoint mobile: cosi va a capo invece di traboccare */
 .v3-hero__ctas {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 1.2rem;
 }
 
@@ -199,6 +203,14 @@ img { max-width: 100%; display: block; }
   background-color: var(--black);
   color: var(--beige);
   border-color: var(--black);
+}
+
+/* Giallo Glovo in hover. Va dopo la regola --secondary:hover, che ha la
+   stessa specificita: vince l'ultima dichiarata. */
+.v3-hero__cta--glovo:hover {
+  background-color: #ffc041;
+  border-color: #ffc041;
+  color: #fff;
 }
 
 .v3-hero__dish img {
