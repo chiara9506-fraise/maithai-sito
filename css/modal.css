@@ -210,6 +210,31 @@
   line-height: 1.65;
 }
 
+/* Proteina a scelta — separatori verticali fra le opzioni, come nel menu
+   cartaceo. La regola :not(:first-child) evita la barretta iniziale. */
+.dish-modal__choice {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2rem 0;
+}
+
+.dish-modal__choice-item {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--color-white);
+  padding: 0 0.85rem;
+}
+
+.dish-modal__choice-item:first-child {
+  padding-left: 0;
+}
+
+.dish-modal__choice-item:not(:first-child) {
+  border-left: 2px solid var(--color-red);
+}
+
 /* Chip eliminabili */
 .dish-modal__removable {
   display: flex;

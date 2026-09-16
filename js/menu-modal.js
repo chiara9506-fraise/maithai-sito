@@ -67,7 +67,9 @@ const DISH_DATA = {
   'Pad Thai': {
     ingredients: 'Noodles di riso, uovo, germogli di soia, cipollotto, arachidi, salsa di pesce, tamarindo',
     removable: ['Arachidi', 'Uovo', 'Cipollotto'],
-    spice: 0
+    spice: 0,
+    // Campo opzionale: la sezione nel popup compare solo se presente
+    scelta: ['Mazzancolle', 'Pollo', 'Calamari', 'Vegetariano']
   },
   'Chiang Mai Noodles': {
     ingredients: 'Noodles all\'uovo, pollo, curry rosso, latte di cocco, cipolla rossa, lime',
@@ -102,7 +104,8 @@ const DISH_DATA = {
   'Pad Thai Omelette': {
     ingredients: 'Uova, noodles di riso, gamberi, germogli di soia, cipollotto, arachidi, salsa di pesce',
     removable: ['Arachidi', 'Cipollotto'],
-    spice: 0
+    spice: 0,
+    scelta: ['Mazzancolle', 'Pollo', 'Calamari', 'Vegetariano']
   },
 
   // RISO
@@ -333,6 +336,8 @@ const DISH_DATA = {
   const vegEl         = modal.querySelector('.dish-modal__veg');
   const ingredientsEl = modal.querySelector('.dish-modal__ingredients');
   const removableEl   = modal.querySelector('.dish-modal__removable');
+  const choiceEl      = modal.querySelector('.dish-modal__choice');
+  const choiceSection = modal.querySelector('.dish-modal__choice-section');
 
   function openModal(card) {
     // Nome (ignora lo span qty se presente)
@@ -378,6 +383,17 @@ const DISH_DATA = {
 
     // Ingredienti
     ingredientsEl.textContent = data.ingredients || 'Informazioni in aggiornamento.';
+
+    // Proteina a scelta — sezione presente solo per i piatti che la prevedono
+    const scelta = data.scelta || [];
+    choiceEl.innerHTML = '';
+    choiceSection.hidden = scelta.length === 0;
+    scelta.forEach(opt => {
+      const span = document.createElement('span');
+      span.className = 'dish-modal__choice-item';
+      span.textContent = opt;
+      choiceEl.appendChild(span);
+    });
 
     // Eliminabili
     removableEl.innerHTML = '';
