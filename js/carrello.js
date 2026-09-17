@@ -24,10 +24,7 @@
   /* ---------- DESTINATARIO DEGLI ORDINI ----------
      Un numero solo: chi lo riceve smista l'ordine alla sede che copre
      l'indirizzo del cliente. Per questo il cliente non sceglie la sede,
-     che non avrebbe modo di sapere, ma scrive il proprio indirizzo.
-
-     Quando saranno note le zone di consegna si potra instradare in
-     automatico, aggiungendo qui una tabella citta -> sede. */
+     che non avrebbe modo di sapere, ma scrive il proprio indirizzo. */
   var ORDINI_A = NUMERO_DI_PROVA;
 
   /* ---------- Sedi gestite separatamente ----------
