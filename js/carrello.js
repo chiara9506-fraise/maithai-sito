@@ -87,7 +87,7 @@
   function aggiungi(nome, prezzo, variante) {
     var k = chiaveDi(nome, variante);
     if (carrello[k]) carrello[k].qta++;
-    else carrello[k] = { nome: nome, prezzo: prezzo, variante: variante || '', qta: 1 };
+    else carrello[k] = { nome: nome, prezzo: prezzo, variante: variante || '', qta: 1, nota: '' };
     salva();
     aggiornaTutto();
   }
@@ -182,13 +182,42 @@
      Per i piatti con piu prezzi (es. Noodle Soup): piccolo menu a
      comparsa con le opzioni lette da data-varianti. */
 
-  function leggiVarianti(nodoPrezzo) {
+  /* Le opzioni di un piatto possono venire da due posti:
+
+     1. data-varianti sulla card, quando cambia anche il prezzo
+        (Noodle Soup: Vegetariana 10, Classica 13)
+     2. il campo 'scelta' di DISH_DATA, per la proteina a scelta
+        (Pad Thai e Pad Thai Omelette), dove il prezzo e sempre lo stesso
+
+     Nel secondo caso il prezzo non viene riscritto: si prende quello
+     della card, che resta l'unico punto in cui modificarlo. */
+  function opzioniDi(nome, nodoPrezzo) {
     var attr = nodoPrezzo.getAttribute('data-varianti');
-    if (!attr) return null;
-    return attr.split('|').map(function (pezzo) {
-      var p = pezzo.split(':');
-      return { nome: p[0].trim(), prezzo: leggiPrezzo(p[1]) };
+    if (attr) {
+      return attr.split('|').map(function (pezzo) {
+        var p = pezzo.split(':');
+        return { nome: p[0].trim(), prezzo: leggiPrezzo(p[1]) };
+      });
+    }
+
+    // DISH_DATA e dichiarato in menu-modal.js, caricato prima di questo file
+    if (typeof DISH_DATA !== 'undefined' && DISH_DATA[nome] && DISH_DATA[nome].scelta) {
+      var prezzo = leggiPrezzo(nodoPrezzo.textContent);
+      return DISH_DATA[nome].scelta.map(function (s) {
+        return { nome: s, prezzo: prezzo };
+      });
+    }
+
+    return null;
+  }
+
+  // Con le opzioni la chiave dipende da quale e stata scelta: cerco una
+  // qualsiasi voce del carrello che appartenga a questo piatto.
+  function chiaveEsistente(nome) {
+    var k = Object.keys(carrello).filter(function (x) {
+      return carrello[x].nome === nome;
     });
+    return k[0] || chiaveDi(nome, '');
   }
 
   function apriSceltaVariante(nome, varianti, ancora) {
@@ -235,20 +264,13 @@
       // Il nome puo contenere lo span della quantita ("3pz"): prendo solo
       // il primo nodo di testo, come fa gia il popup.
       var nome = nodoNome.firstChild.textContent.trim();
-      var varianti = leggiVarianti(nodoPrezzo);
+      var opzioni = opzioniDi(nome, nodoPrezzo);
 
       var wrap;
-      if (varianti) {
-        // Con varianti la chiave dipende da quale e stata scelta: mostro i
-        // controlli solo se ce n'e almeno una nel carrello.
+      if (opzioni) {
         wrap = creaControlli(
-          function () {
-            var k = Object.keys(carrello).filter(function (x) {
-              return carrello[x].nome === nome;
-            });
-            return k[0] || chiaveDi(nome, '');
-          },
-          function () { apriSceltaVariante(nome, varianti, wrap); }
+          function () { return chiaveEsistente(nome); },
+          function () { apriSceltaVariante(nome, opzioni, wrap); }
         );
         wrap.classList.add('cart-btn-wrap--varianti');
       } else {
@@ -285,7 +307,7 @@
 
   /* ---------- Pulsante dentro il popup piatto ---------- */
 
-  var popupWrap, popupNome, popupPrezzo;
+  var popupWrap, popupNome, popupPrezzo, popupOpzioni;
 
   function montaSulPopup() {
     var modal = document.getElementById('dish-modal');
@@ -294,8 +316,13 @@
     if (!info) return;
 
     popupWrap = creaControlli(
-      function () { return chiaveDi(popupNome, ''); },
-      function () { aggiungi(popupNome, popupPrezzo, ''); },
+      function () {
+        return popupOpzioni ? chiaveEsistente(popupNome) : chiaveDi(popupNome, '');
+      },
+      function () {
+        if (popupOpzioni) apriSceltaVariante(popupNome, popupOpzioni, popupWrap);
+        else aggiungi(popupNome, popupPrezzo, '');
+      },
       'cart-btn-wrap cart-btn-wrap--popup'
     );
     info.appendChild(popupWrap);
@@ -305,9 +332,14 @@
       popupNome = e.detail.nome;
       popupPrezzo = leggiPrezzo(e.detail.prezzo);
 
-      // I piatti con varianti si aggiungono dalla card, dove c'e la scelta
-      var multi = (e.detail.prezzo.match(/\d+[.,]\d{2}/g) || []).length > 1;
-      popupWrap.hidden = multi;
+      // Le opzioni si ricavano dalla card di origine, che porta sia il
+      // prezzo sia l'eventuale data-varianti
+      var nodoPrezzo = e.detail.card
+        ? e.detail.card.querySelector('.dish-card-sm__price')
+        : null;
+      popupOpzioni = nodoPrezzo ? opzioniDi(popupNome, nodoPrezzo) : null;
+
+      popupWrap.classList.toggle('cart-btn-wrap--varianti', !!popupOpzioni);
       aggiornaTutto();
     });
   }
@@ -371,6 +403,10 @@
             '<span class="cart-form__label">Note <em>(facoltativo)</em></span>' +
             '<textarea name="note" rows="2" class="cart-form__input"></textarea>' +
           '</label>' +
+          '<p class="cart-form__allergie">' +
+            '<strong>Allergie o intolleranze?</strong> Chiama il ristorante prima di ordinare: ' +
+            'una nota scritta qui potrebbe non essere notata in tempo.' +
+          '</p>' +
           '<p class="cart-form__avviso" hidden></p>' +
           '<button type="submit" class="cart-form__invia">Ordina su WhatsApp</button>' +
           '<a class="cart-form__chiama" hidden></a>' +
@@ -435,21 +471,37 @@
       var riga = document.createElement('div');
       riga.className = 'cart-riga';
       riga.innerHTML =
-        '<div class="cart-riga__testo">' +
-          '<span class="cart-riga__nome">' + v.nome + '</span>' +
-          (v.variante ? '<span class="cart-riga__var">' + v.variante + '</span>' : '') +
+        '<div class="cart-riga__alto">' +
+          '<div class="cart-riga__testo">' +
+            '<span class="cart-riga__nome">' + v.nome + '</span>' +
+            (v.variante ? '<span class="cart-riga__var">' + v.variante + '</span>' : '') +
+          '</div>' +
+          '<div class="cart-qta cart-qta--riga">' +
+            '<button type="button" class="cart-qta__btn" data-a="meno" aria-label="Togli uno">−</button>' +
+            '<span class="cart-qta__n">' + v.qta + '</span>' +
+            '<button type="button" class="cart-qta__btn" data-a="piu" aria-label="Aggiungi uno">+</button>' +
+          '</div>' +
+          '<span class="cart-riga__prezzo">' + formatta(v.prezzo * v.qta) + '</span>' +
+          '<button type="button" class="cart-riga__x" aria-label="Rimuovi">✕</button>' +
         '</div>' +
-        '<div class="cart-qta cart-qta--riga">' +
-          '<button type="button" class="cart-qta__btn" data-a="meno" aria-label="Togli uno">−</button>' +
-          '<span class="cart-qta__n">' + v.qta + '</span>' +
-          '<button type="button" class="cart-qta__btn" data-a="piu" aria-label="Aggiungi uno">+</button>' +
-        '</div>' +
-        '<span class="cart-riga__prezzo">' + formatta(v.prezzo * v.qta) + '</span>' +
-        '<button type="button" class="cart-riga__x" aria-label="Rimuovi">✕</button>';
+        '<input type="text" class="cart-riga__nota" maxlength="120" ' +
+               'placeholder="Richieste per questo piatto (es. senza aglio)" ' +
+               'aria-label="Richieste per ' + v.nome + '">';
 
       riga.querySelector('[data-a="meno"]').addEventListener('click', function () { cambiaQta(k, -1); });
       riga.querySelector('[data-a="piu"]').addEventListener('click', function () { cambiaQta(k, 1); });
       riga.querySelector('.cart-riga__x').addEventListener('click', function () { rimuovi(k); });
+
+      // La nota si salva senza ridisegnare l'elenco: un redisegno a ogni
+      // tasto premuto farebbe perdere il fuoco dal campo mentre si scrive.
+      var campoNota = riga.querySelector('.cart-riga__nota');
+      campoNota.value = v.nota || '';
+      campoNota.addEventListener('input', function () {
+        if (carrello[k]) {
+          carrello[k].nota = campoNota.value;
+          salva();
+        }
+      });
 
       elenco.appendChild(riga);
     });
@@ -585,11 +637,13 @@
     righe.push('');
 
     // La variante va fra parentesi: usando il trattino si confonderebbe
-    // con quello che separa il prezzo.
+    // con quello che separa il prezzo. La nota va sotto, rientrata, cosi
+    // in cucina si vede subito a quale piatto appartiene.
     Object.keys(carrello).forEach(function (k) {
       var v = carrello[k];
       var etichetta = v.variante ? v.nome + ' (' + v.variante + ')' : v.nome;
       righe.push(v.qta + 'x ' + etichetta + ' – ' + formatta(v.prezzo * v.qta));
+      if (v.nota) righe.push('   ↳ ' + v.nota);
     });
 
     righe.push('');

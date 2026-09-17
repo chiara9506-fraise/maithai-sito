@@ -40,6 +40,16 @@
 .cart-btn:hover { background-color: var(--color-red); }
 .cart-btn[hidden] { display: none; }
 
+/* Il contorno predefinito del browser e azzurro e stona. Non lo tolgo
+   e basta: serve a chi naviga da tastiera. :focus-visible lo mostra solo
+   in quel caso, non dopo un clic col mouse. */
+.cart-btn:focus-visible,
+.cart-qta__btn:focus-visible,
+.cart-varianti__opt:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 2px;
+}
+
 /* ---------- Controlli quantità ---------- */
 .cart-qta {
   display: flex;
@@ -94,7 +104,9 @@
 .cart-btn-wrap--drink .cart-qta__btn { width: 1.9rem; }
 .cart-btn-wrap--drink .cart-qta__n { min-width: 1.6rem; }
 
-/* ---------- Popup piatto ---------- */
+/* ---------- Popup piatto ----------
+   Il pannello del popup e antracite, lo stesso colore del pulsante sulle
+   card: li dentro sparirebbe. Qui i colori si invertono. */
 .cart-btn-wrap--popup {
   order: 0;
   margin-top: 0.5rem;
@@ -107,20 +119,40 @@
 .cart-btn-wrap--popup .cart-qta {
   height: 2.6rem;
   font-size: 0.78rem;
+  background-color: var(--color-white);
+  color: var(--color-black);
 }
 
+.cart-btn-wrap--popup .cart-btn:hover {
+  background-color: var(--color-red);
+  color: #fff;
+}
+
+.cart-btn-wrap--popup .cart-qta__btn { color: var(--color-black); }
+.cart-btn-wrap--popup .cart-qta__btn:hover { background-color: rgba(0, 0, 0, 0.12); }
+
 /* ---------- Scelta variante ----------
-   Si apre sopra il pulsante: in fondo alla card non ci sarebbe spazio. */
+   Si apre sopra il pulsante: in fondo alla card non ci sarebbe spazio.
+   Beige con bordo antracite: funziona sia sul popup (fondo antracite)
+   sia sulla card (fondo beige), dove e il bordo a staccarlo. */
 .cart-varianti {
   position: absolute;
-  bottom: calc(100% + 0.3rem);
+  bottom: calc(100% + 0.35rem);
   left: 0;
   right: 0;
   z-index: 5;
-  background-color: var(--color-black);
+  background-color: var(--color-white);
+  border: 2px solid var(--color-black);
   border-radius: 6px;
   overflow: hidden;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transform-origin: bottom center;
+  animation: cart-varianti-entra 0.22s cubic-bezier(0.34, 1.3, 0.64, 1);
+}
+
+@keyframes cart-varianti-entra {
+  from { opacity: 0; transform: translateY(8px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .cart-varianti__opt {
@@ -129,19 +161,30 @@
   justify-content: space-between;
   gap: 0.5rem;
   width: 100%;
-  padding: 0.6rem 0.7rem;
+  padding: 0.65rem 0.75rem;
   background: none;
   border: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-  color: var(--color-white);
+  border-bottom: 1px solid rgba(56, 62, 66, 0.18);
+  color: var(--color-black);
   font-family: var(--font-body);
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   text-align: left;
   cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
 }
 
+.cart-varianti__opt strong { font-weight: 700; }
 .cart-varianti__opt:last-child { border-bottom: none; }
-.cart-varianti__opt:hover { background-color: var(--color-red); }
+
+.cart-varianti__opt:hover {
+  background-color: var(--color-red);
+  color: #fff;
+}
+
+/* Chi ha disattivato le animazioni nel sistema non vede l'ingresso */
+@media (prefers-reduced-motion: reduce) {
+  .cart-varianti { animation: none; }
+}
 
 /* =========================================================
    PULSANTE FLOTTANTE
@@ -266,12 +309,39 @@
 
 /* ---------- Righe dell'ordine ---------- */
 .cart-riga {
+  padding: 0.7rem 0;
+  border-bottom: 1px solid rgba(56, 62, 66, 0.15);
+}
+
+.cart-riga__alto {
   display: grid;
   grid-template-columns: 1fr auto auto auto;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.7rem 0;
-  border-bottom: 1px solid rgba(56, 62, 66, 0.15);
+}
+
+/* Nota per singolo piatto: una sola nota per tutto l'ordine non direbbe
+   a quale piatto si riferisce la richiesta. */
+.cart-riga__nota {
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  background-color: #fff;
+  border: 1px solid rgba(56, 62, 66, 0.22);
+  border-radius: 4px;
+  font-family: var(--font-body);
+  font-size: 16px;   /* sotto i 16px iOS ingrandisce la pagina al focus */
+  color: var(--color-black);
+}
+
+.cart-riga__nota::placeholder {
+  font-size: 0.8rem;
+  color: rgba(56, 62, 66, 0.45);
+}
+
+.cart-riga__nota:focus {
+  outline: none;
+  border-color: var(--color-black);
 }
 
 .cart-riga__testo { min-width: 0; }
@@ -471,6 +541,22 @@
 
 .cart-form__chiama:hover { background-color: var(--color-red); }
 .cart-form__chiama[hidden] { display: none; }
+
+/* ---------- Disclaimer allergie ----------
+   Subito prima del pulsante, dove il cliente conferma: piu in alto
+   verrebbe scorso via. */
+.cart-form__allergie {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--color-black);
+  background-color: rgba(56, 62, 66, 0.06);
+  border-radius: 4px;
+  padding: 0.7rem 0.8rem;
+  margin-bottom: 0.85rem;
+}
+
+.cart-form__allergie strong { color: var(--color-red); }
 
 /* ---------- Pulsante finale ---------- */
 .cart-form__invia {
