@@ -422,6 +422,56 @@
 
 .cart-form__avviso[hidden] { display: none; }
 
+/* CAP e Provincia affiancati: sono corti, una riga ciascuno sprecherebbe
+   spazio verticale proprio dove il form e gia lungo. */
+.cart-form__coppia {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+}
+
+/* ---------- Avviso zone gestite separatamente ----------
+   Giallo e non rosso: e un'informazione, non un errore dell'utente. */
+.cart-form__nota {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--color-black);
+  background-color: rgba(255, 209, 0, 0.18);
+  border-left: 3px solid var(--color-yellow);
+  border-radius: 4px;
+  padding: 0.75rem 0.85rem;
+  margin-bottom: 0.85rem;
+}
+
+.cart-form__nota[hidden] { display: none; }
+
+.cart-form__nota a {
+  color: var(--color-red);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ---------- Pulsante chiama (sedi solo-telefono) ---------- */
+.cart-form__chiama {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--color-black);
+  color: var(--color-white);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+
+.cart-form__chiama:hover { background-color: var(--color-red); }
+.cart-form__chiama[hidden] { display: none; }
+
 /* ---------- Pulsante finale ---------- */
 .cart-form__invia {
   display: block;
@@ -441,6 +491,7 @@
 }
 
 .cart-form__invia:hover { background-color: #1da851; }
+.cart-form__invia[hidden] { display: none; }
 
 /* =========================================================
    DESKTOP

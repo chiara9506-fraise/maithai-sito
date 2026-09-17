@@ -21,18 +21,22 @@
      ========================================================= */
   var NUMERO_DI_PROVA = '393923589317';
 
-  /* ---------- SEDI ----------
-     whatsapp: numero in formato internazionale senza + ne spazi
-     (es. '393331234567'). Se e null il pulsante avvisa invece di
-     aprire un link rotto. */
-  var SEDI = [
-    { id: 'rivoli',     nome: 'Rivoli',     indirizzo: 'Corso Susa 12/D, Rivoli',            whatsapp: NUMERO_DI_PROVA },
-    { id: 'torino',     nome: 'Torino',     indirizzo: 'Via Mazzini 56/H, Torino',           whatsapp: NUMERO_DI_PROVA },
-    { id: 'moncalieri', nome: 'Moncalieri', indirizzo: 'Strada Torino 1, Moncalieri',        whatsapp: NUMERO_DI_PROVA },
-    { id: 'torino2',    nome: 'Torino 2',   indirizzo: 'Via G. Gropello 22, Torino',         whatsapp: NUMERO_DI_PROVA },
-    { id: 'chieri',     nome: 'Chieri',     indirizzo: 'Via Marconi 1, Chieri',              whatsapp: NUMERO_DI_PROVA },
-    { id: 'cuneo',      nome: 'Cuneo',      indirizzo: 'Piazza Vincenzo Virginio 9/B, Cuneo', whatsapp: NUMERO_DI_PROVA },
-    { id: 'mondovi',    nome: 'Mondovì',    indirizzo: 'Corso Statuto 10, Mondovì',          whatsapp: NUMERO_DI_PROVA }
+  /* ---------- DESTINATARIO DEGLI ORDINI ----------
+     Un numero solo: chi lo riceve smista l'ordine alla sede che copre
+     l'indirizzo del cliente. Per questo il cliente non sceglie la sede,
+     che non avrebbe modo di sapere, ma scrive il proprio indirizzo.
+
+     Quando saranno note le zone di consegna si potra instradare in
+     automatico, aggiungendo qui una tabella citta -> sede. */
+  var ORDINI_A = NUMERO_DI_PROVA;
+
+  /* ---------- Sedi gestite separatamente ----------
+     Cuneo e Mondovì non fanno capo alla titolarita di Torino: gli ordini
+     di quelle zone non possono passare dal numero unico. Se il cliente
+     scrive una di queste citta, gli mostriamo il numero da chiamare. */
+  var CITTA_SEPARATE = [
+    { citta: 'cuneo',   nome: 'Cuneo',   telefono: '0171 480 470' },
+    { citta: 'mondovi', nome: 'Mondovì', telefono: '0174 300 296' }
   ];
 
   var CHIAVE = 'maithai-carrello';
@@ -356,23 +360,20 @@
           campo('nome', 'Nome', 'text') +
           campo('cognome', 'Cognome', 'text') +
           campo('telefono', 'Telefono', 'tel') +
-          campo('indirizzo', 'Indirizzo di consegna', 'text', 'Via e numero civico, città') +
-          '<label class="cart-form__row">' +
-            '<span class="cart-form__label">Sede che consegna</span>' +
-            '<select name="sede" class="cart-form__input">' +
-              '<option value="">Scegli una sede…</option>' +
-              SEDI.map(function (s) {
-                return '<option value="' + s.id + '">' + s.nome + ' — ' + s.indirizzo + '</option>';
-              }).join('') +
-            '</select>' +
-            '<span class="cart-form__err"></span>' +
-          '</label>' +
+          campo('indirizzo', 'Indirizzo', 'text', 'Via e numero civico') +
+          campo('citta', 'Città', 'text', 'Es. Torino') +
+          '<div class="cart-form__coppia">' +
+            campo('cap', 'CAP', 'text', '10121') +
+            campo('provincia', 'Prov.', 'text', 'TO') +
+          '</div>' +
+          '<div class="cart-form__nota" hidden></div>' +
           '<label class="cart-form__row">' +
             '<span class="cart-form__label">Note <em>(facoltativo)</em></span>' +
             '<textarea name="note" rows="2" class="cart-form__input"></textarea>' +
           '</label>' +
           '<p class="cart-form__avviso" hidden></p>' +
           '<button type="submit" class="cart-form__invia">Ordina su WhatsApp</button>' +
+          '<a class="cart-form__chiama" hidden></a>' +
         '</form>' +
       '</div>';
 
@@ -385,12 +386,17 @@
     pannello.querySelector('.cart-panel__close').addEventListener('click', chiudiPannello);
     pannello.querySelector('.cart-panel__overlay').addEventListener('click', chiudiPannello);
     form.addEventListener('submit', inviaOrdine);
+    // L'avviso si aggancia alla citta digitata, non piu a un menu a tendina
+    form.elements.citta.addEventListener('input', aggiornaNotaSede);
 
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && pannello.classList.contains('is-open')) chiudiPannello();
     });
 
     ripristinaDati();
+    // Se la sede ripristinata e una di quelle solo-telefono, l'avviso
+    // deve esserci gia all'apertura
+    aggiornaNotaSede();
   }
 
   function campo(nome, etichetta, tipo, suggerimento) {
@@ -459,7 +465,7 @@
   function ripristinaDati() {
     try {
       var d = JSON.parse(localStorage.getItem(CHIAVE_DATI)) || {};
-      ['nome', 'cognome', 'telefono', 'indirizzo', 'sede', 'note'].forEach(function (c) {
+      ['nome', 'cognome', 'telefono', 'indirizzo', 'citta', 'cap', 'provincia', 'note'].forEach(function (c) {
         if (d[c] && form.elements[c]) form.elements[c].value = d[c];
       });
     } catch (e) { /* silenzioso */ }
@@ -469,6 +475,52 @@
     try {
       localStorage.setItem(CHIAVE_DATI, JSON.stringify(d));
     } catch (e) { /* silenzioso */ }
+  }
+
+  /* ---------- Zone gestite separatamente ----------
+     L'avviso compare mentre si scrive la citta, non all'invio: scoprirlo
+     dopo aver compilato tutto il form sarebbe frustrante. Al posto del
+     pulsante WhatsApp compare quello per chiamare. */
+
+  // "Mondovì", "mondovi", "MONDOVI'" devono valere tutti: tolgo accenti,
+  // apostrofi e maiuscole prima di confrontare.
+  function normalizza(s) {
+    return (s || '')
+      .toLowerCase()
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/['’]/g, '')
+      .trim();
+  }
+
+  function zonaSeparata() {
+    var c = normalizza(form.elements.citta.value);
+    if (!c) return null;
+    return CITTA_SEPARATE.filter(function (z) { return c === z.citta; })[0] || null;
+  }
+
+  function aggiornaNotaSede() {
+    var nota = form.querySelector('.cart-form__nota');
+    var inviaBtn = form.querySelector('.cart-form__invia');
+    var chiamaBtn = form.querySelector('.cart-form__chiama');
+    var z = zonaSeparata();
+
+    if (z) {
+      var tel = z.telefono.replace(/\s/g, '');
+      nota.innerHTML =
+        '<strong>Gli ordini per ' + z.nome + ' non passano dal sito.</strong> ' +
+        'Quella sede è gestita separatamente: per ordinare chiama direttamente ' +
+        'il ristorante al <a href="tel:' + tel + '">' + z.telefono + '</a>.';
+      nota.hidden = false;
+
+      chiamaBtn.textContent = 'Chiama ' + z.nome + ' — ' + z.telefono;
+      chiamaBtn.href = 'tel:' + tel;
+      chiamaBtn.hidden = false;
+      inviaBtn.hidden = true;
+    } else {
+      nota.hidden = true;
+      chiamaBtn.hidden = true;
+      inviaBtn.hidden = false;
+    }
   }
 
   function mostraErrore(campo, messaggio) {
@@ -500,23 +552,35 @@
     }
 
     if (!d.indirizzo) {
-      errori.push(['indirizzo', 'Inserisci l\'indirizzo di consegna']);
+      errori.push(['indirizzo', 'Inserisci via e numero civico']);
     } else if (!/\d/.test(d.indirizzo)) {
       // Senza un numero l'indirizzo e quasi sempre incompleto
       errori.push(['indirizzo', 'Manca il numero civico']);
     }
 
-    if (!d.sede) errori.push(['sede', 'Scegli la sede che consegna']);
+    if (!d.citta) errori.push(['citta', 'Inserisci la città']);
+
+    if (!d.cap) {
+      errori.push(['cap', 'Inserisci il CAP']);
+    } else if (!/^\d{5}$/.test(d.cap)) {
+      errori.push(['cap', 'Il CAP è di 5 cifre']);
+    }
+
+    if (!d.provincia) {
+      errori.push(['provincia', 'Inserisci la provincia']);
+    } else if (!/^[A-Za-z]{2}$/.test(d.provincia)) {
+      errori.push(['provincia', 'Due lettere (es. TO)']);
+    }
+
     return errori;
   }
 
   /* ---------- Messaggio WhatsApp ----------
      encodeURIComponent gestisce accenti, simbolo € e a capo. */
 
-  function componiMessaggio(sede, d) {
+  function componiMessaggio(d) {
     var righe = [];
     righe.push('Ciao Mai Thai! Vorrei fare un ordine 🍜');
-    righe.push('Sede: ' + sede.nome + ' – ' + sede.indirizzo);
     righe.push('Modalità: Consegna a domicilio');
     righe.push('');
 
@@ -533,7 +597,8 @@
     righe.push('');
     righe.push('Nome: ' + d.nome + ' ' + d.cognome);
     righe.push('Telefono: ' + d.telefono);
-    righe.push('Indirizzo: ' + d.indirizzo);
+    // Indirizzo su una riga sola, nel formato italiano abituale
+    righe.push('Indirizzo: ' + d.indirizzo + ', ' + d.cap + ' ' + d.citta + ' (' + d.provincia + ')');
     if (d.note) righe.push('Note: ' + d.note);
 
     return righe.join('\n');
@@ -548,7 +613,9 @@
       cognome: form.elements.cognome.value.trim(),
       telefono: form.elements.telefono.value.trim(),
       indirizzo: form.elements.indirizzo.value.trim(),
-      sede: form.elements.sede.value,
+      citta: form.elements.citta.value.trim(),
+      cap: form.elements.cap.value.trim(),
+      provincia: form.elements.provincia.value.trim().toUpperCase(),
       note: form.elements.note.value.trim()
     };
 
@@ -564,17 +631,21 @@
       return;
     }
 
-    var sede = SEDI.filter(function (s) { return s.id === d.sede; })[0];
+    // Zona servita da una sede gestita separatamente: li l'ordine si fa
+    // al telefono, non da qui
+    var z = zonaSeparata();
+    if (z) {
+      avvisa('Gli ordini per ' + z.nome + ' non passano dal sito: chiama il ' + z.telefono + '.');
+      return;
+    }
 
-    // Numero non ancora fornito: meglio un avviso che un link rotto
-    if (!sede.whatsapp) {
-      avvisa('Il numero WhatsApp della sede di ' + sede.nome + ' non è ancora attivo. ' +
-             'Chiama il ristorante per completare l\'ordine.');
+    if (!ORDINI_A) {
+      avvisa('Il servizio di ordinazione non è ancora attivo. Chiama il ristorante per ordinare.');
       return;
     }
 
     salvaDati(d);
-    var url = 'https://wa.me/' + sede.whatsapp + '?text=' + encodeURIComponent(componiMessaggio(sede, d));
+    var url = 'https://wa.me/' + ORDINI_A + '?text=' + encodeURIComponent(componiMessaggio(d));
     window.open(url, '_blank');
   }
 
@@ -603,7 +674,6 @@
   aggiornaTutto();
 
   window.MaiThaiCarrello = {
-    sedi: SEDI,
     stato: function () { return carrello; },
     totale: totale,
     formatta: formatta,
