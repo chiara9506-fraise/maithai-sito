@@ -11,18 +11,28 @@
 (function () {
   'use strict';
 
+  /* =========================================================
+     ⚠️  NUMERO DI PROVA — DA SOSTITUIRE PRIMA DELLA PUBBLICAZIONE
+     Tutte le sedi puntano allo stesso numero personale, usato solo per
+     verificare che WhatsApp funzioni. Ogni ordine inviato dal sito
+     arriva qui, da qualunque sede.
+     Quando arrivano i numeri veri: cancellare NUMERO_DI_PROVA e mettere
+     il numero di ciascuna sede al posto suo.
+     ========================================================= */
+  var NUMERO_DI_PROVA = '393923589317';
+
   /* ---------- SEDI ----------
      whatsapp: numero in formato internazionale senza + ne spazi
-     (es. '393331234567'). Finche e null il pulsante avvisa invece di
+     (es. '393331234567'). Se e null il pulsante avvisa invece di
      aprire un link rotto. */
   var SEDI = [
-    { id: 'rivoli',     nome: 'Rivoli',     indirizzo: 'Corso Susa 12/D, Rivoli',            whatsapp: null },
-    { id: 'torino',     nome: 'Torino',     indirizzo: 'Via Mazzini 56/H, Torino',           whatsapp: null },
-    { id: 'moncalieri', nome: 'Moncalieri', indirizzo: 'Strada Torino 1, Moncalieri',        whatsapp: null },
-    { id: 'torino2',    nome: 'Torino 2',   indirizzo: 'Via G. Gropello 22, Torino',         whatsapp: null },
-    { id: 'chieri',     nome: 'Chieri',     indirizzo: 'Via Marconi 1, Chieri',              whatsapp: null },
-    { id: 'cuneo',      nome: 'Cuneo',      indirizzo: 'Piazza Vincenzo Virginio 9/B, Cuneo', whatsapp: null },
-    { id: 'mondovi',    nome: 'Mondovì',    indirizzo: 'Corso Statuto 10, Mondovì',          whatsapp: null }
+    { id: 'rivoli',     nome: 'Rivoli',     indirizzo: 'Corso Susa 12/D, Rivoli',            whatsapp: NUMERO_DI_PROVA },
+    { id: 'torino',     nome: 'Torino',     indirizzo: 'Via Mazzini 56/H, Torino',           whatsapp: NUMERO_DI_PROVA },
+    { id: 'moncalieri', nome: 'Moncalieri', indirizzo: 'Strada Torino 1, Moncalieri',        whatsapp: NUMERO_DI_PROVA },
+    { id: 'torino2',    nome: 'Torino 2',   indirizzo: 'Via G. Gropello 22, Torino',         whatsapp: NUMERO_DI_PROVA },
+    { id: 'chieri',     nome: 'Chieri',     indirizzo: 'Via Marconi 1, Chieri',              whatsapp: NUMERO_DI_PROVA },
+    { id: 'cuneo',      nome: 'Cuneo',      indirizzo: 'Piazza Vincenzo Virginio 9/B, Cuneo', whatsapp: NUMERO_DI_PROVA },
+    { id: 'mondovi',    nome: 'Mondovì',    indirizzo: 'Corso Statuto 10, Mondovì',          whatsapp: NUMERO_DI_PROVA }
   ];
 
   var CHIAVE = 'maithai-carrello';
@@ -342,12 +352,13 @@
         '<p class="cart-panel__vuoto">Il carrello è vuoto.</p>' +
         '<div class="cart-panel__tot"><span>Totale</span><strong></strong></div>' +
         '<form class="cart-form" novalidate>' +
-          '<p class="cart-form__intro">Ritiro in sede — compila i tuoi dati</p>' +
+          '<p class="cart-form__intro">Consegna a domicilio — compila i tuoi dati</p>' +
           campo('nome', 'Nome', 'text') +
           campo('cognome', 'Cognome', 'text') +
           campo('telefono', 'Telefono', 'tel') +
+          campo('indirizzo', 'Indirizzo di consegna', 'text', 'Via e numero civico, città') +
           '<label class="cart-form__row">' +
-            '<span class="cart-form__label">Sede per il ritiro</span>' +
+            '<span class="cart-form__label">Sede che consegna</span>' +
             '<select name="sede" class="cart-form__input">' +
               '<option value="">Scegli una sede…</option>' +
               SEDI.map(function (s) {
@@ -382,10 +393,11 @@
     ripristinaDati();
   }
 
-  function campo(nome, etichetta, tipo) {
+  function campo(nome, etichetta, tipo, suggerimento) {
     return '<label class="cart-form__row">' +
       '<span class="cart-form__label">' + etichetta + '</span>' +
-      '<input type="' + tipo + '" name="' + nome + '" class="cart-form__input" autocomplete="on">' +
+      '<input type="' + tipo + '" name="' + nome + '" class="cart-form__input" autocomplete="on"' +
+        (suggerimento ? ' placeholder="' + suggerimento + '"' : '') + '>' +
       '<span class="cart-form__err"></span>' +
     '</label>';
   }
@@ -447,7 +459,7 @@
   function ripristinaDati() {
     try {
       var d = JSON.parse(localStorage.getItem(CHIAVE_DATI)) || {};
-      ['nome', 'cognome', 'telefono', 'sede', 'note'].forEach(function (c) {
+      ['nome', 'cognome', 'telefono', 'indirizzo', 'sede', 'note'].forEach(function (c) {
         if (d[c] && form.elements[c]) form.elements[c].value = d[c];
       });
     } catch (e) { /* silenzioso */ }
@@ -487,7 +499,14 @@
       errori.push(['telefono', 'Il numero sembra incompleto']);
     }
 
-    if (!d.sede) errori.push(['sede', 'Scegli la sede dove ritirare']);
+    if (!d.indirizzo) {
+      errori.push(['indirizzo', 'Inserisci l\'indirizzo di consegna']);
+    } else if (!/\d/.test(d.indirizzo)) {
+      // Senza un numero l'indirizzo e quasi sempre incompleto
+      errori.push(['indirizzo', 'Manca il numero civico']);
+    }
+
+    if (!d.sede) errori.push(['sede', 'Scegli la sede che consegna']);
     return errori;
   }
 
@@ -498,7 +517,7 @@
     var righe = [];
     righe.push('Ciao Mai Thai! Vorrei fare un ordine 🍜');
     righe.push('Sede: ' + sede.nome + ' – ' + sede.indirizzo);
-    righe.push('Modalità: Ritiro');
+    righe.push('Modalità: Consegna a domicilio');
     righe.push('');
 
     // La variante va fra parentesi: usando il trattino si confonderebbe
@@ -514,6 +533,7 @@
     righe.push('');
     righe.push('Nome: ' + d.nome + ' ' + d.cognome);
     righe.push('Telefono: ' + d.telefono);
+    righe.push('Indirizzo: ' + d.indirizzo);
     if (d.note) righe.push('Note: ' + d.note);
 
     return righe.join('\n');
@@ -527,6 +547,7 @@
       nome: form.elements.nome.value.trim(),
       cognome: form.elements.cognome.value.trim(),
       telefono: form.elements.telefono.value.trim(),
+      indirizzo: form.elements.indirizzo.value.trim(),
       sede: form.elements.sede.value,
       note: form.elements.note.value.trim()
     };
