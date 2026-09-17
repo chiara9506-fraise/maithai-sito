@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/home-v3.css">
   <link rel="stylesheet" href="css/menu-page.css">
   <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/carrello.css">
   <link rel="stylesheet" href="css/animations.css">
 
   <!-- Google Fonts -->
@@ -627,7 +628,10 @@
             <div class="dish-card-sm__info">
               <div class="dish-tags"><img src="images/loghi/elefante-verde.svg" alt="vegetariano"></div>
               <h3 class="dish-card-sm__name">Noodle Soup</h3>
-              <span class="dish-card-sm__price">€10,00 / €13,00</span>
+              <!-- data-varianti: etichetta:prezzo, separate da |. Serve perche
+                   "€10,00 / €13,00" da solo non dice quale versione costa quanto. -->
+              <span class="dish-card-sm__price"
+                    data-varianti="Vegetariana:10,00|Classica con maiale:13,00">€10,00 / €13,00</span>
             </div>
           </article>
 
@@ -794,6 +798,7 @@
   <script src="js/main.js"></script>
   <script src="js/menu-page.js"></script>
   <script src="js/menu-modal.js"></script>
+  <script src="js/carrello.js"></script>
   <script src="js/animations.js"></script>
 
 </body>

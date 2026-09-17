@@ -362,6 +362,12 @@ const DISH_DATA = {
     modal.classList.add('is-open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+
+    // Segnala al carrello quale piatto e a video, cosi puo mostrare il
+    // pulsante giusto senza dover indovinare leggendo il DOM.
+    modal.dispatchEvent(new CustomEvent('piatto-aperto', {
+      detail: { nome: name, prezzo: price, card: card }
+    }));
   }
 
   function closeModal() {
