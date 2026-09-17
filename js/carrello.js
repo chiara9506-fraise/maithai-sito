@@ -32,8 +32,8 @@
      di quelle zone non possono passare dal numero unico. Se il cliente
      scrive una di queste citta, gli mostriamo il numero da chiamare. */
   var CITTA_SEPARATE = [
-    { citta: 'cuneo',   nome: 'Cuneo',   telefono: '0171 480 470' },
-    { citta: 'mondovi', nome: 'Mondovì', telefono: '0174 300 296' }
+    { citta: 'mondovi', nome: 'Mondovì', telefono: '0174 300 296' },
+    { citta: 'cuneo',   nome: 'Cuneo',   telefono: '0171 480 470' }
   ];
 
   var CHIAVE = 'maithai-carrello';
@@ -353,7 +353,21 @@
     fab.className = 'cart-fab';
     fab.hidden = true;
     fab.setAttribute('aria-label', 'Apri il carrello');
-    fab.innerHTML = '<span class="cart-fab__n"></span><span class="cart-fab__t"></span>';
+    // SVG in linea come le altre icone del sito: scala con il testo,
+    // prende il colore da currentColor e non aggiunge una richiesta di rete.
+    // Il conteggio sta sull'angolo dell'icona, non di fianco: e il modo
+    // in cui i carrelli vengono letti a colpo d'occhio.
+    fab.innerHTML =
+      '<span class="cart-fab__icona">' +
+        '<svg class="cart-fab__i" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+             'stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+          '<circle cx="9" cy="21" r="1"></circle>' +
+          '<circle cx="20" cy="21" r="1"></circle>' +
+          '<path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>' +
+        '</svg>' +
+        '<span class="cart-fab__n"></span>' +
+      '</span>' +
+      '<span class="cart-fab__t"></span>';
     fab.addEventListener('click', apriPannello);
     document.body.appendChild(fab);
   }
@@ -387,6 +401,16 @@
         '<div class="cart-panel__tot"><span>Totale</span><strong></strong></div>' +
         '<form class="cart-form" novalidate>' +
           '<p class="cart-form__intro">Consegna a domicilio — compila i tuoi dati</p>' +
+          // Sempre visibile, non solo quando si digita la citta: chi e di
+          // quelle zone deve saperlo prima di compilare tutto il form.
+          '<p class="cart-form__zone">' +
+            'Le sedi di ' +
+            CITTA_SEPARATE.map(function (z) {
+              return '<strong>' + z.nome + '</strong> ' +
+                     '(<a href="tel:' + z.telefono.replace(/\s/g, '') + '">' + z.telefono + '</a>)';
+            }).join(' e ') +
+            ' non prendono ordinazioni su WhatsApp, ma solo per telefono.' +
+          '</p>' +
           campo('nome', 'Nome', 'text') +
           campo('cognome', 'Cognome', 'text') +
           campo('telefono', 'Telefono', 'tel') +

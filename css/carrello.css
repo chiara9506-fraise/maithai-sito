@@ -193,15 +193,18 @@
 /* In alto a destra: su mobile la barra filtri occupa il fondo dello schermo
    quando si scorre, quindi in basso si sovrapporrebbero.
    z-index 200: sopra header (100) e filtri (50), sotto il popup piatto (300). */
+/* top 5.5rem su mobile: l'header e un'isola centrata larga ~140px e il
+   carrello ne sfiora il bordo destro per una decina di pixel. Sotto i
+   900px scende quindi sotto l'header, che finisce a circa 80px. */
 .cart-fab {
   position: fixed;
-  top: 1rem;
+  top: 5.5rem;
   right: 1rem;
   z-index: 200;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.7rem 1.1rem;
+  gap: 0.7rem;
+  padding: 0.6rem 1.1rem;
   background-color: var(--color-red);
   color: #fff;
   border: none;
@@ -215,17 +218,40 @@
 
 .cart-fab[hidden] { display: none; }
 
+/* Contenitore dell'icona: fa da riferimento al conteggio, che gli sta
+   sopra invece che di fianco. */
+.cart-fab__icona {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+/* Dimensione in em: se cambia il testo del pulsante l'icona lo segue */
+.cart-fab__i {
+  width: 1.5em;
+  height: 1.5em;
+  display: block;
+}
+
+/* Sull'angolo in alto a destra dell'icona, con un bordo del colore del
+   pulsante: lo stacca dal disegno del carrello senza sporcarlo. */
 .cart-fab__n {
+  position: absolute;
+  top: -0.45em;
+  right: -0.55em;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 1.35rem;
-  height: 1.35rem;
-  padding: 0 0.3rem;
+  min-width: 1.5em;
+  height: 1.5em;
+  padding: 0 0.25em;
   background-color: #fff;
   color: var(--color-red);
+  border: 2px solid var(--color-red);
   border-radius: 999px;
-  font-size: 0.75rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  line-height: 1;
 }
 
 @media (min-width: 900px) {
@@ -522,6 +548,27 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.7rem;
+}
+
+/* ---------- Avviso permanente sulle zone solo-telefono ----------
+   Discreto: e un'informazione di servizio, non deve pesare quanto
+   l'avviso che compare quando la citta corrisponde davvero. */
+.cart-form__zone {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: rgba(56, 62, 66, 0.75);
+  border-left: 3px solid rgba(56, 62, 66, 0.25);
+  padding: 0.5rem 0 0.5rem 0.7rem;
+  margin-bottom: 1rem;
+}
+
+.cart-form__zone strong { color: var(--color-black); }
+
+.cart-form__zone a {
+  color: var(--color-red);
+  font-weight: 700;
+  white-space: nowrap;
 }
 
 /* ---------- Avviso zone gestite separatamente ----------
