@@ -389,6 +389,30 @@
 
 .cart-riga__x:hover { color: var(--color-red); }
 
+/* ---------- Svuota carrello ----------
+   Discreto e allineato a destra: e un'azione distruttiva, non deve
+   competere con il pulsante che porta a concludere l'ordine. */
+.cart-panel__svuota {
+  display: block;
+  margin: 0.6rem 0 0 auto;
+  padding: 0.2rem 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(56, 62, 66, 0.3);
+  color: rgba(56, 62, 66, 0.6);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.cart-panel__svuota:hover {
+  color: var(--color-red);
+  border-bottom-color: var(--color-red);
+}
+
+.cart-panel__svuota[hidden] { display: none; }
+
 /* ---------- Totale ---------- */
 .cart-panel__tot {
   display: flex;

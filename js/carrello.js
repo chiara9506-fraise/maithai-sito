@@ -383,6 +383,7 @@
         '<h2 class="cart-panel__title">Il tuo ordine</h2>' +
         '<div class="cart-panel__list"></div>' +
         '<p class="cart-panel__vuoto">Il carrello è vuoto.</p>' +
+        '<button type="button" class="cart-panel__svuota">Svuota carrello</button>' +
         '<div class="cart-panel__tot"><span>Totale</span><strong></strong></div>' +
         '<form class="cart-form" novalidate>' +
           '<p class="cart-form__intro">Consegna a domicilio — compila i tuoi dati</p>' +
@@ -418,6 +419,16 @@
 
     pannello.querySelector('.cart-panel__close').addEventListener('click', chiudiPannello);
     pannello.querySelector('.cart-panel__overlay').addEventListener('click', chiudiPannello);
+
+    // Conferma prima di cancellare: un tocco distratto farebbe perdere
+    // tutto l'ordine, e non c'e modo di annullare.
+    pannello.querySelector('.cart-panel__svuota').addEventListener('click', function () {
+      if (confirm('Vuoi svuotare il carrello? L\'ordine verrà cancellato.')) {
+        carrello = {};
+        salva();
+        aggiornaTutto();
+      }
+    });
     form.addEventListener('submit', inviaOrdine);
     // L'avviso si aggancia alla citta digitata, non piu a un menu a tendina
     form.elements.citta.addEventListener('input', aggiornaNotaSede);
@@ -462,6 +473,7 @@
     pannello.querySelector('.cart-panel__vuoto').hidden = chiavi.length > 0;
     form.hidden = chiavi.length === 0;
     pannello.querySelector('.cart-panel__tot').hidden = chiavi.length === 0;
+    pannello.querySelector('.cart-panel__svuota').hidden = chiavi.length === 0;
 
     chiavi.forEach(function (k) {
       var v = carrello[k];
