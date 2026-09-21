@@ -36,6 +36,13 @@
     { citta: 'cuneo',   nome: 'Cuneo',   telefono: '0171 480 470' }
   ];
 
+  /* ---------- CONDIZIONI DI CONSEGNA ----------
+     Il minimo si calcola sui soli piatti: sommarci la consegna
+     significherebbe far raggiungere la soglia a chi non l'ha raggiunta. */
+  var ORDINE_MINIMO = 20.00;
+  var COSTO_CONSEGNA = 5.00;
+  var CONSEGNA_GRATIS_DA = 50.00;
+
   var CHIAVE = 'maithai-carrello';
   var CHIAVE_DATI = 'maithai-dati-cliente';
 
@@ -81,10 +88,24 @@
 
   /* ---------- Operazioni ---------- */
 
-  function aggiungi(nome, prezzo, variante) {
+  /* piccante: livello di partenza (0-3) per i piatti in cui si puo
+     regolare, null per antipasti e bevande. La piccantezza non entra
+     nella chiave: e un attributo della riga, modificabile sul posto
+     come la nota, non un piatto diverso. */
+  function aggiungi(nome, prezzo, variante, piccante) {
     var k = chiaveDi(nome, variante);
-    if (carrello[k]) carrello[k].qta++;
-    else carrello[k] = { nome: nome, prezzo: prezzo, variante: variante || '', qta: 1, nota: '' };
+    if (carrello[k]) {
+      carrello[k].qta++;
+    } else {
+      carrello[k] = {
+        nome: nome,
+        prezzo: prezzo,
+        variante: variante || '',
+        qta: 1,
+        nota: '',
+        piccante: (typeof piccante === 'number') ? piccante : null
+      };
+    }
     salva();
     aggiornaTutto();
   }
@@ -103,10 +124,30 @@
     aggiornaTutto();
   }
 
-  function totale() {
+  // Solo i piatti, senza consegna: e su questo che si misura il minimo
+  function subtotale() {
     return Object.keys(carrello).reduce(function (t, k) {
       return t + carrello[k].prezzo * carrello[k].qta;
     }, 0);
+  }
+
+  // Sopra la soglia la consegna non si paga. Si misura sui piatti, come
+  // il minimo: sommarci la consegna stessa sarebbe circolare.
+  function costoConsegna() {
+    return subtotale() >= CONSEGNA_GRATIS_DA ? 0 : COSTO_CONSEGNA;
+  }
+
+  function consegnaGratis() {
+    return costoConsegna() === 0;
+  }
+
+  function totale() {
+    return subtotale() + costoConsegna();
+  }
+
+  function mancaAlMinimo() {
+    var m = ORDINE_MINIMO - subtotale();
+    return m > 0 ? m : 0;
   }
 
   function numeroArticoli() {
@@ -208,6 +249,18 @@
     return null;
   }
 
+  /* La piccantezza si regola su tutti i piatti tranne antipasti e
+     bevande: li non ha senso. Restituisce il livello di partenza preso
+     dalla ricetta, oppure null se il piatto non e regolabile. */
+  var SEZIONI_SENZA_PICCANTE = ['antipasti'];
+
+  function piccanteDiPartenza(card, nome) {
+    var sezione = card.closest('.mp-section');
+    if (sezione && SEZIONI_SENZA_PICCANTE.indexOf(sezione.id) !== -1) return null;
+    if (typeof DISH_DATA === 'undefined' || !DISH_DATA[nome]) return null;
+    return DISH_DATA[nome].spice || 0;
+  }
+
   // Con le opzioni la chiave dipende da quale e stata scelta: cerco una
   // qualsiasi voce del carrello che appartenga a questo piatto.
   function chiaveEsistente(nome) {
@@ -217,7 +270,7 @@
     return k[0] || chiaveDi(nome, '');
   }
 
-  function apriSceltaVariante(nome, varianti, ancora) {
+  function apriSceltaVariante(nome, varianti, ancora, piccante) {
     // Chiude un eventuale menu gia aperto
     var vecchio = document.querySelector('.cart-varianti');
     if (vecchio) vecchio.remove();
@@ -232,7 +285,7 @@
       b.innerHTML = '<span>' + v.nome + '</span><strong>' + formatta(v.prezzo) + '</strong>';
       b.addEventListener('click', function (e) {
         e.stopPropagation();
-        aggiungi(nome, v.prezzo, v.nome);
+        aggiungi(nome, v.prezzo, v.nome, piccante);
         menu.remove();
       });
       menu.appendChild(b);
@@ -262,19 +315,20 @@
       // il primo nodo di testo, come fa gia il popup.
       var nome = nodoNome.firstChild.textContent.trim();
       var opzioni = opzioniDi(nome, nodoPrezzo);
+      var piccante = piccanteDiPartenza(card, nome);
 
       var wrap;
       if (opzioni) {
         wrap = creaControlli(
           function () { return chiaveEsistente(nome); },
-          function () { apriSceltaVariante(nome, opzioni, wrap); }
+          function () { apriSceltaVariante(nome, opzioni, wrap, piccante); }
         );
         wrap.classList.add('cart-btn-wrap--varianti');
       } else {
         var prezzo = leggiPrezzo(nodoPrezzo.textContent);
         wrap = creaControlli(
           function () { return chiaveDi(nome, ''); },
-          function () { aggiungi(nome, prezzo, ''); }
+          function () { aggiungi(nome, prezzo, '', piccante); }
         );
       }
       info.appendChild(wrap);
@@ -304,7 +358,7 @@
 
   /* ---------- Pulsante dentro il popup piatto ---------- */
 
-  var popupWrap, popupNome, popupPrezzo, popupOpzioni;
+  var popupWrap, popupNome, popupPrezzo, popupOpzioni, popupPiccante;
 
   function montaSulPopup() {
     var modal = document.getElementById('dish-modal');
@@ -317,8 +371,8 @@
         return popupOpzioni ? chiaveEsistente(popupNome) : chiaveDi(popupNome, '');
       },
       function () {
-        if (popupOpzioni) apriSceltaVariante(popupNome, popupOpzioni, popupWrap);
-        else aggiungi(popupNome, popupPrezzo, '');
+        if (popupOpzioni) apriSceltaVariante(popupNome, popupOpzioni, popupWrap, popupPiccante);
+        else aggiungi(popupNome, popupPrezzo, '', popupPiccante);
       },
       'cart-btn-wrap cart-btn-wrap--popup'
     );
@@ -335,6 +389,12 @@
         ? e.detail.card.querySelector('.dish-card-sm__price')
         : null;
       popupOpzioni = nodoPrezzo ? opzioniDi(popupNome, nodoPrezzo) : null;
+      popupPiccante = e.detail.card ? piccanteDiPartenza(e.detail.card, popupNome) : null;
+
+      // Avvisa che il livello mostrato non e fisso, altrimenti sembra
+      // un dato della scheda e non una scelta possibile
+      var nota = modal.querySelector('.dish-modal__spice-mod');
+      if (nota) nota.hidden = popupPiccante === null;
 
       popupWrap.classList.toggle('cart-btn-wrap--varianti', !!popupOpzioni);
       aggiornaTutto();
@@ -377,7 +437,9 @@
     var n = numeroArticoli();
     fab.hidden = n === 0;
     fab.querySelector('.cart-fab__n').textContent = n;
-    fab.querySelector('.cart-fab__t').textContent = formatta(totale());
+    // Subtotale e non totale: qui si mostra quello che si e aggiunto.
+    // La consegna compare nel pannello, dove si conclude l'ordine.
+    fab.querySelector('.cart-fab__t').textContent = formatta(subtotale());
   }
 
   /* =========================================================
@@ -395,10 +457,23 @@
       '<div class="cart-panel__box" role="dialog" aria-label="Il tuo ordine">' +
         '<button type="button" class="cart-panel__close" aria-label="Chiudi">✕</button>' +
         '<h2 class="cart-panel__title">Il tuo ordine</h2>' +
+        // Le condizioni in cima, prima dell'elenco: scoprire il costo di
+        // consegna dopo aver scelto i piatti e una sorpresa sgradita.
+        // Il testo si costruisce dalle costanti, cosi non puo divergere.
+        '<p class="cart-panel__condizioni">' +
+          'Ordine minimo ' + formatta(ORDINE_MINIMO) + ' · ' +
+          'Consegna ' + formatta(COSTO_CONSEGNA) + ' • ' +
+          'Gratuita per ordini superiori a ' + formatta(CONSEGNA_GRATIS_DA) +
+        '</p>' +
         '<div class="cart-panel__list"></div>' +
         '<p class="cart-panel__vuoto">Il carrello è vuoto.</p>' +
         '<button type="button" class="cart-panel__svuota">Svuota carrello</button>' +
-        '<div class="cart-panel__tot"><span>Totale</span><strong></strong></div>' +
+        '<div class="cart-conti">' +
+          '<div class="cart-conti__r"><span>Totale piatti</span><span class="cart-conti__sub"></span></div>' +
+          '<div class="cart-conti__r"><span>Consegna</span><span class="cart-conti__cons"></span></div>' +
+          '<div class="cart-panel__tot"><span>Totale</span><strong></strong></div>' +
+          '<p class="cart-conti__minimo" hidden></p>' +
+        '</div>' +
         '<form class="cart-form" novalidate>' +
           '<p class="cart-form__intro">Consegna a domicilio — compila i tuoi dati</p>' +
           // Sempre visibile, non solo quando si digita la citta: chi e di
@@ -494,10 +569,11 @@
     elenco.innerHTML = '';
     var chiavi = Object.keys(carrello);
 
-    pannello.querySelector('.cart-panel__vuoto').hidden = chiavi.length > 0;
-    form.hidden = chiavi.length === 0;
-    pannello.querySelector('.cart-panel__tot').hidden = chiavi.length === 0;
-    pannello.querySelector('.cart-panel__svuota').hidden = chiavi.length === 0;
+    var vuoto = chiavi.length === 0;
+    pannello.querySelector('.cart-panel__vuoto').hidden = !vuoto;
+    form.hidden = vuoto;
+    pannello.querySelector('.cart-conti').hidden = vuoto;
+    pannello.querySelector('.cart-panel__svuota').hidden = vuoto;
 
     chiavi.forEach(function (k) {
       var v = carrello[k];
@@ -517,6 +593,15 @@
           '<span class="cart-riga__prezzo">' + formatta(v.prezzo * v.qta) + '</span>' +
           '<button type="button" class="cart-riga__x" aria-label="Rimuovi">✕</button>' +
         '</div>' +
+        (v.piccante === null ? '' :
+          '<div class="cart-picc">' +
+            '<span class="cart-picc__l">Piccantezza</span>' +
+            [0, 1, 2, 3].map(function (n) {
+              return '<button type="button" class="cart-picc__b' +
+                     (n === v.piccante ? ' is-scelto' : '') + '" data-p="' + n + '" ' +
+                     'aria-label="Piccantezza ' + n + ' su 3">' + n + '</button>';
+            }).join('') +
+          '</div>') +
         '<input type="text" class="cart-riga__nota" maxlength="120" ' +
                'placeholder="Richieste per questo piatto (es. senza aglio)" ' +
                'aria-label="Richieste per ' + v.nome + '">';
@@ -524,6 +609,20 @@
       riga.querySelector('[data-a="meno"]').addEventListener('click', function () { cambiaQta(k, -1); });
       riga.querySelector('[data-a="piu"]').addEventListener('click', function () { cambiaQta(k, 1); });
       riga.querySelector('.cart-riga__x').addEventListener('click', function () { rimuovi(k); });
+
+      // Piccantezza: aggiorno solo l'evidenziazione dei pulsanti, senza
+      // ridisegnare l'elenco. Non cambia totali ne conteggi, e un
+      // redisegno farebbe perdere il fuoco alla nota se era in scrittura.
+      riga.querySelectorAll('.cart-picc__b').forEach(function (b) {
+        b.addEventListener('click', function () {
+          if (!carrello[k]) return;
+          carrello[k].piccante = +b.dataset.p;
+          salva();
+          riga.querySelectorAll('.cart-picc__b').forEach(function (x) {
+            x.classList.toggle('is-scelto', x === b);
+          });
+        });
+      });
 
       // La nota si salva senza ridisegnare l'elenco: un redisegno a ogni
       // tasto premuto farebbe perdere il fuoco dal campo mentre si scrive.
@@ -539,7 +638,27 @@
       elenco.appendChild(riga);
     });
 
+    pannello.querySelector('.cart-conti__sub').textContent = formatta(subtotale());
+
+    var cons = pannello.querySelector('.cart-conti__cons');
+    cons.textContent = consegnaGratis() ? 'Gratuita' : formatta(costoConsegna());
+    cons.classList.toggle('is-gratis', consegnaGratis());
+
     totaleEl.textContent = formatta(totale());
+
+    // Sotto il minimo: dico quanto manca, non solo che non si puo ordinare.
+    // E disattivo l'invio, cosi non si compila tutto per poi essere respinti.
+    var manca = mancaAlMinimo();
+    var avvisoMin = pannello.querySelector('.cart-conti__minimo');
+    var inviaBtn = form.querySelector('.cart-form__invia');
+
+    avvisoMin.hidden = manca === 0 || vuoto;
+    if (manca > 0) {
+      avvisoMin.textContent = 'Ordine minimo ' + formatta(ORDINE_MINIMO) +
+                              ': aggiungi ancora ' + formatta(manca) + ' di piatti.';
+    }
+    inviaBtn.disabled = manca > 0;
+    inviaBtn.classList.toggle('is-disattivo', manca > 0);
   }
 
   /* =========================================================
@@ -675,12 +794,18 @@
     Object.keys(carrello).forEach(function (k) {
       var v = carrello[k];
       var etichetta = v.variante ? v.nome + ' (' + v.variante + ')' : v.nome;
+      // La scala "/3" evita che il numero da solo resti ambiguo in cucina
+      if (v.piccante !== null && v.piccante !== undefined) {
+        etichetta += ' · piccantezza ' + v.piccante + '/3';
+      }
       righe.push(v.qta + 'x ' + etichetta + ' – ' + formatta(v.prezzo * v.qta));
       if (v.nota) righe.push('   ↳ ' + v.nota);
     });
 
     righe.push('');
-    righe.push('Totale: ' + formatta(totale()));
+    righe.push('Totale piatti: ' + formatta(subtotale()));
+    righe.push('Consegna: ' + (consegnaGratis() ? 'Gratuita' : formatta(costoConsegna())));
+    righe.push('TOTALE: ' + formatta(totale()));
     righe.push('');
     righe.push('Nome: ' + d.nome + ' ' + d.cognome);
     righe.push('Telefono: ' + d.telefono);
@@ -708,6 +833,15 @@
 
     if (Object.keys(carrello).length === 0) {
       avvisa('Il carrello è vuoto: aggiungi almeno un piatto.');
+      return;
+    }
+
+    // Secondo controllo oltre al pulsante disattivato: quello e solo
+    // l'interfaccia, questo e la regola.
+    var manca = mancaAlMinimo();
+    if (manca > 0) {
+      avvisa('L\'ordine minimo è ' + formatta(ORDINE_MINIMO) +
+             ': mancano ancora ' + formatta(manca) + ' di piatti.');
       return;
     }
 

@@ -346,6 +346,73 @@
   gap: 0.6rem;
 }
 
+/* ---------- Selettore piccantezza ----------
+   Nel carrello e non sulle card: qui si rivede l'ordine prima di
+   confermarlo, e non moltiplica i controlli su 60 riquadri. */
+.cart-picc {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.5rem;
+}
+
+.cart-picc__l {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(56, 62, 66, 0.6);
+  margin-right: 0.15rem;
+}
+
+.cart-picc__b {
+  width: 1.75rem;
+  height: 1.75rem;
+  flex-shrink: 0;
+  background: none;
+  border: 1.5px solid rgba(56, 62, 66, 0.25);
+  border-radius: 4px;
+  color: rgba(56, 62, 66, 0.7);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.cart-picc__b:hover { border-color: var(--color-red); }
+
+.cart-picc__b.is-scelto {
+  background-color: var(--color-red);
+  border-color: var(--color-red);
+  color: #fff;
+}
+
+.cart-picc__b:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 2px;
+}
+
+/* Su telefono 28px sono sotto la misura minima per un dito (44px):
+   l'etichetta va a capo e i pulsanti si allargano. */
+@media (max-width: 600px) {
+  .cart-picc {
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .cart-picc__l {
+    flex: 0 0 100%;
+    margin: 0 0 0.1rem;
+  }
+
+  .cart-picc__b {
+    width: 2.6rem;
+    height: 2.6rem;
+    font-size: 0.85rem;
+  }
+}
+
 /* Nota per singolo piatto: una sola nota per tutto l'ordine non direbbe
    a quale piatto si riferisce la richiesta. */
 .cart-riga__nota {
@@ -438,6 +505,57 @@
 }
 
 .cart-panel__svuota[hidden] { display: none; }
+
+/* ---------- Condizioni in cima al pannello ---------- */
+.cart-panel__condizioni {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: rgba(56, 62, 66, 0.8);
+  background-color: rgba(56, 62, 66, 0.07);
+  border-radius: 4px;
+  padding: 0.6rem 0.75rem;
+  margin: -0.4rem 0 1rem;
+}
+
+/* ---------- Riepilogo conti ---------- */
+.cart-conti[hidden] { display: none; }
+
+.cart-conti__r {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0.35rem 0;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: rgba(56, 62, 66, 0.75);
+}
+
+.cart-conti__r:first-child { padding-top: 0.8rem; }
+
+/* Consegna azzerata: in evidenza, e un vantaggio ottenuto */
+.cart-conti__cons.is-gratis {
+  color: #1da851;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+/* Sotto il minimo: rosso, e la condizione che blocca l'ordine */
+.cart-conti__minimo {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--color-red);
+  background-color: rgba(227, 13, 24, 0.08);
+  border-left: 3px solid var(--color-red);
+  border-radius: 4px;
+  padding: 0.6rem 0.75rem;
+  margin-top: 0.7rem;
+}
+
+.cart-conti__minimo[hidden] { display: none; }
 
 /* ---------- Totale ---------- */
 .cart-panel__tot {
@@ -649,6 +767,18 @@
 
 .cart-form__invia:hover { background-color: #1da851; }
 .cart-form__invia[hidden] { display: none; }
+
+/* Sotto il minimo d'ordine: spento e non cliccabile. Resta visibile
+   perche sparire lascerebbe il cliente senza capire cosa manca. */
+.cart-form__invia.is-disattivo {
+  background-color: rgba(56, 62, 66, 0.25);
+  color: rgba(56, 62, 66, 0.6);
+  cursor: not-allowed;
+}
+
+.cart-form__invia.is-disattivo:hover {
+  background-color: rgba(56, 62, 66, 0.25);
+}
 
 /* =========================================================
    DESKTOP
