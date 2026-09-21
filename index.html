@@ -44,6 +44,14 @@
     <!-- ===== HERO ===== -->
     <section class="v3-hero">
 
+      <!-- muted e playsinline sono obbligatori: senza, i browser non avviano
+           il video da soli e su iPhone si aprirebbe a schermo intero.
+           Il poster e il primo fotogramma, cosi il passaggio al video non si vede. -->
+      <video class="v3-hero__video" autoplay muted loop playsinline
+             preload="auto" poster="images/hero-poster.jpg" aria-hidden="true">
+        <source src="images/hero.mp4" type="video/mp4">
+      </video>
+
       <div class="v3-hero__content">
         <h1 class="v3-hero__title">
           <span>Il miglior</span>

@@ -113,11 +113,15 @@ img { max-width: 100%; display: block; }
 
 /* ===== HERO ===== */
 
+/* Lo sfondo e la copertina del video: resta come riserva se il video non
+   parte (browser che non lo supporta, risparmio dati, riduzione movimento).
+   isolation crea un contesto di impilamento: senza, il video a z-index -1
+   finirebbe dietro lo sfondo della sezione e non si vedrebbe. */
 .v3-hero {
   background-color: var(--red);
-  background-image: url('../images/street/STREET6.jpg');
+  background-image: url('../images/hero-poster.jpg');
   background-size: cover;
-  background-position: center 70%;
+  background-position: center;
   min-height: 100vh;
   padding-top: 100px;
   display: flex;
@@ -127,6 +131,23 @@ img { max-width: 100%; display: block; }
   padding-right: 3rem;
   position: relative;
   overflow: hidden;
+  isolation: isolate;
+}
+
+/* Sotto il velo scuro (::before, z-index 0) e sotto il testo (z-index 1) */
+.v3-hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -1;
+}
+
+/* Chi ha disattivato le animazioni nel sistema vede la copertina ferma */
+@media (prefers-reduced-motion: reduce) {
+  .v3-hero__video { display: none; }
 }
 
 .v3-hero::before {
@@ -231,7 +252,7 @@ img { max-width: 100%; display: block; }
 /* SMILE — posizione originale, dietro il piatto */
 .v3-graffiti--smile-hero {
   width: 180px;
-  bottom: -4%;
+  bottom: 2%;
   right: 1%;
   z-index: 2;
   filter: brightness(0) invert(1) sepia(0.5) saturate(0.6);

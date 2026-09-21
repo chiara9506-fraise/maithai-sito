@@ -1,3 +1,8 @@
 .DS_Store
 *.tiff
 *.tif
+
+# Sorgente del video della hero (24 MB): il sito usa la versione compressa
+# images/hero.mp4. Tenerlo nel repository lo appesantirebbe per sempre,
+# anche cancellandolo dopo, perche resterebbe nella storia di git.
+images/video hero.mp4
