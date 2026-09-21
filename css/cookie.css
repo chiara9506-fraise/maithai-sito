@@ -1,0 +1,393 @@
+/* ==========================================================================
+   Consenso cookie — banner, pannello preferenze, segnaposto mappe
+   Stile delle card del menu: beige, bordo antracite 3px, titolo TAN Ashford.
+   Colori scritti per esteso: la pagina puo caricare base.css (--color-*)
+   o solo home-v3.css (--red, --beige...), qui valgono entrambe.
+   ========================================================================== */
+
+.cookie [hidden],
+.cookie[hidden] {
+  display: none !important;
+}
+
+/* ---------- Banner ---------- */
+
+.cookie {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 500;               /* sopra carrello (200) e pannello carrello (400) */
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;       /* il sito resta usabile ai lati del banner */
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.cookie.is-visibile {
+  opacity: 1;
+  transform: none;
+}
+
+.cookie__box {
+  pointer-events: auto;
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  max-height: calc(100vh - 2rem);
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
+  background-color: #EDE8DA;
+  color: #383E42;
+  border: 3px solid #383E42;
+  border-radius: 18px;
+  box-shadow: 6px 6px 0 #383E42;
+  padding: 1.5rem 1.75rem 1.5rem;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.cookie__titolo {
+  font-family: 'TAN Ashford', 'Gorilla Milkshake', cursive;
+  font-size: 1.9rem;
+  line-height: 1;
+  color: #E30D18;
+  margin: 0 2.5rem 0.6rem 0;
+}
+
+.cookie__testo {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.cookie__link {
+  color: #E30D18;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* X in alto a destra: chiude e rifiuta */
+.cookie__chiudi {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  border: 2px solid #383E42;
+  background: transparent;
+  color: #383E42;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.cookie__chiudi:hover {
+  background-color: #383E42;
+  color: #EDE8DA;
+}
+
+/* ---------- Pulsanti ---------- */
+
+.cookie__azioni {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+}
+
+/* Rifiuta e Accetta hanno lo stesso identico stile: nessuno dei due spinge l'altro */
+.cookie__btn {
+  flex: 1 1 0;
+  min-width: 9rem;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.2rem;
+  border-radius: 999px;
+  border: 2px solid #383E42;
+  background-color: #383E42;
+  color: #EDE8DA;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.cookie__btn:hover {
+  background-color: #E30D18;
+  border-color: #E30D18;
+  color: #EDE8DA;
+}
+
+.cookie__btn--contorno {
+  background-color: transparent;
+  color: #383E42;
+}
+
+.cookie__btn:focus-visible,
+.cookie__chiudi:focus-visible,
+.cookie__link:focus-visible {
+  outline: 3px solid #E30D18;
+  outline-offset: 3px;
+}
+
+/* ---------- Pannello Personalizza ---------- */
+
+.cookie__pannello {
+  margin-top: 1.1rem;
+  border-top: 3px solid #383E42;
+}
+
+.cookie__categoria {
+  padding: 0.9rem 0;
+  border-bottom: 1px solid rgba(56, 62, 66, 0.25);
+}
+
+.cookie__categoria-testa {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+label.cookie__categoria-testa {
+  cursor: pointer;
+}
+
+.cookie__categoria-nome {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.cookie__sempre {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #E30D18;
+}
+
+.cookie__categoria-desc {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin: 0.35rem 0 0;
+  opacity: 0.8;
+}
+
+/* Interruttore: parte sempre spento */
+.cookie__switch {
+  position: relative;
+  flex-shrink: 0;
+  width: 3.1rem;
+  height: 1.75rem;
+}
+
+.cookie__switch-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.cookie__switch-track {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 2px solid #383E42;
+  background-color: transparent;
+  transition: background-color 0.2s;
+}
+
+.cookie__switch-track::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0.2rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 50%;
+  background-color: #383E42;
+  transform: translateY(-50%);
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.cookie__switch-input:checked + .cookie__switch-track {
+  background-color: #E30D18;
+  border-color: #E30D18;
+}
+
+.cookie__switch-input:checked + .cookie__switch-track::after {
+  background-color: #EDE8DA;
+  transform: translate(1.3rem, -50%);
+}
+
+.cookie__switch-input:focus-visible + .cookie__switch-track {
+  outline: 3px solid #E30D18;
+  outline-offset: 3px;
+}
+
+/* ---------- Link nel footer ---------- */
+
+.v3-footer__bottom-links {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.v3-footer__bottom-links button {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(0, 0, 0, 0.4);
+  transition: color 0.2s;
+}
+
+.v3-footer__bottom-links button:hover {
+  color: #383E42;
+}
+
+/* ---------- Segnaposto mappe (pagina Dove siamo) ---------- */
+
+/* Nel flusso e non sovrapposto: se il testo e piu alto della mappa (mobile)
+   il riquadro si allunga invece di tagliare l'icona */
+.mappa-bloccata {
+  position: relative;
+  box-sizing: border-box;
+  min-height: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 1.5rem;
+  text-align: center;
+  background-color: #383E42;
+  color: #EDE8DA;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* Sui blocchi antracite il segnaposto diventa beige, per staccarsi */
+.sede-block--alt .mappa-bloccata {
+  background-color: #EDE8DA;
+  color: #383E42;
+}
+
+.mappa-bloccata__icona {
+  width: 2.2rem;
+  height: 2.2rem;
+  color: #E30D18;
+}
+
+.mappa-bloccata__titolo {
+  font-family: 'TAN Ashford', 'Gorilla Milkshake', cursive;
+  font-size: 1.5rem;
+  line-height: 1;
+  margin: 0;
+}
+
+.mappa-bloccata__testo {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  max-width: 22rem;
+  margin: 0;
+  opacity: 0.85;
+}
+
+.mappa-bloccata__azioni {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+}
+
+.mappa-bloccata__btn {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.3rem;
+  border-radius: 999px;
+  border: 2px solid currentColor;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.mappa-bloccata__btn--pieno {
+  background-color: #E30D18;
+  border-color: #E30D18;
+  color: #EDE8DA;
+}
+
+.mappa-bloccata__btn:hover {
+  background-color: #E30D18;
+  border-color: #E30D18;
+  color: #EDE8DA;
+}
+
+.mappa-bloccata__btn--pieno:hover {
+  background-color: transparent;
+  border-color: currentColor;
+  color: inherit;
+}
+
+.mappa-bloccata__btn:focus-visible {
+  outline: 3px solid #E30D18;
+  outline-offset: 3px;
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 600px) {
+  .cookie {
+    padding: 0.6rem;
+  }
+
+  .cookie__box {
+    padding: 1.2rem 1.1rem 1.1rem;
+    border-radius: 14px;
+    box-shadow: 4px 4px 0 #383E42;
+  }
+
+  .cookie__titolo { font-size: 1.6rem; }
+  .cookie__testo  { font-size: 0.85rem; }
+
+  /* Rifiuta e Accetta affiancati sotto, Personalizza a tutta larghezza sopra */
+  .cookie__btn {
+    min-width: 0;
+    padding: 0.8rem 0.6rem;
+    font-size: 0.75rem;
+  }
+
+  .cookie__btn--contorno {
+    order: -1;
+    flex-basis: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cookie { transition: none; transform: none; }
+}
