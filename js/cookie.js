@@ -12,7 +12,8 @@
    - "Rifiuta" ha lo stesso peso visivo di "Accetta"
    - la X chiude e vale come rifiuto
    - nessuna casella gia spuntata
-   - la scelta si puo cambiare in ogni momento dal link nel footer
+   - la scelta si puo cambiare in ogni momento: link "Cookie Policy" nel
+     footer, poi "Gestisci i cookie" nella pagina
    - la domanda non viene ripetuta prima di 6 mesi
 
    Da fuori:  window.MaiThaiConsenso.apri()         riapre le preferenze
@@ -28,8 +29,8 @@
   var VERSIONE = 1;            // alzarla se cambiano le categorie: il banner ricompare
   var DURATA_GIORNI = 180;     // dopo 6 mesi la domanda viene riproposta
 
-  // Link all'informativa: vuoto finche la pagina non esiste, e il link non compare
-  var COOKIE_POLICY_URL = '';
+  // Link all'informativa estesa; se vuoto il link nel banner non compare
+  var COOKIE_POLICY_URL = 'cookie-policy.html';
 
   /* ---------- Salvataggio ---------- */
 
@@ -67,9 +68,10 @@
     banner.setAttribute('aria-labelledby', 'cookie-titolo');
     banner.setAttribute('aria-describedby', 'cookie-testo');
 
-    var linkInformativa = COOKIE_POLICY_URL
-      ? ' <a href="' + COOKIE_POLICY_URL + '" class="cookie__link">Leggi la Cookie Policy</a>.'
-      : '';
+    // Senza pagina della policy la frase resta, ma senza link
+    var policy = COOKIE_POLICY_URL
+      ? '<a href="' + COOKIE_POLICY_URL + '" class="cookie__link">Cookie Policy</a>'
+      : 'Cookie Policy';
 
     banner.innerHTML =
       '<div class="cookie__box">' +
@@ -78,8 +80,7 @@
         '<p class="cookie__testo" id="cookie-testo">' +
           'Usiamo solo strumenti tecnici, necessari al funzionamento del sito, come il carrello. ' +
           'Con il tuo consenso carichiamo anche le mappe di Google Maps, che possono impostare cookie di Google. ' +
-          'Puoi cambiare idea quando vuoi da "Preferenze cookie" in fondo alla pagina.' +
-          linkInformativa +
+          'Puoi cambiare idea quando vuoi dalla ' + policy + ', in fondo a ogni pagina.' +
         '</p>' +
 
         '<div class="cookie__pannello" id="cookie-pannello" hidden>' +
@@ -164,7 +165,7 @@
     chiudi();
   }
 
-  /* ---------- Link "Preferenze cookie" nel footer ---------- */
+  /* ---------- Link "Gestisci i cookie" (pagina Cookie Policy) ---------- */
 
   document.addEventListener('click', function (e) {
     var link = e.target.closest('[data-preferenze-cookie]');

@@ -249,6 +249,11 @@ body {
   width: 34%;
 }
 
+/* Tabelle a quattro colonne (Cookie Policy): prima colonna piu stretta */
+.legal__tabella--4 tbody th {
+  width: 26%;
+}
+
 .legal__tabella tbody tr:first-child th,
 .legal__tabella tbody tr:first-child td {
   border-top: 0;
@@ -256,6 +261,14 @@ body {
 
 .legal__tabella tbody tr:nth-child(even) {
   background-color: rgba(56, 62, 66, 0.05);
+}
+
+/* Nota in piccolo sotto una tabella */
+.legal__body .legal__nota {
+  font-size: 0.82rem;
+  font-style: italic;
+  opacity: 0.8;
+  margin-top: 0.5rem;
 }
 
 /* ---------- Mobile ---------- */

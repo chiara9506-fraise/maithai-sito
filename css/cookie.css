@@ -240,29 +240,11 @@ label.cookie__categoria-testa {
   outline-offset: 3px;
 }
 
-/* ---------- Link nel footer ---------- */
+/* ---------- Footer: i link vanno a capo su schermi stretti ---------- */
 
 .v3-footer__bottom-links {
   flex-wrap: wrap;
   justify-content: center;
-}
-
-.v3-footer__bottom-links button {
-  background: none;
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(0, 0, 0, 0.4);
-  transition: color 0.2s;
-}
-
-.v3-footer__bottom-links button:hover {
-  color: #383E42;
 }
 
 /* ---------- Segnaposto mappe (pagina Dove siamo) ---------- */
