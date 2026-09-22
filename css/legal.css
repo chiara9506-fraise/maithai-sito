@@ -1,0 +1,348 @@
+/* ==========================================================================
+   Pagine legali — Privacy Policy e Cookie Policy
+   Intestazione rossa corta, testo su beige in colonna stretta.
+   Usa le variabili di home-v3.css (--red, --beige, --black).
+   ========================================================================== */
+
+body {
+  background-color: var(--beige);
+}
+
+/* ---------- Intestazione ---------- */
+
+.legal-hero {
+  background-color: var(--red);
+  color: var(--beige);
+  padding: 9rem 1.5rem 3.5rem;   /* spazio per l'header flottante */
+}
+
+.legal-hero__inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.legal-hero__label {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 0.6rem;
+}
+
+.legal-hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 7vw, 5.5rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+  color: var(--beige);
+  margin: 0 0 1.25rem;
+}
+
+.legal-hero__sub {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 34rem;
+  margin: 0 0 0.4rem;
+}
+
+.legal-hero__data {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* ---------- Corpo ---------- */
+
+.legal {
+  background-color: var(--beige);
+  color: var(--black);
+  padding: 3.5rem 1.5rem 5rem;
+}
+
+.legal__body {
+  max-width: 760px;
+  margin: 0 auto;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.legal__body p {
+  margin: 0 0 1rem;
+}
+
+.legal__body a {
+  color: var(--red);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  overflow-wrap: anywhere;
+}
+
+.legal__body a:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 2px;
+}
+
+.legal__intro {
+  font-size: 1.1rem;
+  line-height: 1.65;
+}
+
+/* ---------- Indice ---------- */
+
+.legal__indice {
+  border: 3px solid var(--black);
+  border-radius: 18px;
+  padding: 1.25rem 1.5rem;
+  margin: 2rem 0 1rem;
+}
+
+.legal__indice-titolo {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--red);
+  margin: 0 0 0.5rem !important;
+}
+
+.legal__indice ol {
+  list-style: decimal;          /* reset.css toglie i numeri a tutte le liste */
+  margin: 0;
+  padding-left: 1.5rem;
+  columns: 2;
+  column-gap: 2rem;
+  font-size: 0.9rem;
+}
+
+.legal__indice li {
+  break-inside: avoid;
+  padding: 0.15rem 0;
+}
+
+.legal__indice li::marker {
+  color: var(--red);
+  font-weight: 700;
+}
+
+.legal__indice a {
+  color: var(--black) !important;
+  font-weight: 400 !important;
+  text-decoration: none !important;
+}
+
+.legal__indice a:hover {
+  color: var(--red) !important;
+  text-decoration: underline !important;
+}
+
+/* ---------- Sezioni ---------- */
+
+.legal__sezione {
+  padding-top: 2.5rem;
+  /* Il titolo non finisce sotto l'header fisso quando si arriva dall'indice */
+  scroll-margin-top: 5rem;
+}
+
+.legal__sezione h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3.2vw, 2rem);
+  line-height: 1.15;
+  color: var(--red);
+  margin: 0 0 1rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 3px solid var(--black);
+}
+
+.legal__num {
+  color: var(--black);
+}
+
+.legal__sezione h3 {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin: 1.75rem 0 0.6rem;
+}
+
+.legal__sezione ul {
+  list-style: disc;
+  padding-left: 1.4rem;
+  margin: 0 0 1rem;
+}
+
+.legal__sezione li {
+  margin-bottom: 0.45rem;
+}
+
+.legal__sezione li::marker {
+  color: var(--red);
+}
+
+/* Dati del titolare: blocco compatto, senza pallini */
+.legal__sezione ul.legal__scheda {
+  list-style: none;
+  padding: 1rem 1.25rem;
+  background-color: rgba(56, 62, 66, 0.06);
+  border-left: 4px solid var(--red);
+  border-radius: 0 10px 10px 0;
+}
+
+.legal__scheda li {
+  margin-bottom: 0.15rem;
+}
+
+/* Riquadro di avvertenza (dati sanitari) */
+.legal__avviso {
+  border: 2px solid var(--red);
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0 0.5rem;
+}
+
+.legal__avviso p {
+  margin: 0 !important;
+  font-size: 0.95rem;
+}
+
+.legal__avviso strong {
+  color: var(--red);
+}
+
+/* ---------- Tabella ---------- */
+
+.legal__tabella {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 3px solid var(--black);
+  border-radius: 14px;
+  overflow: hidden;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 1rem 0 0.5rem;
+}
+
+.legal__tabella thead th {
+  background-color: var(--black);
+  color: var(--beige);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 0.8rem 1rem;
+}
+
+.legal__tabella tbody th,
+.legal__tabella tbody td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.85rem 1rem;
+  border-top: 1px solid rgba(56, 62, 66, 0.2);
+}
+
+.legal__tabella tbody th {
+  font-weight: 700;
+  width: 34%;
+}
+
+.legal__tabella tbody tr:first-child th,
+.legal__tabella tbody tr:first-child td {
+  border-top: 0;
+}
+
+.legal__tabella tbody tr:nth-child(even) {
+  background-color: rgba(56, 62, 66, 0.05);
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 700px) {
+  .legal-hero {
+    padding: 7rem 1rem 2.5rem;
+  }
+
+  .legal {
+    padding: 2.5rem 1rem 4rem;
+  }
+
+  .legal__body {
+    font-size: 0.95rem;
+  }
+
+  .legal__intro {
+    font-size: 1rem;
+  }
+
+  .legal__indice {
+    padding: 1rem 1.1rem;
+  }
+
+  .legal__indice ol {
+    columns: 1;
+  }
+
+  /* La tabella diventa una scheda per riga */
+  .legal__tabella,
+  .legal__tabella tbody,
+  .legal__tabella tr,
+  .legal__tabella th,
+  .legal__tabella td {
+    display: block;
+    width: auto;
+  }
+
+  .legal__tabella {
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+  }
+
+  .legal__tabella thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .legal__tabella tbody tr,
+  .legal__tabella tbody tr:nth-child(even) {
+    border: 3px solid var(--black);
+    border-radius: 14px;
+    background-color: transparent;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+  }
+
+  .legal__tabella tbody th {
+    width: auto;
+    background-color: var(--black);
+    color: var(--beige);
+    border-top: 0;
+  }
+
+  .legal__tabella tbody td {
+    border-top: 0;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .legal__tabella tbody td:last-child {
+    padding-bottom: 0.9rem;
+  }
+
+  .legal__tabella td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.15rem;
+  }
+}
