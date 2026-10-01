@@ -11,21 +11,13 @@
 (function () {
   'use strict';
 
-  /* =========================================================
-     ⚠️  NUMERO DI PROVA — DA SOSTITUIRE PRIMA DELLA PUBBLICAZIONE
-     Tutte le sedi puntano allo stesso numero personale, usato solo per
-     verificare che WhatsApp funzioni. Ogni ordine inviato dal sito
-     arriva qui, da qualunque sede.
-     Quando arrivano i numeri veri: cancellare NUMERO_DI_PROVA e mettere
-     il numero di ciascuna sede al posto suo.
-     ========================================================= */
-  var NUMERO_DI_PROVA = '393923589317';
-
   /* ---------- DESTINATARIO DEGLI ORDINI ----------
+     WhatsApp Business del cliente: +39 327 0776496.
+     Formato richiesto da wa.me: prefisso internazionale, senza + ne spazi.
      Un numero solo: chi lo riceve smista l'ordine alla sede che copre
      l'indirizzo del cliente. Per questo il cliente non sceglie la sede,
      che non avrebbe modo di sapere, ma scrive il proprio indirizzo. */
-  var ORDINI_A = NUMERO_DI_PROVA;
+  var ORDINI_A = '393270776496';
 
   /* ---------- Sedi gestite separatamente ----------
      Cuneo e Mondovì non fanno capo alla titolarita di Torino: gli ordini
